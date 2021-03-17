@@ -32,7 +32,7 @@ export default function Navbar() {
           <Typography variant="h6" className={classes.title}>
             News
           </Typography>
-          <Button color="inherit">Signup</Button>
+          <Button color="inherit" href="/Signup">Signup</Button>
           <Button color="inherit">Signin</Button>
         </Toolbar>
       </AppBar>
