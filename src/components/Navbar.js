@@ -33,7 +33,10 @@ export default function Navbar() {
             News
           </Typography>
           <Button color="inherit" href="/Signup">Signup</Button>
-          <Button color="inherit">Signin</Button>
+          <Button color="inherit" href="/">Signin</Button>
+          <Button color="inherit" href="/signintrainer">Signin Trainer</Button>
+          <Button color="inherit" href="/signuptrainer">Signup Trainer</Button>
+
         </Toolbar>
       </AppBar>
     </div>

@@ -54,8 +54,7 @@ export default function Signup() {
     //   M.toast({ html: "Invalid email", classes: "#ff4081 pink accent-2" });
       return;
     }
- 
-    fetch(`${process.env.REACT_APP_SERVER}/signup`, {
+    fetch(`${process.env.REACT_APP_SERVER}/signupTrainer`, {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -63,6 +62,7 @@ export default function Signup() {
         email,
         password,
         age,
+        experience,
         tel
       }),
     })
@@ -71,16 +71,15 @@ export default function Signup() {
         if (data.error) {
             console.log("nonononono")
 
-        //   M.toast({ html: data.error, classes: "#ff4081 pink accent-2" });
         } else {
-            console.log("successfully")
-        //   M.toast({ html: data.message, classes: "#81c784 green lighten-2" });
+            console.log("successfully Trainer")
           history.push("/");
         }
       })
       .catch((err) => {
         console.log(err);
       });
+
   };
 
   return (
@@ -144,7 +143,17 @@ export default function Signup() {
                 value={age}
                 onChange={(e) => setAge(e.target.value)}
               />
-     
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            name="experience"
+            label="experience"
+            id="experience"
+            value={experience}
+                onChange={(e) => setExperience(e.target.value)}
+          />
             <TextField
             variant="outlined"
             margin="normal"

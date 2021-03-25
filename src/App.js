@@ -11,8 +11,10 @@ import {
 // import Home from "./components/screens/Home";
 import Signin from "./components/screens/Signin";
 import Signup from "./components/screens/Signup";
-import { reducer, initialState } from "./reducers/userReducer";
+import SignupTrainer from "./components/screens/SignupTrainer";
+import SigninTrainer from "./components/screens/SigninTrainer";
 
+import { reducer, initialState } from "./reducers/userReducer";
 
 export const UserContext = createContext();
 
@@ -51,13 +53,18 @@ const Routing = () => {
       <Route exact path="/signup">
         <Signup />
       </Route>
-    
+      <Route exact path="/signuptrainer">
+        <SignupTrainer />
+      </Route>
+      <Route exact path="/signintrainer">
+        <SigninTrainer />
+      </Route>
     </Switch>
   );
 };
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
-  console.log(state)
+  console.log(state);
   return (
     <UserContext.Provider value={{ state, dispatch }}>
       <BrowserRouter>
