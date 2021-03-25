@@ -67,7 +67,7 @@ export default function Signup() {
       .then((res) => res.json())
       .then((data) => {
         if (data.error) {
-            console.log("nonononoono")
+            console.log("nonononono")
 
         //   M.toast({ html: data.error, classes: "#ff4081 pink accent-2" });
         } else {
