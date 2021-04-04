@@ -13,6 +13,9 @@ import Signin from "./components/screens/Signin";
 import Signup from "./components/screens/Signup";
 import SignupTrainer from "./components/screens/SignupTrainer";
 import SigninTrainer from "./components/screens/SigninTrainer";
+import HomePage from "./components/screens/HomePage/HomePage";
+import Login from "./components/screens/Login/Login"
+
 
 import { reducer, initialState } from "./reducers/userReducer";
 
@@ -44,13 +47,16 @@ const Routing = () => {
 
   return (
     <Switch location={background || location}>
-      {/* <Route exact path="/">
-        <Home />
-      </Route> */}
       <Route exact path="/">
-        <Signin />
+        <HomePage />
       </Route>
-      <Route exact path="/signup">
+      {/* <Route exact path="/signin">
+        <Signin />
+      </Route> */}
+      <Route exact path="/login">
+        <Login />
+      </Route>
+      {/* <Route exact path="/signup">
         <Signup />
       </Route>
       <Route exact path="/signuptrainer">
@@ -58,13 +64,12 @@ const Routing = () => {
       </Route>
       <Route exact path="/signintrainer">
         <SigninTrainer />
-      </Route>
+      </Route> */}
     </Switch>
   );
 };
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
-  console.log(state);
   return (
     <UserContext.Provider value={{ state, dispatch }}>
       <BrowserRouter>
