@@ -12,6 +12,11 @@ const parallaxStyle = {
       display: "flex",
       alignItems: "center"
     },
+    h1:{
+      position:"center",
+      margin:"auto",
+      color:"#c4dfdf"
+    },
     filter: {
       "&:before": {
         background: "rgba(0, 0, 0, 0.5)"

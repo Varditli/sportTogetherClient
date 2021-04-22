@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import Button from "../../../CustomButtons/Button";
+import Button from "../../../CustomButtons/Button"
 import TextField from "@material-ui/core/TextField";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
@@ -17,10 +17,10 @@ export default function Signup() {
   const [tel, setTel] = useState("");
   const [password, setPassword] = useState("");
   const [age, setAge] = useState("");
+  const [experience, setExperience] = useState("");
 
   const classes = useStyles();
-  const [cardAnimaton, setCardAnimation] = React.useState("cardHidden");
-  const PostData = () => {
+  const PostDataTrainer = () => {
     if (
       !/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
         email
@@ -29,7 +29,7 @@ export default function Signup() {
       //   M.toast({ html: "Invalid email", classes: "#ff4081 pink accent-2" });
       return;
     }
-    fetch(`${process.env.REACT_APP_SERVER}/signup`, {
+    fetch(`${process.env.REACT_APP_SERVER}/signupTrainer`, {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -37,6 +37,7 @@ export default function Signup() {
         email,
         password,
         age,
+        experience,
         tel,
       }),
     })
@@ -55,7 +56,7 @@ export default function Signup() {
   };
 
   return (
-      <form className={classes.form} noValidate>
+      <form className={classes.form} >
         <CardBody>
           <TextField
             variant="outlined"
@@ -107,7 +108,17 @@ export default function Signup() {
             value={age}
             onChange={(e) => setAge(e.target.value)}
           />
-
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            name="experience"
+            label="experience"
+            id="experience"
+            value={experience}
+            onChange={(e) => setExperience(e.target.value)}
+          />
           <TextField
             variant="outlined"
             margin="normal"
@@ -121,15 +132,15 @@ export default function Signup() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-        </CardBody> 
+        </CardBody>
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
             label="Remember me"
-          />
-
-          <Button onClick={() => PostData()} round color="primary">SignUp</Button>
+          /> 
+          <Button onClick={() => PostDataTrainer()} round color="primary">SignUp</Button> 
           <CardFooter>
           <Grid container>
+          
             <Grid item xs>
               <Link href="#" variant="body2">
                 Forgot password?

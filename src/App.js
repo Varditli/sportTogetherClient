@@ -1,6 +1,8 @@
 import React, { useEffect, createContext, useReducer, useContext } from "react";
-import Navbar from "./components/Navbar";
+import Navbar from "./components/Navbar/Navbar";
+import Parallax from "./components/compopnets/Parallax/Parallax"
 import "./App.css";
+
 import {
   BrowserRouter,
   Route,
@@ -8,13 +10,11 @@ import {
   useHistory,
   useLocation,
 } from "react-router-dom";
-// import Home from "./components/screens/Home";
-import Signin from "./components/screens/Signin";
-import Signup from "./components/screens/Signup";
-import SignupTrainer from "./components/screens/SignupTrainer";
-import SigninTrainer from "./components/screens/SigninTrainer";
 import HomePage from "./components/screens/HomePage/HomePage";
-import Login from "./components/screens/Login/Login"
+import Login from "./components/screens/Login/Login";
+import Profile from "./components/screens/ProfilePage/Profile"
+import LoginTrainer from "./components/screens/LoginTrainer/LoginTrainer";
+import CreateTraining from "./components/screens/CreateTraining/CreateTraining";
 
 
 import { reducer, initialState } from "./reducers/userReducer";
@@ -44,27 +44,25 @@ const Routing = () => {
 
   const location = useLocation();
   const background = location.state && location.state.background;
+ 
 
   return (
     <Switch location={background || location}>
-      <Route exact path="/">
+      <Route exact path="/HomePage">
         <HomePage />
       </Route>
-      {/* <Route exact path="/signin">
-        <Signin />
-      </Route> */}
       <Route exact path="/login">
         <Login />
       </Route>
-      {/* <Route exact path="/signup">
-        <Signup />
+      <Route exact path="/logintrainer">
+        <LoginTrainer />
       </Route>
-      <Route exact path="/signuptrainer">
-        <SignupTrainer />
+      <Route exact path="/profile">
+        <Profile />
       </Route>
-      <Route exact path="/signintrainer">
-        <SigninTrainer />
-      </Route> */}
+      <Route exact path="/createtraining">
+        <CreateTraining />
+      </Route>
     </Switch>
   );
 };

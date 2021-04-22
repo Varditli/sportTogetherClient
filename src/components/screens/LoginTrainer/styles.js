@@ -1,10 +1,8 @@
 import { makeStyles } from "@material-ui/core/styles";
+import { CenterFocusStrong } from "@material-ui/icons";
 import { container, title } from "../../Card/Exports";
 
 const useStyles = makeStyles((theme) => ({
-  root:{
-    backgroundColor: "#c4dfdf"
-  },
   paper: {
     marginTop: theme.spacing(8),
     display: "flex",
@@ -83,11 +81,6 @@ const useStyles = makeStyles((theme) => ({
   form: {
     margin: "0"
   },
-  media:{
-    margin: "auto",
-    paddingTop: '56.25%'
-  },
-  
   cardHeader: {
     width: "auto",
     textAlign: "center",
@@ -97,7 +90,8 @@ const useStyles = makeStyles((theme) => ({
     padding: "20px 0",
     marginBottom: "15px"
   },
-  divider: {
+  
+   divider: {
     marginTop: "30px",
     marginBottom: "0px",
     textAlign: "center"

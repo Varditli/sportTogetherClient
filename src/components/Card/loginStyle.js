@@ -1,42 +1,28 @@
-import { makeStyles } from "@material-ui/core/styles";
-import { container, title } from "../../Card/Exports";
+const containerFluid = {
+    paddingRight: "15px",
+    paddingLeft: "15px",
+    marginRight: "auto",
+    marginLeft: "auto",
+    width: "100%"
+  };
+  
+const container = {
+    ...containerFluid,
+    "@media (min-width: 576px)": {
+      maxWidth: "540px"
+    },
+    "@media (min-width: 768px)": {
+      maxWidth: "720px"
+    },
+    "@media (min-width: 992px)": {
+      maxWidth: "960px"
+    },
+    "@media (min-width: 1200px)": {
+      maxWidth: "1140px"
+    }
+  };
 
-const useStyles = makeStyles((theme) => ({
-  root:{
-    backgroundColor: "#c4dfdf"
-  },
-  paper: {
-    marginTop: theme.spacing(8),
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-  },
-  title: {
-    ...title,
-    color: "#FFFFFF",
-    margin:"auto",
-    display: "inline-block",
-    position: "relative",
-    fontSize:"48px",
-    textAlign:"center",
-    marginTop: "30px",
-    padding:"15px",
-    minHeight: "32px",
-    textDecoration: "none"
-  },
-  form: {
-    width: "100%", // Fix IE 11 issue.
-    marginTop: theme.spacing(1),
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
-  trainer: {
-    backgroundColor: "blue",
-  },
-  user: {
-    backgroundColor: "white",
-  },
+const signupPageStyle = {
   container: {
     ...container,
     zIndex: "2",
@@ -83,11 +69,6 @@ const useStyles = makeStyles((theme) => ({
   form: {
     margin: "0"
   },
-  media:{
-    margin: "auto",
-    paddingTop: '56.25%'
-  },
-  
   cardHeader: {
     width: "auto",
     textAlign: "center",
@@ -96,6 +77,17 @@ const useStyles = makeStyles((theme) => ({
     marginTop: "-40px",
     padding: "20px 0",
     marginBottom: "15px"
+  },
+  socialIcons: {
+    maxWidth: "24px",
+    marginTop: "0",
+    width: "100%",
+    transform: "none",
+    left: "0",
+    top: "0",
+    height: "100%",
+    lineHeight: "41px",
+    fontSize: "20px"
   },
   divider: {
     marginTop: "30px",
@@ -116,5 +108,6 @@ const useStyles = makeStyles((theme) => ({
   inputIconsColor: {
     color: "#495057"
   }
-}));
-export default useStyles;
+};
+
+export default signupPageStyle;

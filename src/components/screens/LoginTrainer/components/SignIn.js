@@ -2,21 +2,21 @@ import React, { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { UserContext } from "../../../../App";
 import Avatar from "@material-ui/core/Avatar";
-import Button from "../../../CustomButtons/Button";
+import Button from "../../../CustomButtons/Button"
 import TextField from "@material-ui/core/TextField";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 import Link from "@material-ui/core/Link";
 import Grid from "@material-ui/core/Grid";
+import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import Typography from "@material-ui/core/Typography";
 import useStyles from "../styles";
 import CardFooter from "../../../Card/CardFooter";
 import CardBody from "../../../Card/CardBody";
+import GridItem from "../../../Grid/GridItem";
 
-// import styles from "../LogInStyle";
 
-// const loginstyle = makeStyles(styles);
 
-// const classes = loginstyle();
 
 export default function SignIn(isTrainer) {
   const { state, dispatch } = useContext(UserContext);
@@ -28,8 +28,9 @@ export default function SignIn(isTrainer) {
   setTimeout(function () {
     setCardAnimation("");
   }, 700);
-  const SigninCheck = () => {
-    fetch(`${process.env.REACT_APP_SERVER}/signin`, {
+
+  const SigninTrainer = () => {
+    fetch(`${process.env.REACT_APP_SERVER}/signinTrainer`, {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -41,19 +42,25 @@ export default function SignIn(isTrainer) {
       .then((data) => {
         if (data.error) {
         }
+        console.log(data);
+        debugger
         localStorage.setItem("jwt", data.token);
-        localStorage.setItem("user", JSON.stringify(data.user));
-        localStorage.setItem("Role", "user");
-        dispatch({ type: "USER", payload: data.user });
+        localStorage.setItem("trainer", JSON.stringify(data.trainer));
+        localStorage.setItem("Role", "trainer");
+        dispatch({ type: "TRAINER", payload: data.trainer });
         history.push("/HomePage");
       })
       .catch((err) => {
         console.log(err);
       });
   };
-
   return (
-        <form className={classes.form} noValidate>
+   <div>
+          {/* <Avatar className={classes.avatar} margin="auto" >
+            <LockOutlinedIcon />
+          </Avatar> */}
+          
+          <form className={classes.form} noValidate>
           <CardBody>
             <TextField
               variant="outlined"
@@ -86,7 +93,8 @@ export default function SignIn(isTrainer) {
             control={<Checkbox value="remember" color="primary" />}
             label="Remember me"
           />
-          <Button onClick={() => SigninCheck()} round color="primary">Sign In</Button>
+          <Button onClick={() => SigninTrainer()} round color="primary" >Sign In</Button>
+
           <CardFooter>
             <Grid container>
               <Grid item xs>
@@ -102,5 +110,7 @@ export default function SignIn(isTrainer) {
             </Grid>
           </CardFooter>
         </form>
+        </div>
+
   );
 }

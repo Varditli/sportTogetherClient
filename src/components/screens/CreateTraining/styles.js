@@ -1,8 +1,9 @@
 import { makeStyles } from "@material-ui/core/styles";
-import { container, title } from "../../Card/Exports";
+import { container } from "../../Card/Exports";
 
 const useStyles = makeStyles((theme) => ({
-  root:{
+  main:{
+    margin:"auto",
     backgroundColor: "#c4dfdf"
   },
   paper: {
@@ -11,22 +12,9 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     alignItems: "center",
   },
-  title: {
-    ...title,
-    color: "#FFFFFF",
-    margin:"auto",
-    display: "inline-block",
-    position: "relative",
-    fontSize:"48px",
-    textAlign:"center",
-    marginTop: "30px",
-    padding:"15px",
-    minHeight: "32px",
-    textDecoration: "none"
-  },
-  form: {
-    width: "100%", // Fix IE 11 issue.
-    marginTop: theme.spacing(1),
+  avatar: {
+    margin: theme.spacing(1),
+    backgroundColor: theme.palette.secondary.main,
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
@@ -80,14 +68,11 @@ const useStyles = makeStyles((theme) => ({
       width: "100%"
     }
   },
-  form: {
-    margin: "0"
-  },
   media:{
+    width: "75%",
     margin: "auto",
-    paddingTop: '56.25%'
+    paddingTop: '56.25%',
   },
-  
   cardHeader: {
     width: "auto",
     textAlign: "center",
@@ -96,6 +81,17 @@ const useStyles = makeStyles((theme) => ({
     marginTop: "-40px",
     padding: "20px 0",
     marginBottom: "15px"
+  },
+  socialIcons: {
+    maxWidth: "24px",
+    marginTop: "0",
+    width: "100%",
+    transform: "none",
+    left: "0",
+    top: "0",
+    height: "100%",
+    lineHeight: "41px",
+    fontSize: "20px"
   },
   divider: {
     marginTop: "30px",
@@ -116,5 +112,6 @@ const useStyles = makeStyles((theme) => ({
   inputIconsColor: {
     color: "#495057"
   }
+  
 }));
 export default useStyles;
