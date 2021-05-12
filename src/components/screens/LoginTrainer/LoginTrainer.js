@@ -33,7 +33,7 @@ const isSignUp = () => {
   } else {
     state[1]=true;
   }
-  history.push("/Logintrainer")
+  history.push("/LoginTrainer")
 
 }
 

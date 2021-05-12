@@ -11,10 +11,11 @@ import {
   useLocation,
 } from "react-router-dom";
 import HomePage from "./components/screens/HomePage/HomePage";
-import Login from "./components/screens/Login/Login";
-import Profile from "./components/screens/ProfilePage/Profile"
+import LoginTrainee from "./components/screens/LoginTrainee/LoginTrainee";
+import TrainerProfile from "./components/screens/ProfilePage/TrainerProfile";
 import LoginTrainer from "./components/screens/LoginTrainer/LoginTrainer";
 import CreateTraining from "./components/screens/CreateTraining/CreateTraining";
+import TraineeProfile from "./components/screens/ProfilePage/TraineeProfile";
 
 
 import { reducer, initialState } from "./reducers/userReducer";
@@ -51,16 +52,16 @@ const Routing = () => {
       <Route exact path="/HomePage">
         <HomePage />
       </Route>
-      <Route exact path="/login">
-        <Login />
+      <Route exact path="/LoginTrainee">
+        <LoginTrainee />
       </Route>
-      <Route exact path="/logintrainer">
+      <Route exact path="/LoginTrainer">
         <LoginTrainer />
       </Route>
-      <Route exact path="/profile">
+      <Route exact path="/Profile">
         <Profile />
       </Route>
-      <Route exact path="/createtraining">
+      <Route exact path="/CreateTraining">
         <CreateTraining />
       </Route>
     </Switch>

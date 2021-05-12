@@ -52,10 +52,10 @@ const renderList = () => {
           </IconButton>
           {/* <Navbar brand={icon} toggleNavKey={0}/> */}
           <Typography className={classes.title}>
-          <Button edge="start" href="/loginTrainee" className={classes.menuButton} color="inherit" aria-label="menu">
+          <Button edge="start" href="/LoginTrainee" className={classes.menuButton} color="inherit" aria-label="menu">
             Login Trainee
           </Button>
-          <Button edge="start" href="/logintrainer" className={classes.menuButton} color="inherit" aria-label="menu">
+          <Button edge="start" href="/Logintrainer" className={classes.menuButton} color="inherit" aria-label="menu">
             Login Trainer
           </Button>
           </Typography>
