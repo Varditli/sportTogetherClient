@@ -14,21 +14,34 @@ import GridContainer from "../../Grid/GridContainer";
 import GridItem from "../../Grid/GridItem";
 import NavPills from "../../NavPills/NavPills";
 import Parallax from "../../compopnets/Parallax/Parallax";
+import IconButton from '@material-ui/core/IconButton';
+import EditIcon from '@material-ui/icons/Edit';
+import editTProfile from "./editProfile";
 
-
-import styles from "./PrifilePage";
+import styles from "./ProfileStyle";
 
 const useStyles = makeStyles(styles);
 
-export default function ProfilePage(props) {
+export default function TraineeProfilePage(props) {
   const classes = useStyles();
-  const { ...rest } = props;
-  const imageClasses = classNames(
-    classes.imgRaised,
-    classes.imgRoundedCircle,
-    classes.imgFluid
-  );
-  const navImageClasses = classNames(classes.imgRounded, classes.imgGallery);
+  //const { ...rest } = props;
+
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const editTraineeProfile = () => {
+    handleClickOpen();
+    return;
+
+  };
+
   return (
     <div>
     
@@ -40,31 +53,23 @@ export default function ProfilePage(props) {
               <GridItem xs={12} sm={12} md={6}>
                 <div className={classes.profile}>
                   <div>
-                    <img src={"https://res.cloudinary.com/dywnmmeue/image/upload/v1617887588/trainingPic_gmmk9c.jpg"} alt="..." className={imageClasses} />
+                    <img src={"https://res.cloudinary.com/dywnmmeue/image/upload/v1617887588/trainingPic_gmmk9c.jpg"} alt="..." />
                   </div>
                   <div className={classes.name}>
-                    <h3 className={classes.title}>Christian Louboutin</h3>
-                    <h6>מאמן כושר אישי</h6>
-                    <Button justIcon link className={classes.margin5}>
-                      <i className={"fab fa-twitter"} />
-                    </Button>
-                    <Button justIcon link className={classes.margin5}>
-                      <i className={"fab fa-instagram"} />
-                    </Button>
-                    <Button justIcon link className={classes.margin5}>
-                      <i className={"fab fa-facebook"} />
-                    </Button>
+                    <h3 className={classes.title}>Yosi Cohen</h3>
+                    <IconButton variant="contained" disableElevation onClick={() => editTraineeProfile()}>
+                        <EditIcon/>
+                    </IconButton>
+                    <editTProfile
+                        open={open}
+                        handleClose={handleClose}
+                    />
                   </div>
                 </div>
               </GridItem>
             </GridContainer>
-            <div className={classes.description}>
+            <div className={classes}>
               <p>
-              💪🏼 עוסק בתחום הספורט מעל 15 שנה
-🏋🏻‍♂️ סטודיו מאובזר בציוד חדיש ומתקדם
-🏷 חבילות אימונים במחירי היכרות בתל אביב
-🤝 אימונים אישיים וזוגיים ביחס אישי
-🧼 הקפדה על נקיון אחרי כל מתאמן{" "}
               </p>
             </div>
             <GridContainer justify="center">
@@ -82,7 +87,6 @@ export default function ProfilePage(props) {
                             <img
                               alt="..."
                               src={ "https://res.cloudinary.com/dywnmmeue/image/upload/v1617887588/trainingPic_gmmk9c.jpg"}
-                              className={navImageClasses}
                             />
                            
                           </GridItem>
@@ -90,7 +94,7 @@ export default function ProfilePage(props) {
                             <img
                               alt="..."
                               src={"https://res.cloudinary.com/dywnmmeue/image/upload/v1617887588/trainingPic_gmmk9c.jpg"}
-                              className={navImageClasses}
+        
                             />
                            
                           </GridItem>
@@ -106,7 +110,7 @@ export default function ProfilePage(props) {
                             <img
                               alt="..."
                               src={ "https://res.cloudinary.com/dywnmmeue/image/upload/v1617887588/trainingPic_gmmk9c.jpg"}
-                              className={navImageClasses}
+        
                             />
                        
                           </GridItem>
@@ -116,12 +120,12 @@ export default function ProfilePage(props) {
                               src={
                                   "https://res.cloudinary.com/dywnmmeue/image/upload/v1617887588/trainingPic_gmmk9c.jpg"
                               }
-                              className={navImageClasses}
+        
                             />
                             <img
                               alt="..."
                               src={ "https://res.cloudinary.com/dywnmmeue/image/upload/v1617887588/trainingPic_gmmk9c.jpg"}
-                              className={navImageClasses}
+        
                             />
                           </GridItem>
                         </GridContainer>
@@ -136,7 +140,7 @@ export default function ProfilePage(props) {
                             <img
                               alt="..."
                               src={"https://res.cloudinary.com/dywnmmeue/image/upload/v1617887588/trainingPic_gmmk9c.jpg"}
-                              className={navImageClasses}
+        
                             />
                           
                           </GridItem>
@@ -144,7 +148,7 @@ export default function ProfilePage(props) {
                             <img
                               alt="..."
                               src={"https://res.cloudinary.com/dywnmmeue/image/upload/v1617887588/trainingPic_gmmk9c.jpg"}
-                              className={navImageClasses}
+        
                             /> 
                           </GridItem>
                         </GridContainer>

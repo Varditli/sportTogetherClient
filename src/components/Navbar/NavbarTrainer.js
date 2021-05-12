@@ -28,14 +28,13 @@ export default function NavbarTrainer() {
           </IconButton>
           
           <Typography className={classes.title}>
-          <Button edge="start" href="/Profile" className={classes.menuButton} color="inherit" aria-label="menu">
+          <Button edge="start" href="/TrainerProfile" className={classes.menuButton} color="inherit" aria-label="menu">
           <AccountCircle className={classes.icons} /> 
             profile
             </Button>
           <Button color="inherit" href="/HomePage">Home</Button>
           <Button color="inherit" href="/createtraining">Create New Training</Button>
-          <Button edge="start" className={classes.menuButton} color="inherit" aria-label="menu"
-              aria-label="settings"
+          <Button color="inherit"
               onClick={() => {
                 localStorage.clear();
                 dispatch({ type: "CLEAR" });
@@ -45,7 +44,6 @@ export default function NavbarTrainer() {
               Logout
             </Button>
             </Typography> 
-        
         </Toolbar>
   );
 }

@@ -25,7 +25,7 @@ export default function NavbarTrainee() {
           </IconButton>
          
           <Typography className={classes.title}>
-          <Button edge="start" href="/Profile" className={classes.menuButton} color="inherit" aria-label="menu">
+          <Button edge="start" href="/TraineeProfile" className={classes.menuButton} color="inherit" aria-label="menu">
           <AccountCircle className={classes.icons} /> 
             profile
             </Button>
@@ -35,7 +35,7 @@ export default function NavbarTrainee() {
               onClick={() => {
                 localStorage.clear();
                 dispatch({ type: "CLEAR" });
-                history.push("/Login");
+                history.push("/LoginTrainee");
               }}
             >
               Logout

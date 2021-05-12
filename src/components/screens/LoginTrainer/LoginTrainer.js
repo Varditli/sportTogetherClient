@@ -7,10 +7,10 @@ import SignUp from "./components/SignUp"
 import SignIn from "./components/SignIn"
 import Card from "../../Card/Card";
 import CardHeader from "../../Card/CardHeader";
-import useStyles from "./styles";
+import {useStyles} from "./styles";
 import Parallax from "../../compopnets/Parallax/Parallax";
 import GridContainer from "../../Grid/GridContainer";
-  import GridItem from "../../Grid/GridItem";
+import GridItem from "../../Grid/GridItem";
 import Footer from "../../Footer/Footer";
 
 
@@ -48,7 +48,7 @@ return (
             <GridItem xs={12} sm={12} md={6}>
             <h1 className={classes.title}>SporTogether</h1>
                <h4>
-               מביאים את האימונים עד אליכם
+                We bring you the all the trainings to one place
               </h4>
               <br />
             </GridItem>

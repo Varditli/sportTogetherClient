@@ -29,7 +29,7 @@ export default function Signup() {
       //   M.toast({ html: "Invalid email", classes: "#ff4081 pink accent-2" });
       return;
     }
-    fetch(`${process.env.REACT_APP_SERVER}/signup`, {
+    fetch(`${process.env.REACT_APP_SERVER}/signupTrainee`, {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -45,8 +45,8 @@ export default function Signup() {
         if (data.error) {
           console.log("nonononono");
         } else {
-          console.log("successfully Trainer");
-          history.push("/");
+          console.log("successfully Added Trainee");
+          history.push("/LoginTrainee");
         }
       })
       .catch((err) => {

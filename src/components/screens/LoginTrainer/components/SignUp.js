@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import Button from "../../../CustomButtons/Button"
 import TextField from "@material-ui/core/TextField";
@@ -6,9 +6,18 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 import Link from "@material-ui/core/Link";
 import Grid from "@material-ui/core/Grid";
-import useStyles from "../styles";
+import {useStyles, Label, InputWrapper, Listbox, Tag} from "../styles";
 import CardFooter from "../../../Card/CardFooter";
 import CardBody from "../../../Card/CardBody";
+import { Photo } from "@material-ui/icons";
+
+
+/* eslint-disable no-use-before-define */  //sportType imports
+import useAutocomplete from '@material-ui/lab/useAutocomplete';
+import NoSsr from '@material-ui/core/NoSsr';
+import CheckIcon from '@material-ui/icons/Check';
+
+const allTypes = []
 
 export default function Signup() {
   const history = useHistory();
@@ -16,8 +25,10 @@ export default function Signup() {
   const [email, setEmail] = useState("");
   const [tel, setTel] = useState("");
   const [password, setPassword] = useState("");
+  const [sportTypes, setSportTypes] = useState("");
   const [age, setAge] = useState("");
   const [experience, setExperience] = useState("");
+  const [photo, setPhoto] = useState("");
 
   const classes = useStyles();
   const PostDataTrainer = () => {
@@ -39,21 +50,62 @@ export default function Signup() {
         age,
         experience,
         tel,
+        sportTypes
+        //photo
       }),
     })
       .then((res) => res.json())
       .then((data) => {
         if (data.error) {
-          console.log("nonononono");
+          console.log(data.error);
         } else {
-          console.log("successfully Trainer");
-          history.push("/");
+          console.log("successfully added Trainer");
+          history.push("/LoginTrainer");
         }
       })
       .catch((err) => {
         console.log(err);
       });
   };
+
+
+  useEffect(() => {
+    fetch(`${process.env.REACT_APP_SERVER}/allSportTypes`, {
+      headers: {
+        "Content-Type": "application/json",   //the content type is json
+      },
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        for (var i = 0; i<result.sportTypes.length; i++){
+          allTypes.push({name: result.sportTypes[i].name})
+        }
+        console.log(allTypes);
+        return setSportTypes(allTypes);
+      });
+  }, []);
+
+
+    //sportType const
+    const {
+      getRootProps,
+      getInputLabelProps,
+      getInputProps,
+      getTagProps,
+      getListboxProps,
+      getOptionProps,
+      groupedOptions,
+      value,
+      focused,
+      setAnchorEl,
+    } = useAutocomplete({
+      id: 'customized-hook-demo',
+      defaultValue: [a[0]],
+      multiple: true,
+      options: a,
+      getOptionLabel: (option) => option.name,
+    });
+
 
   return (
       <form className={classes.form} >
@@ -132,6 +184,43 @@ export default function Signup() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
+      <NoSsr>
+      <div>
+        <div {...getRootProps()}>
+          <Label {...getInputLabelProps()}>Sport Types</Label>
+          <InputWrapper ref={setAnchorEl} className={focused ? 'focused' : ''}>
+            {value.map((option, index) => (
+              <Tag label={option.name} {...getTagProps({ index })} />
+            ))}
+
+            <input {...getInputProps()} />
+          </InputWrapper>
+        </div>
+        {groupedOptions.length > 0 ? (
+          <Listbox {...getListboxProps()}>
+            {groupedOptions.map((option, index) => (
+              <li {...getOptionProps({ option, index })}>
+                <span>{option.name}</span>
+                <CheckIcon fontSize="small" />
+              </li>
+            ))}
+          </Listbox>
+        ) : null}
+      </div>
+    </NoSsr>
+    <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            name="photo"
+            label="photo"
+            type="photo"
+            id="photo"
+            autoComplete=""
+            value={photo}
+            onChange={(e) => setPhoto(e.target.value)}
+          />
         </CardBody>
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
@@ -148,7 +237,7 @@ export default function Signup() {
             </Grid>
             <Grid item>
               <Link href="#" variant="body2">
-                {"Don't have an account? Sign Up"}
+                {"Don't have an account? Sign Up now"}
               </Link>
             </Grid>
           </Grid>
@@ -156,3 +245,6 @@ export default function Signup() {
       </form>
   );
 }
+
+
+const a = allTypes

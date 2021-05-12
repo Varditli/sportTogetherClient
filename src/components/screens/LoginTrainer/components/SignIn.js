@@ -10,7 +10,7 @@ import Link from "@material-ui/core/Link";
 import Grid from "@material-ui/core/Grid";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
-import useStyles from "../styles";
+import {useStyles} from "../styles";
 import CardFooter from "../../../Card/CardFooter";
 import CardBody from "../../../Card/CardBody";
 import GridItem from "../../../Grid/GridItem";
@@ -43,10 +43,9 @@ export default function SignIn(isTrainer) {
         if (data.error) {
         }
         console.log(data);
-        debugger
         localStorage.setItem("jwt", data.token);
         localStorage.setItem("trainer", JSON.stringify(data.trainer));
-        localStorage.setItem("Role", "trainer");
+        localStorage.setItem("role","trainer");
         dispatch({ type: "TRAINER", payload: data.trainer });
         history.push("/HomePage");
       })
@@ -56,10 +55,6 @@ export default function SignIn(isTrainer) {
   };
   return (
    <div>
-          {/* <Avatar className={classes.avatar} margin="auto" >
-            <LockOutlinedIcon />
-          </Avatar> */}
-          
           <form className={classes.form} noValidate>
           <CardBody>
             <TextField

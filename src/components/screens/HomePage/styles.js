@@ -1,6 +1,29 @@
 import { container, title } from "../../Card/Exports";
 
 const styles = {
+
+  visuallyHidden: {
+    clip: "rect(0 0 0 0)",
+    clipPath: "inset(50%)",
+    height: "1px",
+    overflow: "hidden",
+    position: "absolute",
+    whitespace: "nowrap",
+    width: "1px"
+},
+
+ul: {
+    textAlign: "left",
+    width: "400px"
+},
+
+input: {
+    height: "27px",
+    margin: "4px",
+    padding: "4px",
+    fontSize: "24px"
+},
+
   p:{
     textAlign:"center",
     margin:"auto"

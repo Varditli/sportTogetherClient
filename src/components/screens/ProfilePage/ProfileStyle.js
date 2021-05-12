@@ -1,3 +1,5 @@
+import { emphasize } from "@material-ui/core";
+import { BorderLeft, SignalWifi1BarLockSharp } from "@material-ui/icons";
 import { container, title } from "../../Card/Exports";
 
 const imagesStyle ="https://res.cloudinary.com/niroavram/image/upload/v1617521371/family-members-with-their-pet-dog-on-white-background-free-vector_cuuymv.jpg";
@@ -18,6 +20,18 @@ const profilePageStyle = {
     color: "#999",
     textAlign: "center !important"
   },
+  table: {
+    lineHeight: 2,
+    color: "#999",
+    fontSize: "1.5em",
+    textAlign: "left"
+  },
+
+  tit: {
+    color: "black",
+    textDecoration: "Bold",
+  },
+
   name: {
     marginTop: "-80px"
   },

@@ -31,20 +31,15 @@ const Navbar = (props) => {
 const { state, dispatch } = useContext(UserContext);
 const history = useHistory();
  const classes = useStyles();
-var name = localStorage.getItem("Role");
-// var icon = (
-//   <span class="logo">
-//     <a href="/">
-//       <img src="https://res.cloudinary.com/niroavram/image/upload/v1617714585/Add_a_subheading_kpvjyo.svg" height="33" width="120" alt="text here" /></a>
-//   </span>
-// );
+var name = localStorage.getItem("role");
+console.log(name)
 
 const renderList = () => {
   if (name) {
     if (name.includes("trainer")) {
       return [
         <NavbarTrainer />
-      ]} else if (name.includes("user")) {
+      ]} else if (name.includes("trainee")) {
       return [
       <NavbarTrainee />
       ];
@@ -57,8 +52,8 @@ const renderList = () => {
           </IconButton>
           {/* <Navbar brand={icon} toggleNavKey={0}/> */}
           <Typography className={classes.title}>
-          <Button edge="start" href="/login" className={classes.menuButton} color="inherit" aria-label="menu">
-            Login User
+          <Button edge="start" href="/loginTrainee" className={classes.menuButton} color="inherit" aria-label="menu">
+            Login Trainee
           </Button>
           <Button edge="start" href="/logintrainer" className={classes.menuButton} color="inherit" aria-label="menu">
             Login Trainer

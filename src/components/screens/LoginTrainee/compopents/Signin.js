@@ -29,7 +29,7 @@ export default function SignIn(isTrainer) {
     setCardAnimation("");
   }, 700);
   const SigninCheck = () => {
-    fetch(`${process.env.REACT_APP_SERVER}/signin`, {
+    fetch(`${process.env.REACT_APP_SERVER}/signinTrainee`, {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -42,9 +42,9 @@ export default function SignIn(isTrainer) {
         if (data.error) {
         }
         localStorage.setItem("jwt", data.token);
-        localStorage.setItem("user", JSON.stringify(data.user));
-        localStorage.setItem("Role", "user");
-        dispatch({ type: "USER", payload: data.user });
+        localStorage.setItem("trainee", JSON.stringify(data.trainee));
+        localStorage.setItem("role","trainee");
+        dispatch({ type: "TRAINEE", payload: data.user });
         history.push("/HomePage");
       })
       .catch((err) => {

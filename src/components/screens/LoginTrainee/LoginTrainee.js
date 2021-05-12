@@ -33,7 +33,7 @@ const LogoImg = "https://res.cloudinary.com/niroavram/image/upload/v1617714585/A
     } else {
       state[1]=true;
     }
-    history.push("/Login")
+    history.push("/LoginTrainee")
 
   }
   
