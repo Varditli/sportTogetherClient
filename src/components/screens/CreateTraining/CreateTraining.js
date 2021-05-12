@@ -62,7 +62,7 @@ export default function CreateTraing() {
           console.log("nonononono");
         } else {
           console.log("successfully Trainer");
-          history.push("/");
+          history.push("/HomePage");
         }
       })
       .catch((err) => {
