@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useHistory} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Parallax from "../../compopnets/Parallax/Parallax"
@@ -9,11 +9,12 @@ import classNames from "classnames";
 import Footer from "../../Footer/Footer";
 import styles from "./styles";
 import Button from "../../CustomButtons/Button";
-import CustomDropdown from '../../CustomDropdown/CastomDropdown';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { BrowserRouter as Router } from "react-router-dom";
 import Search from './Search';
+import Maps from './Maps';
+
 
 import Schedule from "@material-ui/icons/Schedule";
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
@@ -21,7 +22,7 @@ import HowToRegIcon from '@material-ui/icons/HowToReg';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import List from "@material-ui/icons/List";
 import NavPills from "../../NavPills/NavPills";
-import { CheckCircle } from '@material-ui/icons';
+
 
 const useStyles = makeStyles(styles);
 
@@ -235,33 +236,24 @@ export default function HomePage() {
 // }, []);
 const [allData,setAllData] = useState([]);
 const [filteredData,setFilteredData] = useState(allData);
-const handleSearch = (event) => {
-  let value = event.target.value.toLowerCase();
-  let result = [];
-  console.log(value);
-  result = allData.filter((data) => {
-  return data.title.search(value) != -1;
-  });
-  setFilteredData(result);
+
+const filtertrainings = (trfiltertrainings, query) => {
+  if (!query) {
+      return trfiltertrainings;
   }
 
-  
-  const classes = useStyles();
-  const filtertrainings = (trainings, query) => {
-    if (!query) {
-        return trainings;
-    }
-
-    return trainings.filter((trainings) => {
-        const trainingsName = trainings.name.toLowerCase();
-        return trainingsName.includes(query);
-    });
+  return trfiltertrainings.filter((item) => {
+      const trainingsName = trainings.name.toLowerCase();
+      return trainingsName.includes(query);
+  });
 };
+
+  const classes = useStyles();
   const { search } = window.location;
   const query = new URLSearchParams(search).get('s');
   const [searchQuery, setSearchQuery] = useState(query || '');
   const filteredtrainings = filtertrainings(trainings, query);
-  
+
   return (
   <Router>
     <div> 
@@ -270,9 +262,9 @@ const handleSearch = (event) => {
           <GridContainer>
             <GridItem xs={12} sm={12} md={6}>
             <h1 className={classes.title}>SporTogether</h1>
-               <h4>
+               <h3>
                 מביאים את האימונים עד אליכם
-              </h4>
+              </h3>
               <br />
             </GridItem>
           </GridContainer>
@@ -284,118 +276,92 @@ const handleSearch = (event) => {
            <div className={classes.section}>
          <GridContainer justify="center">
          <GridItem xs={12} sm={12} md={8}>
-          <Button round color="primary">
-          <h2 >How it works</h2>
-          </Button>
-          <h3 className={classes.description}>
-            SporTogether מביאים את האימונים עד אליכם! 
-          </h3>
+       
+          <h1 >How it works</h1>
+          
         </GridItem>
       </GridContainer>
       <NavPills
                 color="primary"
                 tabs={[
                   {
-                    tabButton: "מתאמנים ונהנים!",
-                   tabIcon: CheckCircleIcon,
+                    tabButton: "Sign up",
+                   tabIcon: HowToRegIcon,
                     tabContent: (
                       <span>   
-                        <h4>
-                         לאחר ההרשמה ישלח אליכם קישור לזום, וכל מה שנותר הוא להתחבר למפגש ולהנות. התשלום יתבצע במועד המפגש
-                         </h4> 
+                        <h3>
+                          In order to participate in trainings,
+                        first you need to sign up to our website
+                         </h3> 
                         <br />
                       </span>
                     )
                   },
                   {
-                    tabButton: "בוחרים באימון הרצוי",
+                    tabButton: "choose training",
                     tabIcon: Schedule,
                     tabContent: (
                       <span>
-                       <h4>
-                         כעת לאחר שנרשמתם, תוכלו לבחור באימון הרצוי עבורכם ולהרשם
-                         </h4>
+                       <h3>
+                       after you signed-in,
+                       choose a training you would like to participate 
+                       and book place, no credit card needed.
+                         </h3>
                         <br />
                       </span>
                     )
                   },
                   {
-                    tabButton: " נרשמים לאתר",
-                    tabIcon: HowToRegIcon,
+                    tabButton: " enjoy ",
+                    tabIcon: CheckCircleIcon,
                     tabContent: (
                       <span>
-                       <h4>
-                          על מנת שתוכלו להרשם לאימונים תחילה עליכם לבצע הרשמה לאתר
-                       </h4>
+                       <h3>
+                         it's all set !
+                     enjoy your training
+                       </h3>
                         <br />
                       </span>
                     )
                   }
                 ]}
               />
+              <Maps/>
       <GridContainer justify="center">
       <GridItem xs={12} sm={12} md={8}>
-      <Button round color="primary">
-          <h2>All Trainings</h2>
-          </Button>
+          <h1>All Trainings</h1>
       </GridItem>   
        </GridContainer>
        <form>
 
-       <div className="App">
-        <div style={{ margin: '0 auto', marginTop: '10%' }}>
-        <label>Search:</label>
-        <input type="text" onChange={(event) =>handleSearch(event)} />
-        </div>
-       </div>
-
     <GridContainer>
-    
-
-
-                  <div >
+               <div >
                  <Search
                   searchQuery={searchQuery}
                   setSearchQuery={setSearchQuery}
-            />
+               />
             <ul>
                 {filteredtrainings.map(trainings => (
-                  <li key={trainings.key}>{trainings.type}</li>
+                  <li key={trainings.name}>{Training}</li>
                 ))}
             </ul>
         </div>
                      <Autocomplete
-                      id="סוג אימון"
+                      id="Category"
                       options={trainings}
-                      getOptionLabel={(trainings) => trainings.type}
+                      getOptionLabel={(trainings) => trainings.type} 
+                      onChange={(e) => console.log(e.target.value)}
                       style={{ width: 300 }}
-                      renderInput={(params) => <TextField {...params} label="סוג אימון" variant="outlined" />}
-                       />
-                       <Autocomplete
-                      id="תאריך"
+                      renderInput={(params) => <TextField {...params}  label="סוג אימון" variant="outlined" />}
+                       />  
+                        <Autocomplete
+                      id="Date"
                       options={trainings}
                       getOptionLabel={(trainings) => trainings.time}
                       style={{ width: 300 }}
                       renderInput={(params) => <TextField {...params} label=" תאריך" variant="outlined" />}
                       
                        />
-
-                        <Autocomplete
-                        freeSolo
-                        id="free-solo-2-demo"
-                        style={{ width: 300 }}
-                        disableClearable
-                        options={trainings.map((trainings) => trainings.type)}
-                        renderInput={(params) => (
-                          <TextField
-                            {...params}
-                            label="Search input"
-                            margin="normal"
-                            variant="outlined"
-                            InputProps={{ ...params.InputProps, type: 'search' }}
-                          />
-                          )}
-                          />
 
               </GridContainer>
        </form>
