@@ -1,14 +1,14 @@
 import React from 'react'
 import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
+
 // API KEY = AIzaSyAd7JflAOBezbp22Ur_svbRKdZ_8C0bmQ8
 
 // Create the script tag, set the appropriate attributes
 var script = document.createElement('script');
-// script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyAd7JflAOBezbp22Ur_svbRKdZ_8C0bmQ8Y&callback=initMap';
-// script.async = true;
 
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAd7JflAOBezbp22Ur_svbRKdZ_8C0bmQ8&callback=initMap"
 type="text/javascript"></script> 
+
 
 // Attach your callback function to the `window` object
 window.initMap = function() {
