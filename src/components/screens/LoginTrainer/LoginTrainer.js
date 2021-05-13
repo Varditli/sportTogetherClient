@@ -14,7 +14,6 @@ import GridItem from "../../Grid/GridItem";
 import Footer from "../../Footer/Footer";
 
 
-
 var isTrainer, isSignin, classUI;
 const state= [
   isTrainer = false,

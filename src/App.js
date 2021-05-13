@@ -9,6 +9,7 @@ import {
   Switch,
   useHistory,
   useLocation,
+  Redirect
 } from "react-router-dom";
 import HomePage from "./components/screens/HomePage/HomePage";
 import LoginTrainee from "./components/screens/LoginTrainee/LoginTrainee";
@@ -49,8 +50,14 @@ const Routing = () => {
 
   return (
     <Switch location={background || location}>
+      <Route exact path="/">
+        <Redirect to="/HomePage" />
+      </Route>
       <Route exact path="/HomePage">
         <HomePage />
+      </Route>
+      <Route exact path="/TraineeProfile">
+        <TraineeProfile />
       </Route>
       <Route exact path="/LoginTrainee">
         <LoginTrainee />
@@ -58,8 +65,8 @@ const Routing = () => {
       <Route exact path="/LoginTrainer">
         <LoginTrainer />
       </Route>
-      <Route exact path="/Profile">
-        <Profile />
+      <Route exact path="/TrainerProfile">
+        <TrainerProfile />
       </Route>
       <Route exact path="/CreateTraining">
         <CreateTraining />
