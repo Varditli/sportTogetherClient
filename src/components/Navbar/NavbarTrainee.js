@@ -25,11 +25,6 @@ export default function NavbarTrainee() {
           </IconButton>
          
           <Typography className={classes.title}>
-          <Button edge="start" href="/TraineeProfile" className={classes.menuButton} color="inherit" aria-label="menu">
-          <AccountCircle className={classes.icons} /> 
-            profile
-            </Button>
-            <Button color="inherit" href="/HomePage">Home</Button>
             <Button edge="start" className={classes.menuButton} color="inherit" aria-label="menu"
               aria-label="settings"
               onClick={() => {
@@ -40,6 +35,11 @@ export default function NavbarTrainee() {
             >
               Logout
             </Button>
+            <Button edge="start" href="/TraineeProfile" className={classes.menuButton} color="inherit" aria-label="menu">
+          <AccountCircle className={classes.icons} /> 
+            profile
+            </Button>
+            <Button color="inherit" href="/HomePage">Home</Button>
             </Typography>     
         </Toolbar>
   );

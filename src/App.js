@@ -1,6 +1,6 @@
 import React, { useEffect, createContext, useReducer, useContext } from "react";
 import Navbar from "./components/Navbar/Navbar";
-import Parallax from "./components/compopnets/Parallax/Parallax"
+// import ResponsiveDrawer from './components/Navbar/ResponsiveDrawer';
 import "./App.css";
 
 import {
@@ -80,6 +80,7 @@ function App() {
     <UserContext.Provider value={{ state, dispatch }}>
       <BrowserRouter>
         <Navbar />
+        {/* <ResponsiveDrawer /> */}
         <Routing />
       </BrowserRouter>
     </UserContext.Provider>

@@ -14,6 +14,7 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import { BrowserRouter as Router } from "react-router-dom";
 import Search from './Search';
 import Maps from './Maps';
+import ResponsiveDrawer from '../../Navbar/ResponsiveDrawer';
 
 
 import Schedule from "@material-ui/icons/Schedule";
@@ -234,15 +235,13 @@ export default function HomePage() {
 //     return setTrainings(result.trainings);
 //   });
 // }, []);
-const [allData,setAllData] = useState([]);
-const [filteredData,setFilteredData] = useState(allData);
 
 const filtertrainings = (trfiltertrainings, query) => {
   if (!query) {
       return trfiltertrainings;
   }
 
-  return trfiltertrainings.filter((item) => {
+  return trfiltertrainings.filter((trainings) => {
       const trainingsName = trainings.name.toLowerCase();
       return trainingsName.includes(query);
   });
@@ -326,25 +325,33 @@ const filtertrainings = (trfiltertrainings, query) => {
                   }
                 ]}
               />
-              <Maps/>
+               <div className={classes.section}>
+               <GridContainer justify="center">
+               <GridItem xs={12} sm={12} md={8}>
+                <h1>Trainings Map</h1>
+                </GridItem>
+                <Maps/>
+               </GridContainer>
+               </div>
       <GridContainer justify="center">
       <GridItem xs={12} sm={12} md={8}>
           <h1>All Trainings</h1>
       </GridItem>   
        </GridContainer>
-       <form>
 
+       <form>
     <GridContainer>
                <div >
                  <Search
                   searchQuery={searchQuery}
                   setSearchQuery={setSearchQuery}
-               />
-            <ul>
-                {filteredtrainings.map(trainings => (
-                  <li key={trainings.name}>{Training}</li>
-                ))}
-            </ul>
+               /> 
+            {/* <ul>
+            {filteredtrainings.map((item) => {
+        return (< Training value={item}/>)
+      }
+  )}
+            </ul> */}
         </div>
                      <Autocomplete
                       id="Category"
@@ -352,14 +359,14 @@ const filtertrainings = (trfiltertrainings, query) => {
                       getOptionLabel={(trainings) => trainings.type} 
                       onChange={(e) => console.log(e.target.value)}
                       style={{ width: 300 }}
-                      renderInput={(params) => <TextField {...params}  label="סוג אימון" variant="outlined" />}
+                      renderInput={(params) => <TextField {...params}  label="Category" variant="outlined" />}
                        />  
                         <Autocomplete
                       id="Date"
                       options={trainings}
                       getOptionLabel={(trainings) => trainings.time}
                       style={{ width: 300 }}
-                      renderInput={(params) => <TextField {...params} label=" תאריך" variant="outlined" />}
+                      renderInput={(params) => <TextField {...params} label=" Date" variant="outlined" />}
                       
                        />
 
