@@ -179,11 +179,7 @@ console.log(training)
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
           <Typography paragraph>
-          💪🏼 עוסק בתחום הספורט מעל 15 שנה
-🏋🏻‍♂️ סטודיו מאובזר בציוד חדיש ומתקדם
-🏷 חבילות אימונים במחירי היכרות בתל אביב
-🤝 אימונים אישיים וזוגיים ביחס אישי
-🧼 הקפדה על נקיון אחרי כל מתאמן
+          💪🏼 Hi ! I'm your personal trainer.
           </Typography>
         </CardContent>
       </Collapse>

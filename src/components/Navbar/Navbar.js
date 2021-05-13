@@ -7,21 +7,11 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-import PropTypes from 'prop-types';
-import CloseIcon from '@material-ui/icons/Close';
-import Drawer from '@material-ui/core/Drawer';
-import Hidden from '@material-ui/core/Hidden';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
 import useScrollTrigger from "@material-ui/core/useScrollTrigger";
-import AccountCircle from "@material-ui/icons/AccountCircle";
 import Slide from "@material-ui/core/Slide";
 import NavbarTrainee from "./NavbarTrainee";
 import NavbarTrainer from "./NavbarTrainer";
 import useStyles from "./styles";
-import GridItem from "../Grid/GridItem";
-import { useTheme } from '@material-ui/core/styles';
 
 function HideOnScroll(props) {
   const { children, window } = props;
@@ -34,11 +24,9 @@ function HideOnScroll(props) {
   </Slide>
 );
 }
-
 const Navbar = (props) => {
 const { state, dispatch } = useContext(UserContext);
 const history = useHistory();
-
  const classes = useStyles();
 var name = localStorage.getItem("role");
 console.log(name)
@@ -70,32 +58,10 @@ const renderList = () => {
           </Typography>
           <Button color="inherit" href="/HomePage">Home</Button>
         </Toolbar>
-
-
     ];
   }
 };
-// function ResponsiveDrawer() {
-//   const dummyCategories = ['Hokusai', 'Hiroshige', 'Utamaro', 'Kuniyoshi', 'Yoshitoshi']
-//   const classes = useStyles();
-//   const theme = useTheme();
-//   const [mobileOpen, setMobileOpen] = React.useState(false);
-// function handleDrawerToggle() {
-//     setMobileOpen(!mobileOpen)
-//   }
-// const drawer = (
-//     <div>
-//       <List>
-//         {dummyCategories.map((text, index) => (
-//           <ListItem button key={text}>
-//             <ListItemText primary={text} />
-//           </ListItem>
-//         ))}
-//       </List>
-//     </div>
-//   );
 return (
-  <div className={classes.root}>
   <HideOnScroll  {...props}>
     <AppBar className={classes.root}>
       <Toolbar className={classes.mar}>
@@ -103,50 +69,8 @@ return (
       </Toolbar>
     </AppBar>
   </HideOnScroll>
-   
-    {/* <nav className={classes.drawer}>
-    <Hidden smUp implementation="css">
-      <Drawer
-        variant="temporary"
-        anchor={theme.direction === 'rtl' ? 'right' : 'left'}
-        open={mobileOpen}
-        onClose={handleDrawerToggle}
-        classes={{
-          paper: classes.drawerPaper,
-        }}
-        ModalProps={{
-          keepMounted: true, // Better open performance on mobile.
-        }}
-      >
-        <IconButton onClick={handleDrawerToggle} className={classes.closeMenuButton}>
-          <CloseIcon/>
-        </IconButton>
-        {drawer}
-      </Drawer>
-    </Hidden>
-    <Hidden xsDown implementation="css">
-      <Drawer
-        className={classes.drawer}
-        variant="permanent"
-        classes={{
-          paper: classes.drawerPaper,
-        }}
-      >
-        <div className={classes.toolbar} />
-        {drawer}
-      </Drawer>  
-    </Hidden>
-    </nav> */}
-    <div className={classes.content}>
-    <div className={classes.toolbar} />
-    </div>
-    </div>
-    
-
 );
-}
-
-
+};
 
 
 export default Navbar;

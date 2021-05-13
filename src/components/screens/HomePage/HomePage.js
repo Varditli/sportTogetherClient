@@ -14,14 +14,9 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import { BrowserRouter as Router } from "react-router-dom";
 import Search from './Search';
 import Maps from './Maps';
-import ResponsiveDrawer from '../../Navbar/ResponsiveDrawer';
-
-
 import Schedule from "@material-ui/icons/Schedule";
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import HowToRegIcon from '@material-ui/icons/HowToReg';
-import LocationOnIcon from '@material-ui/icons/LocationOn';
-import List from "@material-ui/icons/List";
 import NavPills from "../../NavPills/NavPills";
 
 
