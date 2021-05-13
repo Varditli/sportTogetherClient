@@ -58,8 +58,11 @@ const Routing = () => {
       <Route exact path="/LoginTrainer">
         <LoginTrainer />
       </Route>
-      <Route exact path="/Profile">
-        <Profile />
+      <Route exact path="/TraineeProfile">
+        <TraineeProfile />
+      </Route>
+      <Route exact path="/TrainerProfile">
+        <TrainerProfile />
       </Route>
       <Route exact path="/CreateTraining">
         <CreateTraining />
