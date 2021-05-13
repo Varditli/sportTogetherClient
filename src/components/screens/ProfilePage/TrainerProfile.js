@@ -113,10 +113,10 @@ export default function ProfilePage(props) {
                               required
                               id="outlined-required"
                               label="Email"
-                              defaultValue= {localStorage.getItem("email")}
+                              defaultValue= "Bla"
+                              //defaultValue= {localStorage.getItem("email")}
                               variant="outlined"
                               fullWidth
-                              defaultValue = {localStorage.getItem("email")}
                               type="email"
                               value={email}
                               onChange={(e) => setEmail(e.target.value)}

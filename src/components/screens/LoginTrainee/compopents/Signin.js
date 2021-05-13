@@ -82,10 +82,7 @@ export default function SignIn(isTrainer) {
               onChange={(e) => setPassword(e.target.value)}
             />
           </CardBody>
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
-          />
+
           <Button onClick={() => SigninCheck()} round color="primary">Sign In</Button>
           <CardFooter>
             <Grid container>
@@ -96,6 +93,7 @@ export default function SignIn(isTrainer) {
               </Grid>
             </Grid>
           </CardFooter>
+
         </form>
   );
 }

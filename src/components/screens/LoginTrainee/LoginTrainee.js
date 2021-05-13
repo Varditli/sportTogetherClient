@@ -13,28 +13,21 @@
 
   import useStyles from "./styles"
 
-  // const useStyles = makeStyles(signupPageStyle);
-const LogoImg = "https://res.cloudinary.com/niroavram/image/upload/v1617714585/Add_a_subheading_kpvjyo.svg"
-  var isTrainer, isSignin, classUI;
-  const state= [
-    isTrainer = false,
-    isSignin = true,
-    classUI = "classes.trainer",
-  ]
+  var isSignin = true
+
   export default function Login() {
   const [cardAnimaton, setCardAnimation] = React.useState("cardHidden");
   setTimeout(function() {
     setCardAnimation("");
   }, 700);
   const history = useHistory();
-  const isSignUp = () => {
-    if(state[1]){
-      state[1]=false;
+  const isSigned = () => {
+    if(isSignin){
+      isSignin=false;
     } else {
-      state[1]=true;
+      isSignin=true;
     }
     history.push("/LoginTrainee")
-
   }
   
   const classes = useStyles();
@@ -47,49 +40,40 @@ const LogoImg = "https://res.cloudinary.com/niroavram/image/upload/v1617714585/A
           <GridContainer>
             <GridItem xs={12} sm={12} md={6}>
             <h1 className={classes.title}>SporTogether</h1>
-               <h4>
-               מביאים את האימונים עד אליכם
-              </h4>
               <br />
             </GridItem>
           </GridContainer>
         </div>
       </Parallax>
   
-      <Container className={state[2]} component="main" maxWidth="xs">
+      <Container className={classes.trainer} component="main" maxWidth="xs">
         
         <CssBaseline />
       
     <Grid>
     <Card className={classes[cardAnimaton]}>
    
-    {state[1]? 
+    {isSignin? 
     
     <div>
       <CardHeader>
-        
-      <Button color="inherit" onClick={() => isSignUp()}>Signup</Button>
-            <Button color="inherit">Signin</Button>
-           
             <Typography component="h1" variant="h5">
             Sign in
           </Typography>
           </CardHeader>
-          {/* <CardMedia
-        className={classes.media}
-        image="https://res.cloudinary.com/niroavram/image/upload/v1617714585/Add_a_subheading_kpvjyo.svg"
-        title="Paella dish"
-      />      */}
            <form className={classes.form}>
-          <SignIn value={state[0]}/>
+          <SignIn value={isSignin}/>
+          <Grid item>
+                <Button onClick={() => isSigned()}  variant="body2">
+                  {"Don't have an account? Sign Up"}
+                </Button>
+              </Grid>
           </form>
           </div>
         
           :
           <div>
             <CardHeader>
-          <Button color="inherit" >Signup</Button>
-          <Button color="inherit" onClick={() => isSignUp()}>Signin</Button>
           <Typography component="h1" variant="h5">
           Sign Up
         </Typography>

@@ -16,20 +16,20 @@ import { Photo } from "@material-ui/icons";
 import useAutocomplete from '@material-ui/lab/useAutocomplete';
 import NoSsr from '@material-ui/core/NoSsr';
 import CheckIcon from '@material-ui/icons/Check';
+import { createGlobalStyle } from "styled-components";
 
-const allTypes = []
 
-export default function Signup() {
+export default function Signup(types) {
   const history = useHistory();
   const [username, setName] = useState("");
   const [email, setEmail] = useState("");
   const [tel, setTel] = useState("");
   const [password, setPassword] = useState("");
-  const [sportTypes, setSportTypes] = useState("");
+  const [sportType, setSportType] = useState("");
   const [age, setAge] = useState("");
   const [experience, setExperience] = useState("");
-  const [photo, setPhoto] = useState("");
-
+  const [photo, setPhoto] = useState("")
+  const allTypes = types.value
   const classes = useStyles();
   const PostDataTrainer = () => {
     if (
@@ -50,7 +50,7 @@ export default function Signup() {
         age,
         experience,
         tel,
-        sportTypes
+        sportType: value
         //photo
       }),
     })
@@ -60,31 +60,13 @@ export default function Signup() {
           console.log(data.error);
         } else {
           console.log("successfully added Trainer");
-          history.push("/LoginTrainer");
+          window.location.reload("false");
         }
       })
       .catch((err) => {
         console.log(err);
       });
   };
-
-
-  useEffect(() => {
-    fetch(`${process.env.REACT_APP_SERVER}/allSportTypes`, {
-      headers: {
-        "Content-Type": "application/json",   //the content type is json
-      },
-    })
-      .then((res) => res.json())
-      .then((result) => {
-        for (var i = 0; i<result.sportTypes.length; i++){
-          allTypes.push({name: result.sportTypes[i].name})
-        }
-        console.log(allTypes);
-        return setSportTypes(allTypes);
-      });
-  }, []);
-
 
     //sportType const
     const {
@@ -100,9 +82,9 @@ export default function Signup() {
       setAnchorEl,
     } = useAutocomplete({
       id: 'customized-hook-demo',
-      defaultValue: [a[0]],
+      defaultValue: [allTypes[0]],
       multiple: true,
-      options: a,
+      options: allTypes,
       getOptionLabel: (option) => option.name,
     });
 
@@ -208,43 +190,10 @@ export default function Signup() {
         ) : null}
       </div>
     </NoSsr>
-    <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            name="photo"
-            label="photo"
-            type="photo"
-            id="photo"
-            autoComplete=""
-            value={photo}
-            onChange={(e) => setPhoto(e.target.value)}
-          />
-        </CardBody>
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
-          /> 
+        </CardBody> 
           <Button onClick={() => PostDataTrainer()} round color="primary">SignUp</Button> 
-          <CardFooter>
-          <Grid container>
-          
-            <Grid item xs>
-              <Link href="#" variant="body2">
-                Forgot password?
-              </Link>
-            </Grid>
-            <Grid item>
-              <Link href="#" variant="body2">
-                {"Don't have an account? Sign Up now"}
-              </Link>
-            </Grid>
-          </Grid>
-        </CardFooter>
       </form>
   );
 }
 
 
-const a = allTypes
