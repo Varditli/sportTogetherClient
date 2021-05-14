@@ -13,6 +13,7 @@ import Card from "../../Card/Card";
 import CardHeader from "../../Card/CardHeader";
 import CardBody from "../../Card/CardBody";
 import Parallax from "../../compopnets/Parallax/Parallax";
+import LocationSearchInput from "../HomePage/LocationSearchInput"
 
 
 import useStyles from "./styles";
@@ -27,6 +28,7 @@ export default function CreateTraing() {
   const [capacity, setCapacity] = useState("");
   const [type, setType] = useState("");
   const [time, setTime] = useState("");
+  const [location, setLocation] = useState("");
   const [intensity, setIntensity] = useState("");
   const [limitations, setLimitations] = useState("");
   const [gender, setGender] = useState("");
@@ -38,7 +40,7 @@ export default function CreateTraing() {
     setCardAnimation("");
   }, 700);
   const history = useHistory();
-  
+
   const PostData = () => {
  
     fetch(`${process.env.REACT_APP_SERVER}/createNewTraining`, {
@@ -49,6 +51,7 @@ export default function CreateTraing() {
         capacity,
         type,
         time,
+        location,
         intensity,
         limitations,
         gender,
@@ -135,6 +138,12 @@ export default function CreateTraing() {
               InputLabelProps={{
                 shrink: true,
               }}
+            />
+            <LocationSearchInput
+            id="Location"
+            label="Location"
+            type="Location"
+            onChange={(e) => setName(e.target.value)}
             />
             <TextField
               variant="outlined"

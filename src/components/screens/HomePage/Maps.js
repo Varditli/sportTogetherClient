@@ -4,13 +4,20 @@ import { GoogleApiWrapper, InfoWindow, Marker } from 'google-maps-react';
 import trainings from "./HomePage";
 import CurrentLocation from './currentLocation';
 
+// const markerList = [
+//   { lat: 59.2967322, lng: 18.0009393},
+//   { lat: 59.2980245, lng: 17.9971503},
+//   { lat: 59.2981078, lng: 17.9980875 },
+//   { lat: 59.2987638, lng: 17.9917639}
+// ]
+
 export class MapContainer extends Component {
   state = {
     showingInfoWindow: false,
     activeMarker: {},
     selectedPlace: {}
   };
-
+  
   onMarkerClick = (props, marker, e) =>
     this.setState({
       selectedPlace: props,
@@ -29,6 +36,7 @@ export class MapContainer extends Component {
 
   render() {
     return (
+      
       <CurrentLocation
         centerAroundCurrentLocation
         google={this.props.google}
@@ -39,6 +47,7 @@ export class MapContainer extends Component {
           visible={this.state.showingInfoWindow}
           onClose={this.onClose}
         >
+          
            {/* <Marker onClick={this.onMarkerClick} name={trainings.name} />
         <InfoWindow
           marker={this.state.activeMarker}

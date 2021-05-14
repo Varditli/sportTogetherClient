@@ -21,6 +21,7 @@ import NavPills from "../../NavPills/NavPills";
 import CreateTraining from "../CreateTraining/CreateTraining"
 import Header from "../../header/Header";
 import HeaderLinks from "../../header/HeaderLinks";
+import LocationSearchInput from "./LocationSearchInput";
 
 const useStyles = makeStyles(styles);
 
@@ -353,16 +354,16 @@ const filtertrainings = (trfiltertrainings, query) => {
        <form>
     <GridContainer>
                <div >
+               <LocationSearchInput/>
                  <Search
                   searchQuery={searchQuery}
                   setSearchQuery={setSearchQuery}
                /> 
-        </div>
-                     <Autocomplete
+        </div>  
+           <Autocomplete
                       id="Category"
                       options={trainings}
                       getOptionLabel={(trainings) => trainings.type} 
-                      onChange={(e) => console.log(e.target.value)}
                       style={{ width: 300 }}
                       renderInput={(params) => <TextField {...params}  label="Category" variant="outlined" />}
                        />  

@@ -13,7 +13,6 @@ const SearchBar = ({ searchQuery, setSearchQuery }) => {
             action=""
             method="get"
             autoComplete="on"
-            onChange={(e) => console.log(e.target.value)}
             onSubmit={onSubmit}
         >
             <label htmlFor="header-search">
