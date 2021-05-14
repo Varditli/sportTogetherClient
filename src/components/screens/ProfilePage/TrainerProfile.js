@@ -1,6 +1,8 @@
 import React, { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { UserContext } from "../../../App";
+import { EditText, EditTextarea } from 'react-edit-text';
+import 'react-edit-text/dist/index.css';
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // @material-ui/core components
@@ -58,6 +60,75 @@ export default function ProfilePage(props) {
     setOpen(false);
   };
 
+  function TypesList(trainer) {
+    const TypesList = trainer.sportType;
+    const listItems = sportType.map((type) =>
+      <li key={type.toString()}>
+        {type}
+      </li>
+    );
+    return (
+      <ul>{listItems}</ul>
+    );
+  }
+
+  const Edit = () => {
+    return (
+      <React.Fragment>
+      <div style={{whiteSpace: 'nowrap'}}>
+        <strong><label className="mr-2">User Name <small>(read-only)</small>: </label></strong>
+        <EditText id="fullName" name="fullName" defaultValue={trainer.username} inline readonly/>
+      </div>
+      <div style={{whiteSpace: 'nowrap'}}>
+        <strong><label className="mr-2">Email: </label></strong>
+        <EditText name="email" type="email" style={{width: '200px'}} defaultValue={trainer.email} inline/>
+      </div>
+      <div style={{whiteSpace: 'nowrap'}}>
+        <strong>
+          <label className='mr-2' style={{width: '50px'}}>Tel: </label>
+        </strong>
+        <EditTextarea
+          name='tel'
+          rows={0}
+          //style={{ paddingTop: 1 }}
+          defaultValue={trainer.tel}
+          inline
+        />
+      </div>
+      <div style={{whiteSpace: 'nowrap'}}>
+        <strong><label className="mr-2">Age: </label></strong>
+        <EditText name="age" type="number" style={{width: '100px'}} defaultValue={trainer.age} inline/>
+      </div>
+      <div style={{whiteSpace: 'nowrap'}}>
+        <strong>
+          <label className='mr-2'>Experience: </label>
+        </strong>
+        <EditTextarea
+          name='experience'
+          rows={4}
+          //style={{ paddingTop: 1 }}
+          //placeholder={trainer.experience}
+          defaultValue={trainer.experience}
+          inline
+        />
+      </div>
+      <div style={{whiteSpace: 'nowrap'}}>
+        <strong>
+          <label className='mr-2'>Sport Types: </label>
+        </strong>
+        <EditTextarea
+          name='sportType'
+          rows={3}
+          //style={{ paddingTop: 1 }}
+          //placeholder={trainer.experience}
+          defaultValue = {numbers} />
+          inline
+        />
+      </div>
+    </React.Fragment>
+    );
+}
+
   const navImageClasses = classNames(classes.imgRounded, classes.imgGallery);
 
   return (
@@ -103,7 +174,8 @@ export default function ProfilePage(props) {
                             Edit Trainer Profile
                           </DialogTitle>
                           <DialogContent>
-                            <TextField
+                            {Edit()}
+                            {/* <TextField
                               required
                               id="outlined-required"
                               label="Email"
@@ -125,7 +197,7 @@ export default function ProfilePage(props) {
                               fullWidth
                               value={username}
                               onChange={(e) => setUsername(e.target.value)}
-                            />
+                            /> */}
                           </DialogContent>
                           <DialogActions>
                             <Button onClick={handleClose} color="primary">
@@ -161,15 +233,6 @@ export default function ProfilePage(props) {
                         console.log({trainer.sportType})
                       </tr>
                     </table>
-                    <Button justIcon link className={classes.margin5}>
-                      <i className={"fab fa-twitter"} />
-                    </Button>
-                    <Button justIcon link className={classes.margin5}>
-                      <i className={"fab fa-instagram"} />
-                    </Button>
-                    <Button justIcon link className={classes.margin5}>
-                      <i className={"fab fa-facebook"} />
-                    </Button>
                   </div>
                 </div>
               </GridItem>
