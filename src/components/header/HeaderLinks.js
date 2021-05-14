@@ -56,13 +56,10 @@ console.log(name)
             <Link to="/LoginTrainee" className={classes.dropdownLink}>
               Login Trainee
             </Link>,
-            <a
-              href="/LoginTrainer"
-              target="_blank"
-              className={classes.dropdownLink}
-            >
-              Login Trainer
-            </a>
+            <Link to="/LoginTrainer" className={classes.dropdownLink}>
+            Login Trainer
+          </Link>
+            
           ]}
         />
       </ListItem>

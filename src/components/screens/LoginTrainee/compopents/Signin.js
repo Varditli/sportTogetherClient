@@ -84,15 +84,7 @@ export default function SignIn(isTrainer) {
           </CardBody>
 
           <Button onClick={() => SigninCheck()} round color="primary">Sign In</Button>
-          <CardFooter>
-            <Grid container>
-              <Grid item>
-                <Link href="#" variant="body2">
-                  {"Don't have an account? Sign Up"}
-                </Link>
-              </Grid>
-            </Grid>
-          </CardFooter>
+        
 
         </form>
   );

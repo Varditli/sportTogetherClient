@@ -296,8 +296,9 @@ const filtertrainings = (trfiltertrainings, query) => {
                     tabContent: (
                       <span>   
                         <h3>
-                          In order to participate in trainings,
-                        first you need to sign up to our website
+                          <ul>In order to participate in trainings,</ul>
+                          <ul>  first you need to sign up to our website</ul>
+                      
                          </h3> 
                         <br />
                       </span>
@@ -309,7 +310,7 @@ const filtertrainings = (trfiltertrainings, query) => {
                     tabContent: (
                       <span>
                        <h3>
-                       after you signed-in,
+                       After you signed-in,
                        choose a training you would like to participate 
                        and book place, no credit card needed.
                          </h3>
@@ -318,13 +319,14 @@ const filtertrainings = (trfiltertrainings, query) => {
                     )
                   },
                   {
-                    tabButton: " enjoy ",
+                    tabButton: " Enjoy ",
                     tabIcon: CheckCircleIcon,
                     tabContent: (
                       <span>
                        <h3>
-                         it's all set !
-                     enjoy your training
+                        <ul>It's all set !</ul>
+                        <ul>Enjoy your training</ul> 
+                     
                        </h3>
                         <br />
                       </span>
