@@ -18,7 +18,8 @@ import Schedule from "@material-ui/icons/Schedule";
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import HowToRegIcon from '@material-ui/icons/HowToReg';
 import NavPills from "../../NavPills/NavPills";
-
+import Header from "../../header/Header";
+import HeaderLinks from "../../header/HeaderLinks";
 
 const useStyles = makeStyles(styles);
 
@@ -216,20 +217,7 @@ const trainings =[ {
   pic: "https://res.cloudinary.com/niroavram/image/upload/v1617521371/family-members-with-their-pet-dog-on-white-background-free-vector_cuuymv.jpg"
 },
 ]
-export default function HomePage() {
-//   const [trainings, setTrainings] = useState([]);
-// useEffect(()=>{
-//   fetch(`${process.env.REACT_APP_SERVER}/all-trainings`,{
-//     headers: {
-//       Authorization: "Bearer " + localStorage.getItem("jwt"),
-//     },
-//   }
-// )
-//   .then((res)=> res.json())
-//   .then((result) => {
-//     return setTrainings(result.trainings);
-//   });
-// }, []);
+export default function HomePage(props) {
 
 const filtertrainings = (trfiltertrainings, query) => {
   if (!query) {

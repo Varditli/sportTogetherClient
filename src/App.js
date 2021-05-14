@@ -1,5 +1,7 @@
 import React, { useEffect, createContext, useReducer, useContext } from "react";
 import Navbar from "./components/Navbar/Navbar";
+import Header from "./components/header/Header";
+import HeaderLinks from "./components/header/HeaderLinks";
 // import ResponsiveDrawer from './components/Navbar/ResponsiveDrawer';
 import "./App.css";
 
@@ -74,12 +76,23 @@ const Routing = () => {
     </Switch>
   );
 };
-function App() {
+function App(props) {
   const [state, dispatch] = useReducer(reducer, initialState);
+  const { ...rest } = props;
   return (
     <UserContext.Provider value={{ state, dispatch }}>
       <BrowserRouter>
-        <Navbar />
+      <Header
+        brand="SporTogether"
+        rightLinks={<HeaderLinks />}
+        fixed
+        color="transparent"
+        changeColorOnScroll={{
+          height: 400,
+          color: "white"
+        }}
+        {...rest}
+      />
         {/* <ResponsiveDrawer /> */}
         <Routing />
       </BrowserRouter>
