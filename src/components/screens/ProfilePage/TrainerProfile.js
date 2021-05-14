@@ -60,12 +60,6 @@ export default function ProfilePage(props) {
 
   const navImageClasses = classNames(classes.imgRounded, classes.imgGallery);
 
-  const trainer1 = {
-    username: "Noam",
-    age: 38,
-    experience: "Have been teaching yoga for 20 years",
-  };
-
   return (
     <div>
       <Parallax
@@ -143,8 +137,16 @@ export default function ProfilePage(props) {
                           </DialogActions>
                       </Dialog>
                     </div>
-                    <h6>Personal Trainer</h6>
+                    <h3>{trainer.username}</h3>
                     <table>
+                    <tr>
+                        <td classNames={classes.tit}>Email:</td>
+                        <td>{trainer.email}</td>
+                      </tr>
+                      <tr>
+                        <td classNames={classes.tit}>Tel:</td>
+                        <td>{trainer.tel}</td>
+                      </tr>
                       <tr>
                         <td classNames={classes.tit}>Age:</td>
                         <td>{trainer.age}</td>
@@ -152,6 +154,11 @@ export default function ProfilePage(props) {
                       <tr>
                         <td classNames={classes.tit}>Experience:</td>
                         <td>{trainer.experience}</td>
+                      </tr>
+                      <tr>
+                        <td classNames={classes.tit}>Sport Types:</td>
+                        <td>{trainer.sportType}</td>
+                        console.log({trainer.sportType})
                       </tr>
                     </table>
                     <Button justIcon link className={classes.margin5}>
@@ -233,7 +240,7 @@ export default function ProfilePage(props) {
                       ),
                     },
                     {
-                      tabButton: "Favorite",
+                      tabButton: "Favorites",
                       tabIcon: Favorite,
                       tabContent: (
                         <GridContainer justify="center">
