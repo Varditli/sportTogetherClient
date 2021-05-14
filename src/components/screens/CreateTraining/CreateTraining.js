@@ -38,6 +38,7 @@ export default function CreateTraing() {
     setCardAnimation("");
   }, 700);
   const history = useHistory();
+  
   const PostData = () => {
  
     fetch(`${process.env.REACT_APP_SERVER}/createNewTraining`, {

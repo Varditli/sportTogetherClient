@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from "react-router-dom";
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
@@ -59,6 +60,10 @@ const useStyles = makeStyles((theme) => ({
     
   
 }));
+function refreshPage() {
+  window.location.reload(false);
+}
+
 export default function RecipeReviewCard(training) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
@@ -73,7 +78,7 @@ console.log(training)
     setExpanded(!expanded);
   };
   const places = training.value.limitations - training.value.capacity
-
+  const history = useHistory();
 
   return (
     <div>
@@ -100,8 +105,6 @@ console.log(training)
       <CardActions disableSpacing>
         <IconButton aria-label="add to favorites">
           <FavoriteIcon />
-        </IconButton>
-        <IconButton aria-label="share">
         </IconButton>
 
         <GridContainer>
@@ -136,6 +139,7 @@ console.log(training)
                       aria-label="Close"
                       color="inherit"
                       onClick={() => setClassicModal(false)}
+                      onClick={refreshPage}
                     >
                       <Close className={classes.modalClose} />
                     </IconButton>
@@ -150,11 +154,17 @@ console.log(training)
                     <h3>לתשלום באמצעות פייפאל</h3>
                   </DialogContent>
                   <DialogActions className={classes.modalFooter}>
-                    <Button color="transparent" simple>
+                    <Button 
+                    color="transparent" 
+                    simple
+                    href="/HomePage"
+                    >
                       הזמן
                     </Button>
                     <Button
                       onClick={() => setClassicModal(false)}
+                    //  onClick={()=>history.push("/HomePage")}
+                     onClick={refreshPage}
                       color="danger"
                       simple
                     >

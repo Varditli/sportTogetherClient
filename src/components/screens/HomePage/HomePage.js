@@ -18,12 +18,36 @@ import Schedule from "@material-ui/icons/Schedule";
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import HowToRegIcon from '@material-ui/icons/HowToReg';
 import NavPills from "../../NavPills/NavPills";
+import CreateTraining from "../CreateTraining/CreateTraining"
 import Header from "../../header/Header";
 import HeaderLinks from "../../header/HeaderLinks";
 
 const useStyles = makeStyles(styles);
 
-const trainings =[ {
+var trainingName=CreateTraining.name;
+var trainingType=CreateTraining.type;
+var trainingIntensity=CreateTraining.intensity;
+var trainingLocation=CreateTraining.location;
+
+const trainings =[
+  // {
+  //   name: trainingName,
+  //   trainerCreate: {
+  //     username: "Asi",
+  //     experience: "10 Years",
+  //     age: "28"
+  //   } ,
+  //   capacity: 2,
+  //   type: trainingType,
+  //   intensity: trainingIntensity,
+  //   limitations: 10,
+  //   gender: "male", 
+  //   location:trainingLocation,
+  //   time: "2021-04-04T14:32:34.466Z",
+  //   free_text: " Yuli maste is the Yuga coacher in the world",
+  //   pic: "https://res.cloudinary.com/niroavram/image/upload/v1617521371/family-members-with-their-pet-dog-on-white-background-free-vector_cuuymv.jpg"
+  // },
+  {
   name: "Mega Yuga By master Yuli",
   trainerCreate: {
     username: "Asi",
@@ -313,6 +337,8 @@ const filtertrainings = (trfiltertrainings, query) => {
                <GridItem xs={12} sm={12} md={8}>
                 <h1>Trainings Map</h1>
                 </GridItem>
+
+                
                 <Maps/>
                </GridContainer>
                </div>
@@ -329,12 +355,6 @@ const filtertrainings = (trfiltertrainings, query) => {
                   searchQuery={searchQuery}
                   setSearchQuery={setSearchQuery}
                /> 
-            {/* <ul>
-            {filteredtrainings.map((item) => {
-        return (< Training value={item}/>)
-      }
-  )}
-            </ul> */}
         </div>
                      <Autocomplete
                       id="Category"
