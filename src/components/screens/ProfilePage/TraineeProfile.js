@@ -190,7 +190,7 @@ export default function TraineeProfilePage(props) {
                   color="primary"
                   tabs={[
                     {
-                      tabButton: "Upcoming trainings",
+                      tabButton: "Upcoming Trainings",
                       tabIcon: Camera,
                       tabContent: (
                         <GridContainer justify="center">
@@ -213,7 +213,7 @@ export default function TraineeProfilePage(props) {
                       )
                     },
                     {
-                      tabButton: "Past trainings",
+                      tabButton: "Past Trainings",
                       tabIcon: Palette,
                       tabContent: (
                         <GridContainer justify="center">
@@ -243,7 +243,7 @@ export default function TraineeProfilePage(props) {
                       )
                     },
                     {
-                      tabButton: "Favorite",
+                      tabButton: "My Favorites",
                       tabIcon: Favorite,
                       tabContent: (
                         <GridContainer justify="center">
