@@ -8,7 +8,6 @@ import PropTypes from "prop-types";
 // @material-ui/core components
 import Header from "./Header";
 import HeaderLinks from "./HeaderLinks";
-import HeaderTrainee from "./HeaderTrainee";
 import HeaderLinksTrainee from "./HeaderLinksTrainee";
 import HeaderLinksTrainer from "./HeaderLinksTrainer";
 

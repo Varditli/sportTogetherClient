@@ -19,7 +19,6 @@ import CustomDropdown from "../CustomDropdown/CastomDropdown";
 import Button from "../CustomButtons/Button";
 
 import styles from "./HeaderLinksStyle";
-import HeaderTrainee from "./HeaderTrainee";
 
 const useStyles = makeStyles(styles);
 
@@ -30,17 +29,6 @@ const history = useHistory();
 var name = localStorage.getItem("role");
 console.log(name)
  
-// const renderList = () => {
-//     if (name) {
-//       if (name.includes("trainer")) {
-//         return [
-//           <HeaderTrainee />
-//         ]} else if (name.includes("trainee")) {
-//         return [
-//         <HeaderTrainee />
-//         ];
-//       }
-//     } else {
   return (
     <List className={classes.list}>
       <ListItem className={classes.listItem}>

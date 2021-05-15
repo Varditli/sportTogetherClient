@@ -19,7 +19,6 @@ import CustomDropdown from "../CustomDropdown/CastomDropdown";
 import Button from "../CustomButtons/Button";
 
 import styles from "./HeaderLinksStyle";
-import HeaderTrainee from "./HeaderTrainee";
 
 const useStyles = makeStyles(styles);
 
@@ -32,17 +31,7 @@ console.log(name)
 function refreshPage() {
     window.location.reload(false);
   }
-// const renderList = () => {
-//     if (name) {
-//       if (name.includes("trainer")) {
-//         return [
-//           <HeaderTrainee />
-//         ]} else if (name.includes("trainee")) {
-//         return [
-//         <HeaderTrainee />
-//         ];
-//       }
-//     } else {
+
   return (
     <List className={classes.list}>
       
@@ -57,8 +46,9 @@ function refreshPage() {
       dispatch({ type: "CLEAR" });
       history.push("/LoginTrainee");
       
+      
         }}
-        onClick={refreshPage}
+        // onClick={refreshPage}
      >
           Logout
       </Button>

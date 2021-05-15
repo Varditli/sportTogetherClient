@@ -19,7 +19,6 @@ import CustomDropdown from "../CustomDropdown/CastomDropdown";
 import Button from "../CustomButtons/Button";
 
 import styles from "./HeaderLinksStyle";
-import HeaderTrainee from "./HeaderTrainee";
 
 const useStyles = makeStyles(styles);
 
@@ -48,7 +47,7 @@ function refreshPage() {
       history.push("/LoginTrainee");
       
         }}
-        onClick={refreshPage}
+        // onClick={refreshPage}
      >
           Logout
       </Button>
