@@ -105,9 +105,7 @@ const filtertrainings = (trfiltertrainings, query) => {
           <GridContainer>
             <GridItem xs={12} sm={12} md={6}>
             <h1 className={classes.title}>SporTogether</h1>
-               <h3>
-                מביאים את האימונים עד אליכם
-              </h3>
+               <h3>We bring you all the traingings to one place</h3>
               <br />
             </GridItem>
           </GridContainer>
