@@ -126,11 +126,7 @@ export default function ProfilePage(props) {
           rows={3}
           //style={{ paddingTop: 1 }}
           //placeholder={trainer.experience}
-<<<<<<< HEAD
-          defaultValue = {sportType}
-=======
           defaultValue = {ShowTypesList}
->>>>>>> 5e3849124befe884325d37f8736cc2ffd5d0ce25
           inline
         /> */}
       </div>

@@ -27,220 +27,59 @@ const useStyles = makeStyles(styles);
 // var trainingIntensity=CreateTraining.intensity;
 // var trainingLocation=CreateTraining.location;
 
-const trainings =[
-  // {
-  //   name: trainingName,
-  //   trainerCreate: {
-  //     username: "Asi",
-  //     experience: "10 Years",
-  //     age: "28"
-  //   } ,
-  //   capacity: 2,
-  //   type: trainingType,
-  //   intensity: trainingIntensity,
-  //   limitations: 10,
-  //   gender: "male", 
-  //   location:trainingLocation,
-  //   time: "2021-04-04T14:32:34.466Z",
-  //   free_text: " Yuli maste is the Yuga coacher in the world",
-  //   pic: "https://res.cloudinary.com/niroavram/image/upload/v1617521371/family-members-with-their-pet-dog-on-white-background-free-vector_cuuymv.jpg"
-  // },
-  {
-  name: "Mega Yuga By master Yuli",
-  trainerCreate: {
-    username: "Asi",
-    experience: "10 Years",
-    age: "28"
-  } ,
-  capacity: 2,
-  type: "sport",
-  intensity: "2",
-  limitations: 10,
-  gender: "male", 
-  location:"zoom",
-  time: "2021-04-04T14:32:34.466Z",
-  free_text: " Yuli maste is the Yuga coacher in the world",
-  pic: "https://res.cloudinary.com/niroavram/image/upload/v1617521371/family-members-with-their-pet-dog-on-white-background-free-vector_cuuymv.jpg"
-},
-{
-  name: "Mega Yuga By master Yuli",
-  trainerCreate: {
-    username: "Asi",
-    experience: "10 Years",
-    age: "28"
-  } ,
-  capacity: 2,
-  type: "sport",
-  intensity: "2",
-  limitations: 10,
-  gender: "male",
-  time: "2021-04-04T14:32:34.466Z",
-  free_text: " Yuli maste is the Yuga coacher in the world",
-  pic: "https://res.cloudinary.com/niroavram/image/upload/v1617521371/family-members-with-their-pet-dog-on-white-background-free-vector_cuuymv.jpg"
-},
-{
-  name: "Mega Yuga By master Yuli",
-  trainerCreate: {
-    username: "Asi",
-    experience: "10 Years",
-    age: "28"
-  } ,
-  capacity: 2,
-  type: "pilatis",
-  intensity: "2",
-  limitations: 10,
-  gender: "male",
-  time: "2021-04-04T14:32:34.466Z",
-  free_text: " Yuli maste is the Yuga coacher in the world",
-  pic: "https://res.cloudinary.com/niroavram/image/upload/v1617521371/family-members-with-their-pet-dog-on-white-background-free-vector_cuuymv.jpg"
-},
-{
-  name: "Mega Yuga By master Yuli",
-  trainerCreate: {
-    username: "Asi",
-    experience: "10 Years",
-    age: "28"
-  } ,
-  capacity: 2,
-  type: "Yuga",
-  intensity: "2",
-  limitations: 10,
-  gender: "male",
-  time: "2021-04-04T14:32:34.466Z",
-  free_text: " Yuli maste is the Yuga coacher in the world",
-  pic: "https://res.cloudinary.com/niroavram/image/upload/v1617521371/family-members-with-their-pet-dog-on-white-background-free-vector_cuuymv.jpg"
-},
-{
-  name: "Mega Yuga By master Yuli",
-  trainerCreate: {
-    username: "Asi",
-    experience: "10 Years",
-    age: "28"
-  } ,
-  capacity: 2,
-  type: "Yuga",
-  intensity: "2",
-  limitations: 10,
-  gender: "male",
-  time: "2021-04-04T14:32:34.466Z",
-  free_text: " Yuli maste is the Yuga coacher in the world",
-  pic: "https://res.cloudinary.com/niroavram/image/upload/v1617521371/family-members-with-their-pet-dog-on-white-background-free-vector_cuuymv.jpg"
-},
-{
-  name: "Mega Yuga By master Yuli",
-  trainerCreate: {
-    username: "Asi",
-    experience: "10 Years",
-    age: "28"
-  } ,
-  capacity: 2,
-  type: "Yuga",
-  intensity: "2",
-  limitations: 10,
-  gender: "male",
-  time: "2021-04-04T14:32:34.466Z",
-  free_text: " Yuli maste is the Yuga coacher in the world",
-  pic: "https://res.cloudinary.com/niroavram/image/upload/v1617521371/family-members-with-their-pet-dog-on-white-background-free-vector_cuuymv.jpg"
-},
-{
-  name: "Mega Yuga By master Yuli",
-  trainerCreate: {
-    username: "Asi",
-    experience: "10 Years",
-    age: "28"
-  } ,
-  capacity: 2,
-  type: "Yuga",
-  intensity: "2",
-  limitations: 10,
-  gender: "male",
-  time: "2021-04-04T14:32:34.466Z",
-  free_text: " Yuli maste is the Yuga coacher in the world",
-  pic: "https://res.cloudinary.com/niroavram/image/upload/v1617521371/family-members-with-their-pet-dog-on-white-background-free-vector_cuuymv.jpg"
-},
-{
-  name: "Mega Yuga By master Yuli",
-  trainerCreate: {
-    username: "Asi",
-    experience: "10 Years",
-    age: "28"
-  } ,
-  capacity: 2,
-  type: "Yuga",
-  intensity: "2",
-  limitations: 10,
-  gender: "male",
-  time: "2021-04-04T14:32:34.466Z",
-  free_text: " Yuli maste is the Yuga coacher in the world",
-  pic: "https://res.cloudinary.com/niroavram/image/upload/v1617521371/family-members-with-their-pet-dog-on-white-background-free-vector_cuuymv.jpg"
-},
-{
-  name: "Mega Yuga By master Yuli",
-  trainerCreate: {
-    username: "Asi",
-    experience: "10 Years",
-    age: "28"
-  } ,
-  capacity: 2,
-  type: "Yuga",
-  intensity: "2",
-  limitations: 10,
-  gender: "male",
-  time: "2021-04-04T14:32:34.466Z",
-  free_text: " Yuli maste is the Yuga coacher in the world",
-  pic: "https://res.cloudinary.com/niroavram/image/upload/v1617521371/family-members-with-their-pet-dog-on-white-background-free-vector_cuuymv.jpg"
-},
-{
-  name: "Mega Yuga By master Yuli",
-  trainerCreate: {
-    username: "Asi",
-    experience: "10 Years",
-    age: "28"
-  } ,
-  capacity: 2,
-  type: "Yuga",
-  intensity: "2",
-  limitations: 10,
-  gender: "male",
-  time: "2021-04-04T14:32:34.466Z",
-  free_text: " Yuli maste is the Yuga coacher in the world",
-  pic: "https://res.cloudinary.com/niroavram/image/upload/v1617521371/family-members-with-their-pet-dog-on-white-background-free-vector_cuuymv.jpg"
-},
-{
-  name: "Mega Yuga By master Yuli",
-  trainerCreate: {
-    username: "Asi",
-    experience: "10 Years",
-    age: "28"
-  } ,
-  capacity: 2,
-  type: "Yuga",
-  intensity: "2",
-  limitations: 10,
-  gender: "male",
-  time: "2021-04-04T14:32:34.466Z",
-  free_text: " Yuli maste is the Yuga coacher in the world",
-  pic: "https://res.cloudinary.com/niroavram/image/upload/v1617521371/family-members-with-their-pet-dog-on-white-background-free-vector_cuuymv.jpg"
-},
-{
-  name: "Mega Yuga By master Yuli",
-  trainerCreate: {
-    username: "Asi",
-    experience: "10 Years",
-    age: "28"
-  } ,
-  capacity: 2,
-  type: "Yuga",
-  intensity: "2",
-  limitations: 10,
-  gender: "male",
-  time: "2021-04-04T14:32:34.466Z",
-  free_text: " Yuli maste is the Yuga coacher in the world",
-  pic: "https://res.cloudinary.com/niroavram/image/upload/v1617521371/family-members-with-their-pet-dog-on-white-background-free-vector_cuuymv.jpg"
-},
-]
-export default function HomePage(props) {
 
+// const trainings =[
+//   {
+//     name: trainingName,
+//     trainerCreate: {
+//       username: "Asi",
+//       experience: "10 Years",
+//       age: "28"
+//     } ,
+//     capacity: 2,
+//     type: trainingType,
+//     intensity: trainingIntensity,
+//     limitations: 10,
+//     gender: "male", 
+//     location:trainingLocation,
+//     time: "2021-04-04T14:32:34.466Z",
+//     free_text: " Yuli maste is the Yuga coacher in the world",
+//     pic: "https://res.cloudinary.com/niroavram/image/upload/v1617521371/family-members-with-their-pet-dog-on-white-background-free-vector_cuuymv.jpg"
+//   },
+//   {
+//   name: "Mega Yuga By master Yuli",
+//   trainerCreate: {
+//     username: "Asi",
+//     experience: "10 Years",
+//     age: "28"
+//   } ,
+//   capacity: 2,
+//   type: "sport",
+//   intensity: "2",
+//   limitations: 10,
+//   gender: "male", 
+//   location:"zoom",
+//   time: "2021-04-04T14:32:34.466Z",
+//   free_text: " Yuli maste is the Yuga coacher in the world",
+//   pic: "https://res.cloudinary.com/niroavram/image/upload/v1617521371/family-members-with-their-pet-dog-on-white-background-free-vector_cuuymv.jpg"
+// },
+
+// ]
+export default function HomePage(props) {
+  const [trainings, setTrainings] = useState();
+  useEffect(() => {
+    fetch(`${process.env.REACT_APP_SERVER}/all-trainings`, {
+      headers: {
+        "Content-Type": "application/json",   //the content type is json
+      },
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        console.log(result)
+        setTrainings(result)
+      });
+  }, []);
+  
 const filtertrainings = (trfiltertrainings, query) => {
   if (!query) {
       return trfiltertrainings;
