@@ -1,7 +1,7 @@
 
 import React, { Component } from 'react';
 import { GoogleApiWrapper, InfoWindow, Marker } from 'google-maps-react';
-import trainings from "./HomePage";
+import trainings from "../HomePage";
 import CurrentLocation from './currentLocation';
 
 // const markerList = [

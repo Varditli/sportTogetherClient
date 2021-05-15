@@ -50,6 +50,7 @@ export default function ProfilePage(props) {
   const [email, setEmail] = useState("");
   const [age, setAge] = useState("");
   const [tel, setTel] = useState("");
+  const [sportType, setSportType] = useState("");
   const { token } = localStorage.getItem("jwt");
 
   const handleClickOpen = () => {
@@ -121,7 +122,7 @@ export default function ProfilePage(props) {
           rows={3}
           //style={{ paddingTop: 1 }}
           //placeholder={trainer.experience}
-          defaultValue = {numbers} />
+          defaultValue = {sportType}
           inline
         />
       </div>

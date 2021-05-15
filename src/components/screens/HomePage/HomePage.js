@@ -13,22 +13,19 @@ import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { BrowserRouter as Router } from "react-router-dom";
 import Search from './Search';
-import Maps from './Maps';
+import Maps from './googleMaps/Maps';
 import Schedule from "@material-ui/icons/Schedule";
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import HowToRegIcon from '@material-ui/icons/HowToReg';
 import NavPills from "../../NavPills/NavPills";
-import CreateTraining from "../CreateTraining/CreateTraining"
-import Header from "../../header/Header";
-import HeaderLinks from "../../header/HeaderLinks";
-import LocationSearchInput from "./LocationSearchInput";
+import LocationSearchInput from './googleMaps/currentLocation';
 
 const useStyles = makeStyles(styles);
 
-var trainingName=CreateTraining.name;
-var trainingType=CreateTraining.type;
-var trainingIntensity=CreateTraining.intensity;
-var trainingLocation=CreateTraining.location;
+// var trainingName=CreateTraining.name;
+// var trainingType=CreateTraining.type;
+// var trainingIntensity=CreateTraining.intensity;
+// var trainingLocation=CreateTraining.location;
 
 const trainings =[
   // {
@@ -355,7 +352,7 @@ const filtertrainings = (trfiltertrainings, query) => {
        <form>
     <GridContainer>
                <div >
-               <LocationSearchInput/>
+               {/* <LocationSearchInput/> */}
                  <Search
                   searchQuery={searchQuery}
                   setSearchQuery={setSearchQuery}

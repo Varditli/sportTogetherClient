@@ -46,7 +46,7 @@ console.log(name)
       <ListItem className={classes.listItem}>
         <CustomDropdown
           noLiPadding
-          buttonText="Login"
+          buttonText="User"
           buttonProps={{
             className: classes.navLink,
             color: "transparent"
@@ -56,8 +56,31 @@ console.log(name)
             <Link to="/LoginTrainee" className={classes.dropdownLink}>
               Login Trainee
             </Link>,
+            <Link to="/TraineeProfile" className={classes.dropdownLink}>
+            Profile 
+          </Link>
+            
+          ]}
+        />
+      </ListItem>
+      <ListItem className={classes.listItem}>
+        <CustomDropdown
+          noLiPadding
+          buttonText="Trainer"
+          buttonProps={{
+            className: classes.navLink,
+            color: "transparent"
+          }}
+          buttonIcon={Apps}
+          dropdownList={[
             <Link to="/LoginTrainer" className={classes.dropdownLink}>
-            Login Trainer
+              Login Trainer
+            </Link>,
+            <Link to="/CraeteTraining" className={classes.dropdownLink}>
+            Create Training
+          </Link>,
+            <Link to="/TrainerProfile" className={classes.dropdownLink}>
+              Profile
           </Link>
             
           ]}

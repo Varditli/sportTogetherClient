@@ -143,7 +143,7 @@ export default function CreateTraing() {
             id="Location"
             label="Location"
             type="Location"
-            onChange={(e) => setName(e.target.value)}
+            onChange={(e) => setLocation(e.target.value)}
             />
             <TextField
               variant="outlined"
