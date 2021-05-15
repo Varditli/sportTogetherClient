@@ -216,10 +216,10 @@ const filtertrainings = (trfiltertrainings, query) => {
        </form>
         </div> 
 
-      {trainings.map((item) => {
+      {/* {trainings.map((item) => {
         return (< Training value={item}/>)
       }
-  )}
+  )} */}
       </Container>
     </div>
     <Footer />
