@@ -1,6 +1,7 @@
 import React, { useState, useContext  } from "react";
 import { useHistory } from "react-router-dom";
 import { UserContext } from "../../../App";
+import { EditText, EditTextarea } from 'react-edit-text';
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // @material-ui/core components
@@ -16,21 +17,22 @@ import GridContainer from "../../Grid/GridContainer";
 import GridItem from "../../Grid/GridItem";
 import NavPills from "../../NavPills/NavPills";
 import Parallax from "../../compopnets/Parallax/Parallax";
-import TextField from "@material-ui/core/TextField";
+//import TextField from "@material-ui/core/TextField";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
+//import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 
 import styles from "./ProfileStyle";
 
-const trainee = JSON.parse(localStorage.getItem("trainee"))
-console.log(trainee);
-
 const useStyles = makeStyles(styles);
 
 export default function TraineeProfilePage(props) {
+
+  const trainee = JSON.parse(localStorage.getItem("trainee"))
+  console.log(trainee);
+
   const classes = useStyles();
   //const { ...rest } = props;
 
@@ -53,16 +55,74 @@ export default function TraineeProfilePage(props) {
     setOpen(false);
   };
 
-  const editTraineeProfile = () => {
-    handleClickOpen();
-    return;
+  // const editTraineeProfile = () => {
+  //   handleClickOpen();
+  //   return;
 
-  };
+  // };
 
+//   const UpdateValue = (e) => {
+//     const { note } = this.state;
+
+//     this.setState({
+//         note: { ...note, [e.target.name]: e.target.value }
+//     });
+// }
+
+  const Edit = () => {
+    return (
+      <React.Fragment>
+      <div style={{whiteSpace: 'nowrap'}}>
+        <strong><label className="mr-2">User Name <small>(read-only)</small>: </label></strong>
+        <EditText 
+          id="username" 
+          name="username" 
+          defaultValue={trainee.username} 
+          inline 
+          readonly
+        />
+      </div>
+      <div style={{whiteSpace: 'nowrap'}}>
+        <strong><label className="mr-2">Email: </label></strong>
+        <EditText 
+          name="email"
+          type="email"
+          style={{width: '200px'}}
+          defaultValue={trainee.email} 
+          inline 
+          //onSave={UpdateValue()}
+          />
+      </div>
+      <div style={{whiteSpace: 'nowrap'}}>
+        <strong>
+          <label className='mr-2' style={{width: '50px'}}>Tel: </label>
+        </strong>
+        <EditTextarea
+          name='tel'
+          rows={0}
+          //style={{ paddingTop: 1 }}
+          defaultValue={trainee.tel}
+          inline
+          //onSave={UpdateValue()}
+        />
+      </div>
+      <div style={{whiteSpace: 'nowrap'}}>
+        <strong><label className="mr-2">Age: </label></strong>
+        <EditText
+          name="age" 
+          type="number" 
+          style={{width: '100px'}} 
+          defaultValue={trainee.age} 
+          inline 
+          //onSave={UpdateValue()}
+          />
+      </div>
+    </React.Fragment>
+    );
+}
 
   return (
     <div>
-    
       <Parallax small filter image={"https://res.cloudinary.com/dywnmmeue/image/upload/v1617887588/trainingPic_gmmk9c.jpg"} />
       <div className={classNames(classes.main, classes.mainRaised)}>
         <div>
@@ -87,32 +147,10 @@ export default function TraineeProfilePage(props) {
                         aria-labelledby="form-dialog-title"
                       >
                           <DialogTitle id="form-dialog-title">
-                            Edit Trainer Profile
+                            Edit Trainee Profile
                           </DialogTitle>
                           <DialogContent>
-                            <TextField
-                              required
-                              id="outlined-required"
-                              label="Email"
-                              defaultValue= "Bla"
-                              //defaultValue= {localStorage.getItem("email")}
-                              variant="outlined"
-                              fullWidth
-                              type="email"
-                              value={email}
-                              onChange={(e) => setEmail(e.target.value)}
-                            
-                            />
-                            <TextField
-                              autoFocus
-                              margin="dense"
-                              id="username"
-                              label="User Name"
-                              type="username"
-                              fullWidth
-                              value={username}
-                              onChange={(e) => setUsername(e.target.value)}
-                            />
+                            {Edit()}
                           </DialogContent>
                           <DialogActions>
                             <Button onClick={handleClose} color="primary">
