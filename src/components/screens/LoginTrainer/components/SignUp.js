@@ -123,8 +123,21 @@ export default function Signup(types) {
             margin="normal"
             required
             fullWidth
+            name="password"
+            label="Password"
+            type="password"
+            id="password"
+            autoComplete="current-password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
             id="tel"
-            label="phone"
+            label="tel"
             name="tel"
             autoFocus
             value={tel}
@@ -153,24 +166,13 @@ export default function Signup(types) {
             value={experience}
             onChange={(e) => setExperience(e.target.value)}
           />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="Password"
-            type="password"
-            id="password"
-            autoComplete="current-password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
       <NoSsr>
       <div>
         <div {...getRootProps()}>
           <Label {...getInputLabelProps()}>Sport Types</Label>
-          <InputWrapper ref={setAnchorEl} className={focused ? 'focused' : ''}>
+          <InputWrapper ref={setAnchorEl} className={focused ? 'focused' : ''}
+            value={sportType}
+            onChange={(e) => setSportType(e.target.value)}>
             {value.map((option, index) => (
               <Tag label={option.name} {...getTagProps({ index })} />
             ))}

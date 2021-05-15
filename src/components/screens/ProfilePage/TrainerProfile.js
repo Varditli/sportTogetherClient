@@ -61,9 +61,10 @@ export default function ProfilePage(props) {
     setOpen(false);
   };
 
-  function TypesList(trainer) {
-    const TypesList = trainer.sportType;
-    const listItems = sportType.map((type) =>
+  const TypesList = trainer.sportType;
+
+  function ShowTypesList(trainer) {
+    const listItems = TypesList.map((type) =>
       <li key={type.toString()}>
         {type}
       </li>
@@ -82,7 +83,7 @@ export default function ProfilePage(props) {
       </div>
       <div style={{whiteSpace: 'nowrap'}}>
         <strong><label className="mr-2">Email: </label></strong>
-        <EditText name="email" type="email" style={{width: '200px'}} defaultValue={trainer.email} inline/>
+        <EditText name="email" type="email" style={{width: '200px'}} defaultValue={trainer.email} inline onSave={this.onSave}/>
       </div>
       <div style={{whiteSpace: 'nowrap'}}>
         <strong>
@@ -94,11 +95,12 @@ export default function ProfilePage(props) {
           //style={{ paddingTop: 1 }}
           defaultValue={trainer.tel}
           inline
+          onSave={this.onSave}
         />
       </div>
       <div style={{whiteSpace: 'nowrap'}}>
         <strong><label className="mr-2">Age: </label></strong>
-        <EditText name="age" type="number" style={{width: '100px'}} defaultValue={trainer.age} inline/>
+        <EditText name="age" type="number" style={{width: '100px'}} defaultValue={trainer.age} inline onSave={this.onSave}/>
       </div>
       <div style={{whiteSpace: 'nowrap'}}>
         <strong>
@@ -108,23 +110,29 @@ export default function ProfilePage(props) {
           name='experience'
           rows={4}
           //style={{ paddingTop: 1 }}
-          //placeholder={trainer.experience}
-          defaultValue={trainer.experience}
+          placeholder="Share your trainees about your experience"
+          //defaultValue={trainer.experience}
+          value = {trainer.experience}
           inline
+          onSave={this.onSave}
         />
       </div>
       <div style={{whiteSpace: 'nowrap'}}>
         <strong>
           <label className='mr-2'>Sport Types: </label>
         </strong>
-        <EditTextarea
+        {/* <EditTextarea
           name='sportType'
           rows={3}
           //style={{ paddingTop: 1 }}
           //placeholder={trainer.experience}
+<<<<<<< HEAD
           defaultValue = {sportType}
+=======
+          defaultValue = {ShowTypesList}
+>>>>>>> 5e3849124befe884325d37f8736cc2ffd5d0ce25
           inline
-        />
+        /> */}
       </div>
     </React.Fragment>
     );
@@ -170,6 +178,7 @@ export default function ProfilePage(props) {
                         open={open}
                         onClose={handleClose}
                         aria-labelledby="form-dialog-title"
+                        width = "80%"
                       >
                           <DialogTitle id="form-dialog-title">
                             Edit Trainer Profile
