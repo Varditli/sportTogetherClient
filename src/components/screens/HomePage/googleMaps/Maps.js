@@ -12,6 +12,7 @@ import CurrentLocation from './currentLocation';
 // ]
 
 export class MapContainer extends Component {
+  
   state = {
     showingInfoWindow: false,
     activeMarker: {},

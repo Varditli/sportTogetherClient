@@ -13,7 +13,7 @@ import Card from "../../Card/Card";
 import CardHeader from "../../Card/CardHeader";
 import CardBody from "../../Card/CardBody";
 import Parallax from "../../compopnets/Parallax/Parallax";
-import LocationSearchInput from "../HomePage/LocationSearchInput"
+import LocationSearchInput from "../HomePage/googleMaps/LocationSearchInput"
 
 
 import useStyles from "./styles";

@@ -1,11 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import GridContainer from "../../../Grid/GridContainer";
+import GridItem from "../../../Grid/GridItem";
 
 const mapStyles = {
+
+    div:{
+        margin:'auto',
+        padding:'50px'
+    },
   map: {
-    position: 'absolute',
-    width: '30%',
-    height: '30%'
+    // position: 'absolute',
+    width: '400px',
+    height: '400px',
+    margin: 'auto',
+    padding:'50px'
   }
 };
 
@@ -107,10 +116,14 @@ export class CurrentLocation extends React.Component {
         
             return (
             <div>
+                <GridContainer>
+                    <GridItem>
                 <div style={style} ref="map">
                 Loading map...
                 </div>
                 {this.renderChildren()}
+                </GridItem>
+                </GridContainer>
             </div>
             );
         }

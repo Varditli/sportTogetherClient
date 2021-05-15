@@ -339,8 +339,9 @@ const filtertrainings = (trfiltertrainings, query) => {
                 <h1>Trainings Map</h1>
                 </GridItem>
 
-                
+                <GridItem>
                 <Maps/>
+                </GridItem>
                </GridContainer>
                </div>
       <GridContainer justify="center">
@@ -351,13 +352,13 @@ const filtertrainings = (trfiltertrainings, query) => {
 
        <form>
     <GridContainer>
-               <div >
-               {/* <LocationSearchInput/> */}
+               {/* <div >
+               <LocationSearchInput/>
                  <Search
                   searchQuery={searchQuery}
                   setSearchQuery={setSearchQuery}
                /> 
-        </div>  
+        </div>   */}
            <Autocomplete
                       id="Category"
                       options={trainings}
