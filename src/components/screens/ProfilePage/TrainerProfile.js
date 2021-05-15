@@ -79,11 +79,23 @@ export default function ProfilePage(props) {
       <React.Fragment>
       <div style={{whiteSpace: 'nowrap'}}>
         <strong><label className="mr-2">User Name <small>(read-only)</small>: </label></strong>
-        <EditText id="username" name="username" defaultValue={trainer.username} inline readonly/>
+        <EditText 
+          id="username" 
+          name="username" 
+          defaultValue={trainer.username} 
+          inline 
+          readonly/>
       </div>
       <div style={{whiteSpace: 'nowrap'}}>
         <strong><label className="mr-2">Email: </label></strong>
-        <EditText name="email" type="email" style={{width: '200px'}} defaultValue={trainer.email} inline onSave={this.onSave}/>
+        <EditText 
+        name="email" 
+        type="email" 
+        style={{width: '200px'}} 
+        defaultValue={trainer.email} 
+        inline 
+        //onSave={this.onSave}
+        />
       </div>
       <div style={{whiteSpace: 'nowrap'}}>
         <strong>
@@ -95,12 +107,19 @@ export default function ProfilePage(props) {
           //style={{ paddingTop: 1 }}
           defaultValue={trainer.tel}
           inline
-          onSave={this.onSave}
+          //onSave={this.onSave}
         />
       </div>
       <div style={{whiteSpace: 'nowrap'}}>
         <strong><label className="mr-2">Age: </label></strong>
-        <EditText name="age" type="number" style={{width: '100px'}} defaultValue={trainer.age} inline onSave={this.onSave}/>
+        <EditText 
+        name="age" 
+        type="number" 
+        style={{width: '100px'}} 
+        defaultValue={trainer.age} 
+        inline 
+        //onSave={this.onSave}
+        />
       </div>
       <div style={{whiteSpace: 'nowrap'}}>
         <strong>
@@ -114,7 +133,7 @@ export default function ProfilePage(props) {
           //defaultValue={trainer.experience}
           value = {trainer.experience}
           inline
-          onSave={this.onSave}
+          //onSave={this.onSave}
         />
       </div>
       <div style={{whiteSpace: 'nowrap'}}>
@@ -227,7 +246,7 @@ export default function ProfilePage(props) {
                   color="primary"
                   tabs={[
                     {
-                      tabButton: "Upcoming trainings",
+                      tabButton: "Upcoming Trainings",
                       tabIcon: Camera,
                       tabContent: (
                         <GridContainer justify="center">
@@ -253,7 +272,7 @@ export default function ProfilePage(props) {
                       ),
                     },
                     {
-                      tabButton: "Past trainings",
+                      tabButton: "Past Trainings",
                       tabIcon: Palette,
                       tabContent: (
                         <GridContainer justify="center">
@@ -286,7 +305,7 @@ export default function ProfilePage(props) {
                       ),
                     },
                     {
-                      tabButton: "Favorites",
+                      tabButton: "My Favorites",
                       tabIcon: Favorite,
                       tabContent: (
                         <GridContainer justify="center">

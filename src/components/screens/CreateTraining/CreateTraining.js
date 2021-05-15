@@ -63,9 +63,9 @@ export default function CreateTraing() {
       .then((res) => res.json())
       .then((data) => {
         if (data.error) {
-          console.log("nonononono");
+          console.log("Failed Adding New Training");
         } else {
-          console.log("successfully Trainer");
+          console.log("Successfully Added New Training");
           history.push("/HomePage");
         }
       })
