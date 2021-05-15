@@ -79,7 +79,7 @@ export default function ProfilePage(props) {
       <React.Fragment>
       <div style={{whiteSpace: 'nowrap'}}>
         <strong><label className="mr-2">User Name <small>(read-only)</small>: </label></strong>
-        <EditText id="fullName" name="fullName" defaultValue={trainer.username} inline readonly/>
+        <EditText id="username" name="username" defaultValue={trainer.username} inline readonly/>
       </div>
       <div style={{whiteSpace: 'nowrap'}}>
         <strong><label className="mr-2">Email: </label></strong>
@@ -181,29 +181,6 @@ export default function ProfilePage(props) {
                           </DialogTitle>
                           <DialogContent>
                             {Edit()}
-                            {/* <TextField
-                              required
-                              id="outlined-required"
-                              label="Email"
-                              defaultValue= "Bla"
-                              //defaultValue= {localStorage.getItem("email")}
-                              variant="outlined"
-                              fullWidth
-                              type="email"
-                              value={email}
-                              onChange={(e) => setEmail(e.target.value)}
-                            
-                            />
-                            <TextField
-                              autoFocus
-                              margin="dense"
-                              id="username"
-                              label="User Name"
-                              type="username"
-                              fullWidth
-                              value={username}
-                              onChange={(e) => setUsername(e.target.value)}
-                            /> */}
                           </DialogContent>
                           <DialogActions>
                             <Button onClick={handleClose} color="primary">
