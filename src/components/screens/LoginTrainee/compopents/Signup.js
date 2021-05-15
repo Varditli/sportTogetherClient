@@ -126,8 +126,8 @@ export default function Signup() {
           <CardFooter>
           <Grid container>
             <Grid item>
-              <Link href="#" variant="body2">
-                {"Already Registered? Sign in"}
+              <Link href="/Signin" variant="body2">
+                {"Already have an account? Sign in"}
               </Link>
             </Grid>
           </Grid>
