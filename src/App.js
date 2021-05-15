@@ -2,7 +2,7 @@ import React, { useEffect, createContext, useReducer, useContext } from "react";
 import Navbar from "./components/Navbar/Navbar";
 import Header from "./components/header/Header";
 import HeaderLinks from "./components/header/HeaderLinks";
-// import ResponsiveDrawer from './components/Navbar/ResponsiveDrawer';
+
 import "./App.css";
 
 import {
@@ -22,6 +22,7 @@ import TraineeProfile from "./components/screens/ProfilePage/TraineeProfile";
 
 
 import { reducer, initialState } from "./reducers/userReducer";
+import HeaderNavigation from "./components/header/HeaderNavigation";
 
 export const UserContext = createContext();
 
@@ -82,18 +83,7 @@ function App(props) {
   return (
     <UserContext.Provider value={{ state, dispatch }}>
       <BrowserRouter>
-      <Header
-        brand="SporTogether"
-        rightLinks={<HeaderLinks />}
-        fixed
-        color="transparent"
-        changeColorOnScroll={{
-          height: 400,
-          color: "white"
-        }}
-        {...rest}
-      />
-        {/* <ResponsiveDrawer /> */}
+        <HeaderNavigation/>
         <Routing />
       </BrowserRouter>
     </UserContext.Provider>

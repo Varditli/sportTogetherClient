@@ -11,7 +11,7 @@ const mapStyles = {
     },
   map: {
     // position: 'absolute',
-    width: '400px',
+    width: '700px',
     height: '400px',
     margin: 'auto',
     padding:'50px'

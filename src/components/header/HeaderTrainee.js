@@ -17,8 +17,7 @@ import Drawer from "@material-ui/core/Drawer";
 import Menu from "@material-ui/icons/Menu";
 // core components
 import styles from "./headerStyle";
-import NavbarTrainee from '../Navbar/NavbarTrainee';
-import NavbarTrainer from '../Navbar/NavbarTrainer';
+
 
 const useStyles = makeStyles(styles);
 
@@ -69,17 +68,7 @@ console.log(name)
     [classes.fixed]: fixed
   });
   const brandComponent = <Button className={classes.title}>{brand}</Button>;
-  // const renderList = () => {
-  //   if (name) {
-  //     if (name.includes("trainer")) {
-  //       return [
-  //         <NavbarTrainer />
-  //       ]} else if (name.includes("trainee")) {
-  //       return [
-  //       <NavbarTrainee />
-  //       ];
-  //     }
-  //   } else {
+
   return (
     <AppBar className={appBarClasses}>
       <Toolbar className={classes.container}>
