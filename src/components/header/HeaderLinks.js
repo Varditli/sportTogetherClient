@@ -46,7 +46,7 @@ console.log(name)
       <ListItem className={classes.listItem}>
         <CustomDropdown
           noLiPadding
-          buttonText="User"
+          buttonText="Trainee"
           buttonProps={{
             className: classes.navLink,
             color: "transparent"

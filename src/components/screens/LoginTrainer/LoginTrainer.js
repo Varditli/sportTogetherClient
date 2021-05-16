@@ -22,7 +22,9 @@ const [cardAnimaton, setCardAnimation] = React.useState("cardHidden");
 setTimeout(function() {
   setCardAnimation("");
 }, 700);
+
 const history = useHistory();
+
 const isSigned = () => {
   if(isSignin){
     isSignin=false;
@@ -44,13 +46,13 @@ useEffect(() => {
       for (var i = 0; i<result.sportTypes.length; i++){
         allTypes.push({name: result.sportTypes[i].name})
       }
-      console.log(allTypes)
+      //console.log(allTypes)
     });
 }, []);
 
 
 const classes = useStyles();
-console.log(Date.now())
+//console.log(Date.now())
  
 return (
   <div>
@@ -88,7 +90,7 @@ return (
                 </Button>
               </Grid>
         </div>
-        :
+        :   //else
         <div>
             <CardHeader>
     
@@ -96,8 +98,12 @@ return (
         Sign Up
       </Typography>
       </CardHeader>
-      
   <SignUp value={allTypes} />
+  <Grid item>
+                <Button onClick={() => isSigned()}  variant="body2">
+                  {"Already have an account? Sign In"}
+                </Button>
+              </Grid>
   </div>
   }
 

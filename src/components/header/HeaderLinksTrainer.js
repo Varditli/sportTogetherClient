@@ -66,7 +66,7 @@ function refreshPage() {
             <Link to="/LoginTrainer" className={classes.dropdownLink}>
               Login Trainer
             </Link>,
-            <Link to="/CraeteTraining" className={classes.dropdownLink}>
+            <Link to="/CreateTraining" className={classes.dropdownLink}>
             Create Training
           </Link>,
             <Link to="/TrainerProfile" className={classes.dropdownLink}>

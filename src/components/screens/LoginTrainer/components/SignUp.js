@@ -9,7 +9,7 @@ import Grid from "@material-ui/core/Grid";
 import {useStyles, Label, InputWrapper, Listbox, Tag} from "../styles";
 import CardFooter from "../../../Card/CardFooter";
 import CardBody from "../../../Card/CardBody";
-import { Photo } from "@material-ui/icons";
+import { ContactsOutlined, ContactSupportOutlined, Photo } from "@material-ui/icons";
 
 
 /* eslint-disable no-use-before-define */  //sportType imports
@@ -40,6 +40,9 @@ export default function Signup(types) {
       //   M.toast({ html: "Invalid email", classes: "#ff4081 pink accent-2" });
       return;
     }
+
+    console.log(value)
+    
     fetch(`${process.env.REACT_APP_SERVER}/signupTrainer`, {
       method: "post",
       headers: { "Content-Type": "application/json" },
@@ -50,7 +53,7 @@ export default function Signup(types) {
         age,
         experience,
         tel,
-        sportType: value
+        sportType : value
         //photo
       }),
     })
@@ -88,6 +91,7 @@ export default function Signup(types) {
       getOptionLabel: (option) => option.name,
     });
 
+console.log(sportType)
 
   return (
       <form className={classes.form} >
@@ -173,6 +177,7 @@ export default function Signup(types) {
           <InputWrapper ref={setAnchorEl} className={focused ? 'focused' : ''}
             value={sportType}
             onChange={(e) => setSportType(e.target.value)}>
+              {console.log(value)}
             {value.map((option, index) => (
               <Tag label={option.name} {...getTagProps({ index })} />
             ))}
