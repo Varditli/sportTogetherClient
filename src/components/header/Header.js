@@ -17,8 +17,6 @@ import Drawer from "@material-ui/core/Drawer";
 import Menu from "@material-ui/icons/Menu";
 // core components
 import styles from "./headerStyle";
-import NavbarTrainee from '../Navbar/NavbarTrainee';
-import NavbarTrainer from '../Navbar/NavbarTrainer';
 
 const useStyles = makeStyles(styles);
 
@@ -69,17 +67,7 @@ export default function Header(props) {
         [classes.fixed]: fixed
       });
       const brandComponent = <Button className={classes.title}>{brand}</Button>;
-      // const renderList = () => {
-      //   if (name) {
-      //     if (name.includes("trainer")) {
-      //       return [
-      //         <NavbarTrainer />
-      //       ]} else if (name.includes("trainee")) {
-      //       return [
-      //       <NavbarTrainee />
-      //       ];
-      //     }
-      //   } else {
+    
       return (
         <AppBar className={appBarClasses}>
           <Toolbar className={classes.container}>
@@ -148,12 +136,6 @@ export default function Header(props) {
       brand: PropTypes.string,
       fixed: PropTypes.bool,
       absolute: PropTypes.bool,
-      // this will cause the sidebar to change the color from
-      // props.color (see above) to changeColorOnScroll.color
-      // when the window.pageYOffset is heigher or equal to
-      // changeColorOnScroll.height and then when it is smaller than
-      // changeColorOnScroll.height change it back to
-      // props.color (see above)
       changeColorOnScroll: PropTypes.shape({
         height: PropTypes.number.isRequired,
         color: PropTypes.oneOf([

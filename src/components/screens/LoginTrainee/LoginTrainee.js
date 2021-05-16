@@ -90,7 +90,7 @@ export default function Login() {
                 <SignUp />
                 <Grid item>
                   <Button onClick={() => isSigned()} variant="body2">
-                    {"Already have an account? Sign In"}
+                    {"Already have an account? Sign Up"}
                   </Button>
                 </Grid>
               </div>

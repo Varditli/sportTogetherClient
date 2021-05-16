@@ -46,7 +46,7 @@ console.log(name)
       localStorage.clear();
       dispatch({ type: "CLEAR" });
       history.push("/HomePage");
-      // window.location.reload();
+      
       
         }}
         // onClick={refreshPage}
@@ -54,28 +54,23 @@ console.log(name)
           Logout
       </Button>
      </ListItem>
-     <ListItem className={classes.listItem}>
-        <CustomDropdown
-          noLiPadding
-          buttonText="Trainer"
-          buttonProps={{
-            className: classes.navLink,
-            color: "transparent"
-          }}
-          buttonIcon={Apps}
-          dropdownList={[
-            // <Link to="/LoginTrainer" className={classes.dropdownLink}>
-            //   Login Trainer
-            // </Link>,
-            <Link to="/CreateTraining" className={classes.dropdownLink}>
-            Create Training
-          </Link>,
-            <Link to="/TrainerProfile" className={classes.dropdownLink}>
-              Profile
-          </Link>
-            
-          ]}
-        />
+      <ListItem className={classes.listItem}>
+        <Button
+          href="/TrainerProfile"
+          color="transparent"
+          className={classes.navLink}
+        >
+          Profile
+        </Button>
+      </ListItem>
+      <ListItem className={classes.listItem}>
+        <Button
+          href="/CreateTraining"
+          color="transparent"
+          className={classes.navLink}
+        >
+          Create Training
+        </Button>
       </ListItem>
       <ListItem className={classes.listItem}>
         <Button

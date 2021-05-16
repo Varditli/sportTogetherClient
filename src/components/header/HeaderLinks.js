@@ -31,7 +31,7 @@ console.log(name)
  
   return (
     <List className={classes.list}>
-      <ListItem className={classes.listItem}>
+      {/* <ListItem className={classes.listItem}>
         <CustomDropdown
           noLiPadding
           buttonText="Trainee"
@@ -73,6 +73,24 @@ console.log(name)
             
           ]}
         />
+      </ListItem> */}
+      <ListItem className={classes.listItem}>
+        <Button
+          href="/LoginTrainer"
+          color="transparent"
+          className={classes.navLink}
+        >
+          Login Trainer
+        </Button>
+      </ListItem>
+      <ListItem className={classes.listItem}>
+        <Button
+          href="/LoginTrainee"
+          color="transparent"
+          className={classes.navLink}
+        >
+          Login Trainee
+        </Button>
       </ListItem>
       <ListItem className={classes.listItem}>
         <Button
