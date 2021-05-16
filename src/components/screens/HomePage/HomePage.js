@@ -67,6 +67,7 @@ const useStyles = makeStyles(styles);
 // ]
 export default function HomePage(props) {
   const [trainings, setTrainings] = useState();
+  
   useEffect(() => {
     fetch(`${process.env.REACT_APP_SERVER}/all-trainings`, {
       headers: {
