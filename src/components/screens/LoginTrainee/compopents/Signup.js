@@ -123,15 +123,6 @@ export default function Signup() {
           />
         </CardBody> 
           <Button onClick={() => PostData()} round color="primary">SignUp</Button>
-          <CardFooter>
-          <Grid container>
-            <Grid item>
-              <Link href="/Signin" variant="body2">
-                {"Already have an account? Sign in"}
-              </Link>
-            </Grid>
-          </Grid>
-        </CardFooter>
       </form>
   );
 }

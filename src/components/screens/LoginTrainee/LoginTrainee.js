@@ -82,8 +82,11 @@
   
     </div>
     }
-      
-
+      <Grid item>
+                <Button onClick={() => isSigned()}  variant="body2">
+                  {"Already have an account? Sign In"}
+                </Button>
+              </Grid>
     </Card>
     {/* <Footer whiteFont /> */}
     </Grid>
