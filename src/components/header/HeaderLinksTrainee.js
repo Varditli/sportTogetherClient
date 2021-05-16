@@ -25,36 +25,39 @@ const useStyles = makeStyles(styles);
 export default function HeaderLinks(props) {
   const classes = useStyles();
   const { state, dispatch } = useContext(UserContext);
-const history = useHistory();
-var name = localStorage.getItem("role");
-console.log(name)
-function refreshPage() {
+  const history = useHistory();
+  var name = localStorage.getItem("role");
+  console.log(name);
+  function refreshPage() {
     window.location.reload(false);
   }
 
   return (
     <List className={classes.list}>
-      
-     <ListItem className={classes.listItem}>
-     <Button 
-     color="transparent"
-     target="_blank"
-     className={classes.navLink}
-
-    onClick={() => {
-      localStorage.clear();
-      dispatch({ type: "CLEAR" });
-      history.push("/LoginTrainee");
-      
-      
-        }}
-        // onClick={refreshPage}
-     >
+      <ListItem className={classes.listItem}>
+        <Button
+          color="transparent"
+          className={classes.navLink}
+          onClick={() => {
+            localStorage.clear();
+            dispatch({ type: "CLEAR" });
+            history.push("/HomePage");
+          }}
+        >
           Logout
-      </Button>
-     </ListItem>
-     <ListItem className={classes.listItem}>
-        <CustomDropdown
+        </Button>
+        <Button
+          color="transparent"
+          className={classes.navLink}
+          onClick={() => {
+          history.push("/HomePage");
+          }}
+        >
+          Trainee Profile
+        </Button>
+      </ListItem>
+      <ListItem className={classes.listItem}>
+        {/* <CustomDropdown
           noLiPadding
           buttonText="User"
           buttonProps={{
@@ -71,13 +74,12 @@ function refreshPage() {
           </Link>
             
           ]}
-        />
+        /> */}
       </ListItem>
       <ListItem className={classes.listItem}>
         <Button
           href="/HomePage"
           color="transparent"
-          target="_blank"
           className={classes.navLink}
         >
           Home

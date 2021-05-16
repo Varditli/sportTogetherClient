@@ -31,6 +31,8 @@ export default function Signup(types) {
   const [photo, setPhoto] = useState("")
   const allTypes = types.value
   const classes = useStyles();
+
+  
   const PostDataTrainer = () => {
     if (
       !/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
@@ -41,34 +43,34 @@ export default function Signup(types) {
       return;
     }
 
-    console.log(value)
-    
-    fetch(`${process.env.REACT_APP_SERVER}/signupTrainer`, {
-      method: "post",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        username,
-        email,
-        password,
-        age,
-        experience,
-        tel,
-        sportType : value
-        //photo
-      }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.error) {
-          console.log(data.error);
-        } else {
-          console.log("successfully added Trainer");
-          window.location.reload("false");
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    console.log(sportType)
+
+    // fetch(`${process.env.REACT_APP_SERVER}/signupTrainer`, {
+    //   method: "post",
+    //   headers: { "Content-Type": "application/json" },
+    //   body: JSON.stringify({
+    //     username,
+    //     email,
+    //     password,
+    //     age,
+    //     experience,
+    //     tel,
+    //     sportType : value
+    //     //photo
+    //   }),
+    // })
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     if (data.error) {
+    //       console.log(data.error);
+    //     } else {
+    //       console.log("successfully added Trainer");
+    //       window.location.reload("false");
+    //     }
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
   };
 
     //sportType const
@@ -175,9 +177,8 @@ console.log(sportType)
         <div {...getRootProps()}>
           <Label {...getInputLabelProps()}>Sport Types</Label>
           <InputWrapper ref={setAnchorEl} className={focused ? 'focused' : ''}
-            value={sportType}
-            onChange={(e) => setSportType(e.target.value)}>
-              {console.log(value)}
+            //value={sportType}
+            onChange={setSportType(value)}>
             {value.map((option, index) => (
               <Tag label={option.name} {...getTagProps({ index })} />
             ))}

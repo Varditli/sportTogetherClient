@@ -45,7 +45,7 @@ console.log(name)
               Login Trainee
             </Link>,
             <Link to="/TraineeProfile" className={classes.dropdownLink}>
-            Profile 
+            Trainee Profile 
           </Link>
             
           ]}
@@ -65,10 +65,10 @@ console.log(name)
               Login Trainer
             </Link>,
             <Link to="/CraeteTraining" className={classes.dropdownLink}>
-            Create Training
+            Create New Training
           </Link>,
             <Link to="/TrainerProfile" className={classes.dropdownLink}>
-              Profile
+              Trainer Profile
           </Link>
             
           ]}
@@ -78,7 +78,6 @@ console.log(name)
         <Button
           href="/HomePage"
           color="transparent"
-          target="_blank"
           className={classes.navLink}
         >
           Home

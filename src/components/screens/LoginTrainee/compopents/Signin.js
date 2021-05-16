@@ -23,7 +23,8 @@ export default function SignIn(isTrainer) {
   setTimeout(function () {
     setCardAnimation("");
   }, 700);
-  const SigninCheck = () => {
+
+  const signinTrainee = () => {
     fetch(`${process.env.REACT_APP_SERVER}/signinTrainee`, {
       method: "post",
       headers: { "Content-Type": "application/json" },
@@ -39,7 +40,7 @@ export default function SignIn(isTrainer) {
         localStorage.setItem("jwt", data.token);
         localStorage.setItem("trainee", JSON.stringify(data.trainee));
         localStorage.setItem("role","trainee");
-        dispatch({ type: "TRAINEE", payload: data.user });
+        dispatch({ type: "TRAINEE", payload: data.trainee });
         history.push("/HomePage");
       })
       .catch((err) => {
@@ -78,9 +79,7 @@ export default function SignIn(isTrainer) {
             />
           </CardBody>
 
-          <Button onClick={() => SigninCheck()} round color="primary">Sign In</Button>
-        
-
+          <Button onClick={() => signinTrainee()} round color="primary">Sign In</Button>
         </form>
   );
 }

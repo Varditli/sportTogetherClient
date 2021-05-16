@@ -41,12 +41,11 @@ console.log(name)
      <ListItem className={classes.listItem}>
      <Button 
      color="transparent"
-     target="_blank"
      className={classes.navLink}
-    onClick={() => {
+      onClick={() => {
       localStorage.clear();
       dispatch({ type: "CLEAR" });
-      history.push("/LoginTrainee");
+      history.push("/HomePage");
       // window.location.reload();
       
         }}
@@ -65,9 +64,9 @@ console.log(name)
           }}
           buttonIcon={Apps}
           dropdownList={[
-            <Link to="/LoginTrainer" className={classes.dropdownLink}>
-              Login Trainer
-            </Link>,
+            // <Link to="/LoginTrainer" className={classes.dropdownLink}>
+            //   Login Trainer
+            // </Link>,
             <Link to="/CreateTraining" className={classes.dropdownLink}>
             Create Training
           </Link>,
@@ -82,7 +81,6 @@ console.log(name)
         <Button
           href="/HomePage"
           color="transparent"
-          target="_blank"
           className={classes.navLink}
         >
           Home

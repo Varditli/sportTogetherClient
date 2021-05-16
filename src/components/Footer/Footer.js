@@ -35,25 +35,6 @@ export default function Footer(props) {
               <a
                 href="/HomePage"
                 className={classes.block}
-                target="_blank"
-              >
-               About us
-              </a>
-            </ListItem>
-            <ListItem className={classes.inlineBlock}>
-              <a
-                href="/HomePage"
-                className={classes.block}
-                target="_blank"
-              >
-                How it works
-              </a>
-            </ListItem>
-            <ListItem className={classes.inlineBlock}>
-              <a
-                href="/HomePage"
-                className={classes.block}
-                target="_blank"
               >
                 Home Page
               </a>

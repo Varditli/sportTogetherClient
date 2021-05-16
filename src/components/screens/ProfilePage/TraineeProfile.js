@@ -1,7 +1,7 @@
-import React, { useState, useContext  } from "react";
+import React, { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { UserContext } from "../../../App";
-import { EditText, EditTextarea } from 'react-edit-text';
+import { EditText, EditTextarea } from "react-edit-text";
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // @material-ui/core components
@@ -25,12 +25,12 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 
 import styles from "./ProfileStyle";
+import { ContactSupportOutlined } from "@material-ui/icons";
 
 const useStyles = makeStyles(styles);
 
 export default function TraineeProfilePage(props) {
-
-  const trainee = JSON.parse(localStorage.getItem("trainee"))
+  const trainee = JSON.parse(localStorage.getItem("trainee"));
   console.log(trainee);
 
   const classes = useStyles();
@@ -46,11 +46,10 @@ export default function TraineeProfilePage(props) {
   const [tel, setTel] = useState("");
   const { token } = localStorage.getItem("jwt");
 
-
   const handleClickOpen = () => {
     setOpen(true);
   };
-  
+
   const handleClose = () => {
     setOpen(false);
   };
@@ -61,69 +60,120 @@ export default function TraineeProfilePage(props) {
 
   // };
 
-//   const UpdateValue = (e) => {
-//     const { note } = this.state;
+  //   const UpdateValue = (e) => {
+  //     const { note } = this.state;
 
-//     this.setState({
-//         note: { ...note, [e.target.name]: e.target.value }
-//     });
-// }
+  //     this.setState({
+  //         note: { ...note, [e.target.name]: e.target.value }
+  //     });
+  // }
+
+
+  const PostData = () => {
+    if (
+      !/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
+        email
+      )
+    ) {
+      //   M.toast({ html: "Invalid email", classes: "#ff4081 pink accent-2" });
+      return;
+    }
+    fetch(`${process.env.REACT_APP_SERVER}/signupTrainee`, {
+      method: "post",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        username,
+        email,
+        password,
+        age,
+        tel,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.error) {
+          console.log("Failed Updating the Trainee Profile");
+        } else {
+          console.log("successfully Updated the Trainee Profile");
+          window.location.reload("false");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
 
   const Edit = () => {
     return (
       <React.Fragment>
-      <div style={{whiteSpace: 'nowrap'}}>
-        <strong><label className="mr-2">User Name <small>(read-only)</small>: </label></strong>
-        <EditText 
-          id="username" 
-          name="username" 
-          defaultValue={trainee.username} 
-          inline 
-          readonly
-        />
-      </div>
-      <div style={{whiteSpace: 'nowrap'}}>
-        <strong><label className="mr-2">Email: </label></strong>
-        <EditText 
-          name="email"
-          type="email"
-          style={{width: '200px'}}
-          defaultValue={trainee.email} 
-          inline 
-          //onSave={UpdateValue()}
+        <div style={{ whiteSpace: "nowrap" }}>
+          <strong>
+            <label className="mr-2">
+              Email: <small>(read-only) </small>
+            </label>
+          </strong>
+          <EditText
+            name="email"
+            type="email"
+            style={{ width: "200px" }}
+            defaultValue={trainee.email}
+            inline
+            readonly
           />
-      </div>
-      <div style={{whiteSpace: 'nowrap'}}>
-        <strong>
-          <label className='mr-2' style={{width: '50px'}}>Tel: </label>
-        </strong>
-        <EditTextarea
-          name='tel'
-          rows={0}
-          //style={{ paddingTop: 1 }}
-          defaultValue={trainee.tel}
-          inline
-          //onSave={UpdateValue()}
-        />
-      </div>
-      <div style={{whiteSpace: 'nowrap'}}>
-        <strong><label className="mr-2">Age: </label></strong>
-        <EditText
-          name="age" 
-          type="number" 
-          style={{width: '100px'}} 
-          defaultValue={trainee.age} 
-          inline 
-          //onSave={UpdateValue()}
+        </div>
+        <div style={{ whiteSpace: "nowrap" }}>
+          <strong>
+            <label className="mr-2">User Name: </label>
+          </strong>
+          <EditText
+            id="username"
+            name="username"
+            defaultValue={trainee.username}
+            inline
           />
-      </div>
-    </React.Fragment>
+        </div>
+        <div style={{ whiteSpace: "nowrap" }}>
+          <strong>
+            <label className="mr-2" style={{ width: "50px" }}>
+              Tel:{" "}
+            </label>
+          </strong>
+          <EditTextarea
+            name="tel"
+            rows={0}
+            //style={{ paddingTop: 1 }}
+            defaultValue={trainee.tel}
+            inline
+            //onSave={UpdateValue()}
+          />
+        </div>
+        <div style={{ whiteSpace: "nowrap" }}>
+          <strong>
+            <label className="mr-2">Age: </label>
+          </strong>
+          <EditText
+            name="age"
+            type="number"
+            style={{ width: "100px" }}
+            defaultValue={trainee.age}
+            inline
+            //onSave={UpdateValue()}
+          />
+        </div>
+      </React.Fragment>
     );
-}
+  };
 
   return (
     <div>
-      <Parallax small filter image={"https://res.cloudinary.com/dywnmmeue/image/upload/v1617887588/trainingPic_gmmk9c.jpg"} />
+      <Parallax
+        small
+        filter
+        image={
+          "https://res.cloudinary.com/dywnmmeue/image/upload/v1617887588/trainingPic_gmmk9c.jpg"
+        }
+      />
       <div className={classNames(classes.main, classes.mainRaised)}>
         <div>
           <div className={classes.container}>
@@ -131,57 +181,67 @@ export default function TraineeProfilePage(props) {
               <GridItem xs={12} sm={12} md={6}>
                 <div className={classes.profile}>
                   <div>
-                    <img src={"https://res.cloudinary.com/dywnmmeue/image/upload/v1617887588/trainingPic_gmmk9c.jpg"} alt="..." />
+                    <img
+                      src={
+                        "https://res.cloudinary.com/dywnmmeue/image/upload/v1617887588/trainingPic_gmmk9c.jpg"
+                      }
+                      alt="..."
+                    />
                   </div>
                   <div className={classes.name}>
-                  <Button
-                        variant="outlined"
+                    <Button
+                      variant="outlined"
+                      color="primary"
+                      onClick={handleClickOpen}
+                    >
+                      Edit
+                    </Button>
+                    <Dialog
+                      open={open}
+                      onClose={handleClose}
+                      aria-labelledby="form-dialog-title"
+                    >
+                      <DialogTitle id="form-dialog-title">
+                        Edit Trainee Profile
+                      </DialogTitle>
+                      <DialogContent>{Edit()}</DialogContent>
+                      <DialogActions>
+                        <Button 
+                        onClick={handleClose} 
                         color="primary"
-                        onClick={handleClickOpen}
-                      >
-                        Edit
-                      </Button>
-                      <Dialog
-                        open={open}
-                        onClose={handleClose}
-                        aria-labelledby="form-dialog-title"
-                      >
-                          <DialogTitle id="form-dialog-title">
-                            Edit Trainee Profile
-                          </DialogTitle>
-                          <DialogContent>
-                            {Edit()}
-                          </DialogContent>
-                          <DialogActions>
-                            <Button onClick={handleClose} color="primary">
-                              Cancel
-                            </Button>
-                            <Button onClick={handleClose} color="primary">
-                              Save
-                            </Button>
-                          </DialogActions>
-                      </Dialog>
-                    </div>
+                        round
+                        >
+                          Cancel
+                        </Button>
+                        <Button
+                          onClick={{function(event){ handleClose(); PostData()}}}
+                          round
+                          color="primary"
+                        >
+                          Save
+                        </Button>
+                      </DialogActions>
+                    </Dialog>
                   </div>
-
+                </div>
               </GridItem>
             </GridContainer>
             <div>
-            <h3>{trainee.username}</h3>
-            <table>
-                    <tr>
-                        <td classNames={classes.tit}>Email:</td>
-                        <td>{trainee.email}</td>
-                      </tr>
-                      <tr>
-                        <td classNames={classes.tit}>Tel:</td>
-                        <td>{trainee.tel}</td>
-                      </tr>
-                      <tr>
-                        <td classNames={classes.tit}>Age:</td>
-                        <td>{trainee.age}</td>
-                      </tr>
-                    </table>
+              <h3>{trainee.username}</h3>
+              <table>
+                <tr>
+                  <td classNames={classes.tit}>Email:</td>
+                  <td>{trainee.email}</td>
+                </tr>
+                <tr>
+                  <td classNames={classes.tit}>Tel:</td>
+                  <td>{trainee.tel}</td>
+                </tr>
+                <tr>
+                  <td classNames={classes.tit}>Age:</td>
+                  <td>{trainee.age}</td>
+                </tr>
+              </table>
             </div>
             <GridContainer justify="center">
               <GridItem xs={12} sm={12} md={8} className={classes.navWrapper}>
@@ -197,20 +257,21 @@ export default function TraineeProfilePage(props) {
                           <GridItem xs={12} sm={12} md={4}>
                             <img
                               alt="..."
-                              src={ "https://res.cloudinary.com/dywnmmeue/image/upload/v1617887588/trainingPic_gmmk9c.jpg"}
+                              src={
+                                "https://res.cloudinary.com/dywnmmeue/image/upload/v1617887588/trainingPic_gmmk9c.jpg"
+                              }
                             />
-                           
                           </GridItem>
                           <GridItem xs={12} sm={12} md={4}>
                             <img
                               alt="..."
-                              src={"https://res.cloudinary.com/dywnmmeue/image/upload/v1617887588/trainingPic_gmmk9c.jpg"}
-        
+                              src={
+                                "https://res.cloudinary.com/dywnmmeue/image/upload/v1617887588/trainingPic_gmmk9c.jpg"
+                              }
                             />
-                           
                           </GridItem>
                         </GridContainer>
-                      )
+                      ),
                     },
                     {
                       tabButton: "Past Trainings",
@@ -220,27 +281,27 @@ export default function TraineeProfilePage(props) {
                           <GridItem xs={12} sm={12} md={4}>
                             <img
                               alt="..."
-                              src={ "https://res.cloudinary.com/dywnmmeue/image/upload/v1617887588/trainingPic_gmmk9c.jpg"}
-        
+                              src={
+                                "https://res.cloudinary.com/dywnmmeue/image/upload/v1617887588/trainingPic_gmmk9c.jpg"
+                              }
                             />
-                       
                           </GridItem>
                           <GridItem xs={12} sm={12} md={4}>
                             <img
                               alt="..."
                               src={
-                                  "https://res.cloudinary.com/dywnmmeue/image/upload/v1617887588/trainingPic_gmmk9c.jpg"
+                                "https://res.cloudinary.com/dywnmmeue/image/upload/v1617887588/trainingPic_gmmk9c.jpg"
                               }
-        
                             />
                             <img
                               alt="..."
-                              src={ "https://res.cloudinary.com/dywnmmeue/image/upload/v1617887588/trainingPic_gmmk9c.jpg"}
-        
+                              src={
+                                "https://res.cloudinary.com/dywnmmeue/image/upload/v1617887588/trainingPic_gmmk9c.jpg"
+                              }
                             />
                           </GridItem>
                         </GridContainer>
-                      )
+                      ),
                     },
                     {
                       tabButton: "My Favorites",
@@ -250,21 +311,22 @@ export default function TraineeProfilePage(props) {
                           <GridItem xs={12} sm={12} md={4}>
                             <img
                               alt="..."
-                              src={"https://res.cloudinary.com/dywnmmeue/image/upload/v1617887588/trainingPic_gmmk9c.jpg"}
-        
+                              src={
+                                "https://res.cloudinary.com/dywnmmeue/image/upload/v1617887588/trainingPic_gmmk9c.jpg"
+                              }
                             />
-                          
                           </GridItem>
                           <GridItem xs={12} sm={12} md={4}>
                             <img
                               alt="..."
-                              src={"https://res.cloudinary.com/dywnmmeue/image/upload/v1617887588/trainingPic_gmmk9c.jpg"}
-        
-                            /> 
+                              src={
+                                "https://res.cloudinary.com/dywnmmeue/image/upload/v1617887588/trainingPic_gmmk9c.jpg"
+                              }
+                            />
                           </GridItem>
                         </GridContainer>
-                      )
-                    }
+                      ),
+                    },
                   ]}
                 />
               </GridItem>

@@ -1,8 +1,8 @@
 import React, { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { UserContext } from "../../../App";
-import { EditText, EditTextarea } from 'react-edit-text';
-import 'react-edit-text/dist/index.css';
+import { EditText, EditTextarea } from "react-edit-text";
+import "react-edit-text/dist/index.css";
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // @material-ui/core components
@@ -30,8 +30,7 @@ import styles from "./ProfileStyle.js";
 const useStyles = makeStyles(styles);
 
 export default function ProfilePage(props) {
-
-  const trainer = JSON.parse(localStorage.getItem("trainer"))
+  const trainer = JSON.parse(localStorage.getItem("trainer"));
   console.log(trainer);
 
   const classes = useStyles();
@@ -64,83 +63,89 @@ export default function ProfilePage(props) {
   const TypesList = trainer.sportType;
 
   function ShowTypesList(trainer) {
-    const listItems = TypesList.map((type) =>
-      <li key={type.toString()}>
-        {type}
-      </li>
-    );
-    return (
-      <ul>{listItems}</ul>
-    );
+    const listItems = TypesList.map((type) => (
+      <li key={type.toString()}>{type}</li>
+    ));
+    return <ul>{listItems}</ul>;
   }
 
   const Edit = () => {
     return (
       <React.Fragment>
-      <div style={{whiteSpace: 'nowrap'}}>
-        <strong><label className="mr-2">User Name <small>(read-only)</small>: </label></strong>
-        <EditText 
-          id="username" 
-          name="username" 
-          defaultValue={trainer.username} 
-          inline 
-          readonly/>
-      </div>
-      <div style={{whiteSpace: 'nowrap'}}>
-        <strong><label className="mr-2">Email: </label></strong>
-        <EditText 
-        name="email" 
-        type="email" 
-        style={{width: '200px'}} 
-        defaultValue={trainer.email} 
-        inline 
-        //onSave={this.onSave}
-        />
-      </div>
-      <div style={{whiteSpace: 'nowrap'}}>
-        <strong>
-          <label className='mr-2' style={{width: '50px'}}>Tel: </label>
-        </strong>
-        <EditTextarea
-          name='tel'
-          rows={0}
-          //style={{ paddingTop: 1 }}
-          defaultValue={trainer.tel}
-          inline
-          //onSave={this.onSave}
-        />
-      </div>
-      <div style={{whiteSpace: 'nowrap'}}>
-        <strong><label className="mr-2">Age: </label></strong>
-        <EditText 
-        name="age" 
-        type="number" 
-        style={{width: '100px'}} 
-        defaultValue={trainer.age} 
-        inline 
-        //onSave={this.onSave}
-        />
-      </div>
-      <div style={{whiteSpace: 'nowrap'}}>
-        <strong>
-          <label className='mr-2'>Experience: </label>
-        </strong>
-        <EditTextarea
-          name='experience'
-          rows={4}
-          //style={{ paddingTop: 1 }}
-          placeholder="Share your trainees about your experience"
-          //defaultValue={trainer.experience}
-          value = {trainer.experience}
-          inline
-          //onSave={this.onSave}
-        />
-      </div>
-      <div style={{whiteSpace: 'nowrap'}}>
-        <strong>
-          <label className='mr-2'>Sport Types: </label>
-        </strong>
-        {/* <EditTextarea
+        <div style={{ whiteSpace: "nowrap" }}>
+          <strong>
+            <label className="mr-2">Email: <small>(read-only) </small></label>
+          </strong>
+          <EditText
+            name="email"
+            type="email"
+            style={{ width: "200px" }}
+            defaultValue={trainer.email}
+            inline
+            readonly
+          />
+        </div>
+        <div style={{ whiteSpace: "nowrap" }}>
+          <strong>
+            <label className="mr-2">
+              User Name:{" "}
+            </label>
+          </strong>
+          <EditText
+            id="username"
+            name="username"
+            defaultValue={trainer.username}
+            inline
+          />
+        </div>
+        <div style={{ whiteSpace: "nowrap" }}>
+          <strong>
+            <label className="mr-2" style={{ width: "50px" }}>
+              Tel:{" "}
+            </label>
+          </strong>
+          <EditTextarea
+            name="tel"
+            rows={0}
+            //style={{ paddingTop: 1 }}
+            defaultValue={trainer.tel}
+            inline
+            //onSave={this.onSave}
+          />
+        </div>
+        <div style={{ whiteSpace: "nowrap" }}>
+          <strong>
+            <label className="mr-2">Age: </label>
+          </strong>
+          <EditText
+            name="age"
+            type="number"
+            style={{ width: "100px" }}
+            defaultValue={trainer.age}
+            inline
+            //onSave={this.onSave}
+          />
+        </div>
+        <div style={{ whiteSpace: "nowrap" }}>
+          <strong>
+            <label className="mr-2">Experience: </label>
+          </strong>
+          <EditTextarea
+            name="experience"
+            rows={4}
+            //style={{ paddingTop: 1 }}
+            placeholder="Share your trainees about your experience"
+            //defaultValue={trainer.experience}
+            value={trainer.experience}
+            inline
+            //onSave={this.onSave}
+          />
+        </div>
+        <div style={{ whiteSpace: "nowrap" }}>
+          <strong>
+            <label className="mr-2">Sport Types: </label>
+          </strong>
+          {/* <EditTextarea
           name='sportType'
           rows={3}
           //style={{ paddingTop: 1 }}
@@ -148,10 +153,10 @@ export default function ProfilePage(props) {
           defaultValue = {ShowTypesList}
           inline
         /> */}
-      </div>
-    </React.Fragment>
+        </div>
+      </React.Fragment>
     );
-}
+  };
 
   const navImageClasses = classNames(classes.imgRounded, classes.imgGallery);
 
@@ -180,7 +185,9 @@ export default function ProfilePage(props) {
                     />
                   </div>
                   <div className={classes.name}>
-                    <h3 className={classes.title}>{localStorage.getItem("username")}</h3>
+                    <h3 className={classes.title}>
+                      {localStorage.getItem("username")}
+                    </h3>
                     <div>
                       <Button
                         variant="outlined"
@@ -193,27 +200,25 @@ export default function ProfilePage(props) {
                         open={open}
                         onClose={handleClose}
                         aria-labelledby="form-dialog-title"
-                        width = "80%"
+                        width="80%"
                       >
-                          <DialogTitle id="form-dialog-title">
-                            Edit Trainer Profile
-                          </DialogTitle>
-                          <DialogContent>
-                            {Edit()}
-                          </DialogContent>
-                          <DialogActions>
-                            <Button onClick={handleClose} color="primary">
-                              Cancel
-                            </Button>
-                            <Button onClick={handleClose} color="primary">
-                              Save
-                            </Button>
-                          </DialogActions>
+                        <DialogTitle id="form-dialog-title">
+                          Edit Trainer Profile
+                        </DialogTitle>
+                        <DialogContent>{Edit()}</DialogContent>
+                        <DialogActions>
+                          <Button onClick={handleClose} color="primary">
+                            Cancel
+                          </Button>
+                          <Button onClick={handleClose} color="primary">
+                            Save
+                          </Button>
+                        </DialogActions>
                       </Dialog>
                     </div>
                     <h3>{trainer.username}</h3>
                     <table>
-                    <tr>
+                      <tr>
                         <td classNames={classes.tit}>Email:</td>
                         <td>{trainer.email}</td>
                       </tr>

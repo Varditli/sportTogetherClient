@@ -51,7 +51,6 @@ const renderList = () => {
       }
     } else {
         return(
-
             <Header
             brand="SporTogether"
             rightLinks={<HeaderLinks />}
