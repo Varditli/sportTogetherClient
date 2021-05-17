@@ -78,7 +78,7 @@ export default function TraineeProfilePage(props) {
       //   M.toast({ html: "Invalid email", classes: "#ff4081 pink accent-2" });
       return;
     }
-    fetch(`${process.env.REACT_APP_SERVER}/signupTrainee`, {
+    fetch(`${process.env.REACT_APP_SERVER}/editTraineeProfile`, {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
