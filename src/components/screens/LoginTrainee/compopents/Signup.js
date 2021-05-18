@@ -9,6 +9,7 @@ import Grid from "@material-ui/core/Grid";
 import useStyles from "../styles";
 import CardFooter from "../../../Card/CardFooter";
 import CardBody from "../../../Card/CardBody";
+import GridItem from "../../../Grid/GridItem";
 
 export default function Signup() {
   const history = useHistory();
@@ -122,7 +123,9 @@ export default function Signup() {
             onChange={(e) => setPassword(e.target.value)}
           />
         </CardBody> 
+        <GridItem margin="auto">
           <Button onClick={() => PostData()} round color="primary">SignUp</Button>
+        </GridItem>
       </form>
   );
 }

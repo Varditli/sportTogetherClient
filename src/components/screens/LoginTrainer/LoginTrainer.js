@@ -84,34 +84,32 @@ return (
         </Typography>
         </CardHeader>
         <SignIn />
-        <Grid item>
+        <GridItem>
                 <Button onClick={() => isSigned()}  variant="body2">
                   {"Don't have an account? Sign Up"}
                 </Button>
-              </Grid>
+              </GridItem>
         </div>
         :   //else
         <div>
         <CardHeader>
-    
+        <GridItem>
         <Typography component="h1" variant="h5">
         Sign Up
       </Typography>
+      </GridItem>
       </CardHeader>
   <SignUp value={allTypes} />
-  <Grid item>
+  <GridItem>
                 <Button onClick={() => isSigned()}  variant="body2">
-                  {"Already have an account? Sign Up"}
+                  {"Already have an account? Sign in"}
                 </Button>
-              </Grid>
+              </GridItem>
   </div>
   }
 
- 
   </Card>
-  {/* <Footer whiteFont /> */}
   </Grid>
- 
   </Container>
   <Footer/>
   </div>

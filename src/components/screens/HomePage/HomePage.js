@@ -22,10 +22,6 @@ import LocationSearchInput from "./googleMaps/currentLocation";
 
 const useStyles = makeStyles(styles);
 
-// var trainingName=CreateTraining.name;
-// var trainingType=CreateTraining.type;
-// var trainingIntensity=CreateTraining.intensity;
-// var trainingLocation=CreateTraining.location;
 
 // const trainings =[
 //   {
@@ -223,12 +219,11 @@ export default function HomePage(props) {
                   />
                 </GridContainer>
               </form>
+
               {/* <div>
-      {
-      trainings.map(item => {
+      {trainings.map(item => {
             <Training key = {item._id} value={item} />
            })}
-
     </div> */}
               {/* {trainings.map((item) => {
                 return <Training key = {item._id} value={item} />

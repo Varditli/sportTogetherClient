@@ -6,6 +6,7 @@ import TextField from "@material-ui/core/TextField";
 import useStyles from "../styles";
 import CardFooter from "../../../Card/CardFooter";
 import CardBody from "../../../Card/CardBody";
+import GridItem from "../../../Grid/GridItem";
 
 // import styles from "../LogInStyle";
 
@@ -78,8 +79,9 @@ export default function SignIn(isTrainer) {
               onChange={(e) => setPassword(e.target.value)}
             />
           </CardBody>
-
+          <GridItem>
           <Button onClick={() => signinTrainee()} round color="primary">Sign In</Button>
+          </GridItem>
         </form>
   );
 }

@@ -17,6 +17,7 @@ import useAutocomplete from '@material-ui/lab/useAutocomplete';
 import NoSsr from '@material-ui/core/NoSsr';
 import CheckIcon from '@material-ui/icons/Check';
 import { createGlobalStyle } from "styled-components";
+import GridItem from "../../../Grid/GridItem";
 
 
 export default function Signup(types) {
@@ -199,7 +200,9 @@ console.log(sportType)
       </div>
     </NoSsr>
         </CardBody> 
+        <GridItem>
           <Button onClick={() => PostDataTrainer()} round color="primary">SignUp</Button> 
+        </GridItem>
       </form>
   );
 }

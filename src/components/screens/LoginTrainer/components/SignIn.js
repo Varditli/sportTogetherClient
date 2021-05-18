@@ -84,7 +84,14 @@ export default function SignIn(isTrainer) {
               onChange={(e) => setPassword(e.target.value)}
             />
           </CardBody>
-          <Button onClick={() => SigninTrainer()} round color="primary" >Sign In</Button>
+          <GridItem>
+          <Button 
+          onClick={() => SigninTrainer()} 
+          round
+          color="primary"
+            >Sign In
+            </Button>
+            </GridItem>
 
         </form>
         </div>

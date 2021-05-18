@@ -7,6 +7,8 @@ import classNames from "classnames";
 import PropTypes from "prop-types";
 // @material-ui/core components
 import Header from "./Header";
+import HeaderTrainee from "./HeaderTrainee";
+import HeaderTrainer from "./HeaderTrainer";
 import HeaderLinks from "./HeaderLinks";
 import HeaderLinksTrainee from "./HeaderLinksTrainee";
 import HeaderLinksTrainer from "./HeaderLinksTrainer";
@@ -16,6 +18,7 @@ export default function HeaderNavigation(props) {
 
 const { state, dispatch } = useContext(UserContext);
 const history = useHistory();
+const { ...rest } = props;
 var name = localStorage.getItem("role");
 console.log(name)
 
@@ -32,7 +35,7 @@ const renderList = () => {
             height: 400,
             color: "white"
             }}
-            // {...rest}
+            {...rest}
             />
         ]} else if (name.includes("trainer")) {
         return [
@@ -45,7 +48,7 @@ const renderList = () => {
             height: 400,
             color: "white"
             }}
-            // {...rest}
+            {...rest}
             />
         ];
       }
@@ -60,7 +63,7 @@ const renderList = () => {
             height: 400,
             color: "white"
             }}
-            // {...rest}
+            {...rest}
             />
         );
     }

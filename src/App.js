@@ -1,7 +1,4 @@
 import React, { useEffect, createContext, useReducer, useContext } from "react";
-import Navbar from "./components/Navbar/Navbar";
-import Header from "./components/header/Header";
-import HeaderLinks from "./components/header/HeaderLinks";
 
 import "./App.css";
 
