@@ -22,7 +22,7 @@ const { ...rest } = props;
 var name = localStorage.getItem("role");
 console.log(name)
 
-const renderList = () => {
+const renderList = (props) => {
     if (name) {
       if (name.includes("trainee")) {
         return [
@@ -70,6 +70,6 @@ const renderList = () => {
 
 }
 return (
-     renderList()
+     renderList(props)
   );
 }

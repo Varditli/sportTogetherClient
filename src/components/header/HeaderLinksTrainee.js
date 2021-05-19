@@ -22,12 +22,13 @@ import styles from "./HeaderLinksStyle";
 
 const useStyles = makeStyles(styles);
 
-export default function HeaderLinks(props) {
+export default function HeaderLinksTrainee(props) {
   const classes = useStyles();
   const { state, dispatch } = useContext(UserContext);
   const history = useHistory();
   var name = localStorage.getItem("role");
   console.log(name);
+
   // function refreshPage() {
   //   window.location.reload(false);
   // }
@@ -35,13 +36,14 @@ export default function HeaderLinks(props) {
   return (
     <List className={classes.list}>
       <ListItem className={classes.listItem}>
-        <Button
+        <Button aria-label="menu"
+              aria-label="settings"
           color="transparent"
           className={classes.navLink}
           onClick={() => {
             localStorage.clear();
             dispatch({ type: "CLEAR" });
-            history.push("/HomePage");
+            history.push("/LoginTrainee");
           }}
         >
           Logout
@@ -50,7 +52,7 @@ export default function HeaderLinks(props) {
           color="transparent"
           className={classes.navLink}
           onClick={() => {
-          history.push("/HomePage");
+          history.push("/TraineeProfile");
           }}
         >
           Profile

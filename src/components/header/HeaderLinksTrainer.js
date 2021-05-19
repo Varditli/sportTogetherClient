@@ -21,10 +21,10 @@ import Button from "../CustomButtons/Button";
 import styles from "./HeaderLinksStyle";
 
 const useStyles = makeStyles(styles);
-function refreshPage() {
-  window.location.reload(false);
-}
-export default function HeaderLinks(props) {
+// function refreshPage() {
+//   window.location.reload(false);
+// }
+export default function HeaderLinksTrainer(props) {
   const classes = useStyles();
   const { state, dispatch } = useContext(UserContext);
 const history = useHistory();
@@ -37,7 +37,6 @@ console.log(name)
 
   return (
     <List className={classes.list}>
-      
      <ListItem className={classes.listItem}>
      <Button 
      color="transparent"
@@ -45,7 +44,7 @@ console.log(name)
       onClick={() => {
       localStorage.clear();
       dispatch({ type: "CLEAR" });
-      history.push("/HomePage");
+      history.push("/LoginTrainer");
       
       
         }}
