@@ -24,7 +24,10 @@ export default function SignIn(isTrainer) {
   setTimeout(function () {
     setCardAnimation("");
   }, 700);
-
+  
+  function refreshPage() {
+    window.location.reload(false);
+  }
   const signinTrainee = () => {
     fetch(`${process.env.REACT_APP_SERVER}/signinTrainee`, {
       method: "post",
@@ -43,6 +46,7 @@ export default function SignIn(isTrainer) {
         localStorage.setItem("role","trainee");
         dispatch({ type: "TRAINEE", payload: data.trainee });
         history.push("/HomePage");
+        refreshPage();
       })
       .catch((err) => {
         console.log(err);

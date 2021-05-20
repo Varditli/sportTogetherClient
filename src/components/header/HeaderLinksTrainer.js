@@ -21,19 +21,16 @@ import Button from "../CustomButtons/Button";
 import styles from "./HeaderLinksStyle";
 
 const useStyles = makeStyles(styles);
-// function refreshPage() {
-//   window.location.reload(false);
-// }
+
 export default function HeaderLinksTrainer(props) {
   const classes = useStyles();
   const { state, dispatch } = useContext(UserContext);
 const history = useHistory();
 var name = localStorage.getItem("role");
 console.log(name)
-
-//   <Route exact path="/">
-//   {!loggedIn ? <Redirect to="/HomePage" /> : <PublicHomePage />}
-// </Route>
+function refreshPage() {
+  window.location.reload(false);
+}
 
   return (
     <List className={classes.list}>
@@ -44,9 +41,8 @@ console.log(name)
       onClick={() => {
       localStorage.clear();
       dispatch({ type: "CLEAR" });
-      history.push("/LoginTrainer");
-      
-      
+      refreshPage();
+      history.push("/HomePage");
         }}
         // onClick={refreshPage}
      >

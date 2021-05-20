@@ -19,6 +19,7 @@ import CustomDropdown from "../CustomDropdown/CastomDropdown";
 import Button from "../CustomButtons/Button";
 
 import styles from "./HeaderLinksStyle";
+import { render } from "@testing-library/react";
 
 const useStyles = makeStyles(styles);
 
@@ -29,9 +30,9 @@ export default function HeaderLinksTrainee(props) {
   var name = localStorage.getItem("role");
   console.log(name);
 
-  // function refreshPage() {
-  //   window.location.reload(false);
-  // }
+  function refreshPage() {
+    window.location.reload(false);
+  }
 
   return (
     <List className={classes.list}>
@@ -42,8 +43,9 @@ export default function HeaderLinksTrainee(props) {
           className={classes.navLink}
           onClick={() => {
             localStorage.clear();
-            dispatch({ type: "CLEAR" });
-            history.push("/LoginTrainee");
+            dispatch({ type: "CLEAR" }); 
+            refreshPage();
+            history.push("/HomePage"); 
           }}
         >
           Logout
@@ -70,4 +72,4 @@ export default function HeaderLinksTrainee(props) {
     </List>
   );
 }
-// }};
+

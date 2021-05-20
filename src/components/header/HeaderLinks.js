@@ -28,52 +28,8 @@ export default function HeaderLinks(props) {
 const history = useHistory();
 var name = localStorage.getItem("role");
 console.log(name)
- 
   return (
     <List className={classes.list}>
-      {/* <ListItem className={classes.listItem}>
-        <CustomDropdown
-          noLiPadding
-          buttonText="Trainee"
-          buttonProps={{
-            className: classes.navLink,
-            color: "transparent"
-          }}
-          buttonIcon={Apps}
-          dropdownList={[
-            <Link to="/LoginTrainee" className={classes.dropdownLink}>
-              Login Trainee
-            </Link>,
-            <Link to="/TraineeProfile" className={classes.dropdownLink}>
-            Trainee Profile 
-          </Link>
-            
-          ]}
-        />
-      </ListItem>
-      <ListItem className={classes.listItem}>
-        <CustomDropdown
-          noLiPadding
-          buttonText="Trainer"
-          buttonProps={{
-            className: classes.navLink,
-            color: "transparent"
-          }}
-          buttonIcon={Apps}
-          dropdownList={[
-            <Link to="/LoginTrainer" className={classes.dropdownLink}>
-              Login Trainer
-            </Link>,
-            <Link to="/CraeteTraining" className={classes.dropdownLink}>
-            Create New Training
-          </Link>,
-            <Link to="/TrainerProfile" className={classes.dropdownLink}>
-              Trainer Profile
-          </Link>
-            
-          ]}
-        />
-      </ListItem> */}
       <ListItem className={classes.listItem}>
         <Button
           href="/LoginTrainer"
@@ -104,4 +60,4 @@ console.log(name)
     </List>
   );
 }
-// }};
+

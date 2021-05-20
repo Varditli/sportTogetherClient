@@ -21,7 +21,9 @@ import Footer from "../../Footer/Footer";
 import useStyles from "./styles";
 
 var isSignin = true;
-
+function refreshPage() {
+  window.location.reload(false);
+}
 export default function Login() {
   const [cardAnimaton, setCardAnimation] = React.useState("cardHidden");
   setTimeout(function () {
@@ -67,14 +69,14 @@ export default function Login() {
             {isSignin ? (
               <div>
                 <CardHeader>
-                  <Typography component="h1" variant="h5">
+                  <Typography component="h1" varint="h5">
                     Sign in
                   </Typography>
                 </CardHeader>
                 <form className={classes.form}>
                   <SignIn value={isSignin} />
                   <Grid item>
-                    <Button onClick={() => isSigned()} variant="body2">
+                    <Button onClick={() => isSigned()} >
                       {"Don't have an account? Sign Up"}
                     </Button>
                   </Grid>
@@ -83,20 +85,19 @@ export default function Login() {
             ) : (
               <div>
                 <CardHeader>
-                  <Typography component="h1" variant="h5">
+                  <Typography component="h1">
                     Sign Up
                   </Typography>
                 </CardHeader>
                 <SignUp />
                 <Grid item>
-                  <Button onClick={() => isSigned()} variant="body2">
+                  <Button onClick={() => isSigned()} >
                     {"Already have an account? Sign in"}
                   </Button>
                 </Grid>
               </div>
             )}
           </Card>
-          {/* <Footer whiteFont /> */}
         </Grid>
       </Container>
       <Footer />

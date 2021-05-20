@@ -66,19 +66,13 @@ return (
           </GridContainer>
         </div>
       </Parallax>
-    <Container className={classes.trainer} component="main" maxWidth="xs">
-      
+    <Container className={classes.trainer} component="main" maxWidth="xs">   
       <CssBaseline />
-    
   <Grid>
   <Card className={classes[cardAnimaton]}>
- 
   {isSignin? 
-  
   <div>
     <CardHeader>
-
- 
           <Typography component="h1" variant="h5">
           Sign in  
         </Typography>

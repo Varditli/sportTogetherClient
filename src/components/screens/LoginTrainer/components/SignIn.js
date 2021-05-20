@@ -28,7 +28,9 @@ export default function SignIn(isTrainer) {
   setTimeout(function () {
     setCardAnimation("");
   }, 700);
-
+function refreshPage() {
+    window.location.reload(false);
+  }
   const SigninTrainer = () => {
     fetch(`${process.env.REACT_APP_SERVER}/signinTrainer`, {
       method: "post",
@@ -48,6 +50,7 @@ export default function SignIn(isTrainer) {
         localStorage.setItem("role","trainer");
         dispatch({ type: "TRAINER", payload: data.trainer });
         history.push("/HomePage");
+        refreshPage();
       })
       .catch((err) => {
         console.log(err);
@@ -86,7 +89,7 @@ export default function SignIn(isTrainer) {
           </CardBody>
           <GridItem>
           <Button 
-          onClick={() => SigninTrainer()} 
+          onClick={() => SigninTrainer()}
           round
           color="primary"
             >Sign In

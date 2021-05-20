@@ -26,6 +26,11 @@ export default function Header(props) {
     const history = useHistory();
     var name = localStorage.getItem("role");
     console.log(name)
+
+    function refreshPage() {
+      window.location.reload(false);
+    }
+    
       const [mobileOpen, setMobileOpen] = React.useState(false);
       React.useEffect(() => {
         if (props.changeColorOnScroll) {
@@ -66,7 +71,15 @@ export default function Header(props) {
         [classes.absolute]: absolute,
         [classes.fixed]: fixed
       });
-      const brandComponent = <Button className={classes.title}>{brand}</Button>;
+      const brandComponent = <Button 
+      className={classes.title}
+      onClick={() => {
+        refreshPage();
+        history.push("/HomePage"); 
+      }}
+      >
+        {brand}
+        </Button>;
     
       return (
         <AppBar className={appBarClasses}>
