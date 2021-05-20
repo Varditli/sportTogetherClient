@@ -27,39 +27,59 @@ import GridItem from "../../Grid/GridItem";
 const LogoImg =
   "https://res.cloudinary.com/niroavram/image/upload/v1617714585/Add_a_subheading_kpvjyo.svg";
 
+  
+  function valuetext(value) {
+    return `${value}°C`;
+  }
 
 export default function CreateTraing() {
   const [cardAnimaton, setCardAnimation] = React.useState("cardHidden");
   const [name, setName] = useState("");
-  const [capacity, setCapacity] = useState("");
+  const [capacity, setCapacity] = useState(0);
   const [type, setType] = useState("");
-  const [time, setTime] = useState("");
-  const [location, setLocation] = useState("");
-  const [intensity, setIntensity] = useState("");
+  const [time, setTime] = useState("1621427720768");
+  const [location, setLocation] = useState("Herzal 50, Ramat Gan");
+  const [zoom, setZoom] = useState(false);
+  const [intensity, setIntensity] = useState("Low");
   const [limitations, setLimitations] = useState("");
-  const [gender, setGender] = useState("");
-  const [age_group, setAge_group] = useState([20, 50]);
+  const [gender, setGender] = useState("Male");
+  const [age_group, setAge_group] = React.useState([20, 50]);
   //const [recurring, setRecurring] = useState("");
   const [additional_info, setAdditional_info] = useState("");
-  //const classes = useStyles();
-  //const [value, setValue] = React.useState([20, 50]);
 
   setTimeout(function () {
     setCardAnimation("");
   }, 700);
   const history = useHistory();
 
-
       //for age group range
+  const handleChange = (event, newValue) => {
+    setAge_group(newValue);
+  };
 
-      const valuetext = (value) => {
-        return `${value} Y.O`;
-      }
+  //     const valuetext = (value) => {
+  //       return `${value} Y.O`;
+  //     }
 
   const PostData = () => {
+    console.log(name,
+       capacity,
+      type,
+      time,
+      location,
+      zoom,
+      intensity,
+      limitations,
+      gender,
+      age_group,
+      additional_info
+      )
+
     fetch(`${process.env.REACT_APP_SERVER}/createNewTraining`, {
       method: "post",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json",
+      "Authorization":"Bearer "+localStorage.getItem("jwt")
+    },
       body: JSON.stringify({
         name,
         capacity,
@@ -70,7 +90,6 @@ export default function CreateTraing() {
         limitations,
         gender,
         age_group,
-        //recurring,
         additional_info,
       }),
     })
@@ -89,7 +108,8 @@ export default function CreateTraing() {
   };
 
   const classes = useStyles();
-  console.log(Date.now());
+  //console.log(Date.now());
+console.log(age_group);
 
   return (
     <div>
@@ -160,6 +180,26 @@ export default function CreateTraing() {
                     shrink: true,
                   }}
                 />
+
+                <FormControl variant="outlined" className={classes.formControl}>
+                  <InputLabel htmlFor="outlined-age-native-simple">
+                    Zoom
+                  </InputLabel>
+                  <Select
+                    native
+                    value={intensity}
+                    onChange={(e) => setZoom(e.target.value)}
+                    label="Zoom"
+                    inputProps={{
+                      name: "zoom",
+                      id: "outlined-age-native-simple",
+                    }}
+                  >
+                    <option value={false}>No</option>
+                    <option value={true}>Yes</option>
+                  </Select>
+                </FormControl>
+
                 <LocationSearchInput
                   id="Location"
                   label="Location"
@@ -181,7 +221,6 @@ export default function CreateTraing() {
                       id: "outlined-age-native-simple",
                     }}
                   >
-                    <option aria-label="None" value="" />
                     <option value="Low">Low</option>
                     <option value="Medium">Medium</option>
                     <option value="High">High</option>
@@ -221,15 +260,15 @@ export default function CreateTraing() {
                   <Select
                     native
                     value={gender}
-                    onChange={(e) => setIntensity(e.target.value)}
+                    onChange={(e) => setGender(e.target.value)}
                     label="Gender"
                     inputProps={{
                       name: "gender",
                       id: "outlined-age-native-simple",
                     }}
                   >
-                    <option value="f">Female</option>
                     <option value="m">Male</option>
+                    <option value="f">Female</option>
                     <option value="other">Other</option>
                   </Select>
                 </FormControl>
@@ -251,21 +290,20 @@ export default function CreateTraing() {
                     Age Group
                   </Typography>
                   <Slider
-                    variant="outlined"
-                    margin="normal"
-                    required
-                    fullWidth
+                    //variant="outlined"
+                    //margin="normal"
+                    //required
+                    //fullWidth
                     name="age_group"
                     label="age_group"
                     id="age_group"
                     value={age_group}
-                    onChange={(e) => setAge_group(e.target.value)}
+                    onChange={handleChange}
                     valueLabelDisplay="auto"
                     aria-labelledby="range-slider"
                     getAriaValueText={valuetext}
                   />
                 </div>
-
                 {/* <TextField
                   variant="outlined"
                   margin="normal"
