@@ -66,11 +66,11 @@ return (
           </GridContainer>
         </div>
       </Parallax>
-    <Container className={classes.trainer} component="main" maxWidth="xs">   
-      <CssBaseline />
+    <Container className={classes.trainer} component="main" maxWidth="xs">    
+      <CssBaseline />  
   <Grid>
   <Card className={classes[cardAnimaton]}>
-  {isSignin? 
+  {isSignin ? (
   <div>
     <CardHeader>
           <Typography component="h1" variant="h5">
@@ -84,7 +84,7 @@ return (
                 </Button>
               </GridItem>
         </div>
-        :   //else
+      )  : ( //else
         <div>
         <CardHeader>
         <GridItem>
@@ -95,12 +95,12 @@ return (
       </CardHeader>
   <SignUp value={allTypes} />
   <GridItem>
-                <Button onClick={() => isSigned()}  variant="body2">
+     <Button onClick={() => isSigned()}  variant="body2">
                   {"Already have an account? Sign in"}
                 </Button>
               </GridItem>
   </div>
-  }
+ ) }
 
   </Card>
   </Grid>

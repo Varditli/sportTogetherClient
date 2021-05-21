@@ -69,14 +69,14 @@ export default function Login() {
             {isSignin ? (
               <div>
                 <CardHeader>
-                  <Typography component="h1" varint="h5">
+                  <Typography component="h1" variant="h5">
                     Sign in
                   </Typography>
                 </CardHeader>
                 <form className={classes.form}>
                   <SignIn value={isSignin} />
                   <Grid item>
-                    <Button onClick={() => isSigned()} >
+                    <Button onClick={() => isSigned()} variant="body2">
                       {"Don't have an account? Sign Up"}
                     </Button>
                   </Grid>
@@ -85,13 +85,13 @@ export default function Login() {
             ) : (
               <div>
                 <CardHeader>
-                  <Typography component="h1">
+                  <Typography component="h1" variant="h5">
                     Sign Up
                   </Typography>
                 </CardHeader>
                 <SignUp />
                 <Grid item>
-                  <Button onClick={() => isSigned()} >
+                  <Button onClick={() => isSigned()} variant="body2">
                     {"Already have an account? Sign in"}
                   </Button>
                 </Grid>
