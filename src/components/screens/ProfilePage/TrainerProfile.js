@@ -50,6 +50,7 @@ export default function ProfilePage(props) {
   const [age, setAge] = useState("");
   const [tel, setTel] = useState("");
   const [sportType, setSportType] = useState("");
+  const [experience, setExperience] = useState("");
   const { token } = localStorage.getItem("jwt");
 
   const handleClickOpen = () => {
@@ -83,6 +84,7 @@ export default function ProfilePage(props) {
             defaultValue={trainer.email}
             inline
             readonly
+            onChange = {(e) => setEmail(e.target.value)}
           />
         </div>
         <div style={{ whiteSpace: "nowrap" }}>
@@ -96,6 +98,7 @@ export default function ProfilePage(props) {
             name="username"
             defaultValue={trainer.username}
             inline
+            onChange = {(e) => setUsername(e.target.value)}
           />
         </div>
         <div style={{ whiteSpace: "nowrap" }}>
@@ -110,6 +113,7 @@ export default function ProfilePage(props) {
             //style={{ paddingTop: 1 }}
             defaultValue={trainer.tel}
             inline
+            onChange = {(e) => setTel(e.target.value)}
             //onSave={this.onSave}
           />
         </div>
@@ -123,6 +127,7 @@ export default function ProfilePage(props) {
             style={{ width: "100px" }}
             defaultValue={trainer.age}
             inline
+            onChange = {(e) => setAge(e.target.value)}
             //onSave={this.onSave}
           />
         </div>
@@ -138,6 +143,7 @@ export default function ProfilePage(props) {
             //defaultValue={trainer.experience}
             value={trainer.experience}
             inline
+            onChange = {(e) => setExperience(e.target.value)}
             //onSave={this.onSave}
           />
         </div>
@@ -145,20 +151,22 @@ export default function ProfilePage(props) {
           <strong>
             <label className="mr-2">Sport Types: </label>
           </strong>
-          {/* <EditTextarea
+          <EditTextarea
           name='sportType'
           rows={3}
           //style={{ paddingTop: 1 }}
           //placeholder={trainer.experience}
           defaultValue = {ShowTypesList}
           inline
-        /> */}
+        />
         </div>
       </React.Fragment>
     );
   };
 
+
   const navImageClasses = classNames(classes.imgRounded, classes.imgGallery);
+
 
   return (
     <div>

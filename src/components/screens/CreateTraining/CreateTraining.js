@@ -34,18 +34,18 @@ const LogoImg =
 
 export default function CreateTraing() {
   const [cardAnimaton, setCardAnimation] = React.useState("cardHidden");
-  const [name, setName] = useState("");
+  const [name, setName] = useState("Relaxing Yoga");
   const [capacity, setCapacity] = useState(0);
-  const [type, setType] = useState("");
+  const [type, setType] = useState("Yoga");
   const [time, setTime] = useState("1621427720768");
-  const [location, setLocation] = useState("Herzal 50, Ramat Gan");
-  const [zoom, setZoom] = useState(false);
+  const [location, setLocation] = useState("Herzel 50, Ramat Gan");
+  const [zoom, setZoom] = useState("No");
   const [intensity, setIntensity] = useState("Low");
-  const [limitations, setLimitations] = useState("");
-  const [gender, setGender] = useState("Male");
+  const [limitations, setLimitations] = useState("Nono");
+  const [gender, setGender] = useState("All");
   const [age_group, setAge_group] = React.useState([20, 50]);
   //const [recurring, setRecurring] = useState("");
-  const [additional_info, setAdditional_info] = useState("");
+  const [additional_info, setAdditional_info] = useState("Nononono");
 
   setTimeout(function () {
     setCardAnimation("");
@@ -61,24 +61,26 @@ export default function CreateTraing() {
   //       return `${value} Y.O`;
   //     }
 
-  const PostData = () => {
-    console.log(name,
-       capacity,
-      type,
-      time,
-      location,
-      zoom,
-      intensity,
-      limitations,
-      gender,
-      age_group,
-      additional_info
-      )
+  const CreatePost = () => {
+    //console.log(
+      // name,
+      // capacity,
+      // type,
+      // time,
+      // location,
+      // zoom,
+      // intensity,
+      // limitations,
+      // gender,
+      // age_group,
+      // additional_info
+      //)
 
     fetch(`${process.env.REACT_APP_SERVER}/createNewTraining`, {
       method: "post",
-      headers: { "Content-Type": "application/json",
-      "Authorization":"Bearer "+localStorage.getItem("jwt")
+      headers: {
+      "Content-Type": "application/json",
+      "Authorization":"Bearer "+localStorage.getItem("jwt"),
     },
       body: JSON.stringify({
         name,
@@ -86,6 +88,7 @@ export default function CreateTraing() {
         type,
         time,
         location,
+        zoom,
         intensity,
         limitations,
         gender,
@@ -109,7 +112,7 @@ export default function CreateTraing() {
 
   const classes = useStyles();
   //console.log(Date.now());
-console.log(age_group);
+//console.log(age_group);
 
   return (
     <div>
@@ -127,7 +130,7 @@ console.log(age_group);
             <Card className={classes[cardAnimaton]}>
               <CardHeader>
                 <Typography component="h1" variant="h5">
-                  Create a New Training
+                  Create New Training
                 </Typography>
               </CardHeader>
               <CardBody>
@@ -138,18 +141,21 @@ console.log(age_group);
                   fullWidth
                   id="name"
                   label="Name"
+                  type = {String}
                   name="name"
                   autoComplete="name"
                   autoFocus
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                 />
-                <TextField
+                <label for="capacity">Capacity </label>
+                <input
                   variant="outlined"
                   margin="normal"
                   required
                   fullWidth
                   type="number"
+                  min="0"
                   id="capacity"
                   label="Capacity"
                   name="capacity"
@@ -162,6 +168,7 @@ console.log(age_group);
                   margin="normal"
                   required
                   fullWidth
+                  type = {String}
                   id="type"
                   label="Type"
                   name="type"
@@ -170,23 +177,30 @@ console.log(age_group);
                   onChange={(e) => setType(e.target.value)}
                 />
                 <TextField
+                  required
+                  variant="outlined"
+                  margin="normal"
                   id="datetime-local"
-                  label="Training"
+                  label="Time"
                   type="datetime-local"
                   value={time}
                   onChange={(e) => setTime(e.target.value)}
                   className={classes.textField}
                   InputLabelProps={{
-                    shrink: true,
+                  shrink: true,
                   }}
                 />
-
+                <br/>
                 <FormControl variant="outlined" className={classes.formControl}>
                   <InputLabel htmlFor="outlined-age-native-simple">
                     Zoom
                   </InputLabel>
                   <Select
+                    required
+                    variant="outlined"
+                    margin="normal"
                     native
+                    type = {Boolean}
                     value={intensity}
                     onChange={(e) => setZoom(e.target.value)}
                     label="Zoom"
@@ -195,24 +209,29 @@ console.log(age_group);
                       id: "outlined-age-native-simple",
                     }}
                   >
-                    <option value={false}>No</option>
-                    <option value={true}>Yes</option>
+                    <option value={"No"}>No</option>
+                    <option value={"Yes"}>Yes</option>
                   </Select>
                 </FormControl>
 
-                <LocationSearchInput
+                {/* <LocationSearchInput
+                  variant="outlined"
+                  margin="normal"
                   id="Location"
                   label="Location"
                   type="Location"
                   onChange={(e) => setLocation(e.target.value)}
-                />
+                /> */}
                 
                 <FormControl variant="outlined" className={classes.formControl}>
                   <InputLabel htmlFor="outlined-age-native-simple">
                     Intensity
                   </InputLabel>
                   <Select
+                    variant="outlined"
+                    margin="normal"
                     native
+                    type = {String}
                     value={intensity}
                     onChange={(e) => setIntensity(e.target.value)}
                     label="Intensity"
@@ -246,6 +265,7 @@ console.log(age_group);
                   margin="normal"
                   required
                   fullWidth
+                  type = {String}
                   name="limitations"
                   label="limitations"
                   id="limitations"
@@ -258,8 +278,12 @@ console.log(age_group);
                     Gender
                   </InputLabel>
                   <Select
+                    variant="outlined"
+                    margin="normal"
                     native
+                    type = {String}
                     value={gender}
+                    type = {String}
                     onChange={(e) => setGender(e.target.value)}
                     label="Gender"
                     inputProps={{
@@ -267,9 +291,9 @@ console.log(age_group);
                       id: "outlined-age-native-simple",
                     }}
                   >
+                    <option value="all">All</option>
                     <option value="m">Male</option>
                     <option value="f">Female</option>
-                    <option value="other">Other</option>
                   </Select>
                 </FormControl>
 
@@ -290,8 +314,9 @@ console.log(age_group);
                     Age Group
                   </Typography>
                   <Slider
-                    //variant="outlined"
-                    //margin="normal"
+                    variant="outlined"
+                    margin="normal"
+                    top = "5px"
                     //required
                     //fullWidth
                     name="age_group"
@@ -333,6 +358,7 @@ console.log(age_group);
                   margin="normal"
                   required
                   fullWidth
+                  type = {String}
                   name="additional_info"
                   label="additional_info"
                   id="additional_info"
@@ -341,7 +367,7 @@ console.log(age_group);
                 />
 
               </CardBody>
-              <Button onClick={() => PostData()} round color="primary">
+              <Button onClick={() => CreatePost()} round color="primary">
                 Create
               </Button>
             </Card>
