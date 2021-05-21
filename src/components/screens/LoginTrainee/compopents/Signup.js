@@ -44,7 +44,7 @@ export default function Signup() {
       .then((res) => res.json())
       .then((data) => {
         if (data.error) {
-          console.log("nonononono");
+          console.log("Failed Adding New Trainee");
         } else {
           console.log("successfully Added Trainee");
           window.location.reload("false");
