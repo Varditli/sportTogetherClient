@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useHistory } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
+import {Grid} from "@material-ui/core";
 import Parallax from "../../compopnets/Parallax/Parallax";
 import Training from "../../Card/Training";
 import GridContainer from "../../Grid/GridContainer";
@@ -22,49 +23,11 @@ import LocationSearchInput from "./googleMaps/currentLocation";
 
 const useStyles = makeStyles(styles);
 
-
-// const trainings =[
-//   {
-//     name: trainingName,
-//     trainerCreate: {
-//       username: "Asi",
-//       experience: "10 Years",
-//       age: "28"
-//     } ,
-//     capacity: 2,
-//     type: trainingType,
-//     intensity: trainingIntensity,
-//     limitations: 10,
-//     gender: "male",
-//     location:trainingLocation,
-//     time: "2021-04-04T14:32:34.466Z",
-//     free_text: " Yuli maste is the Yuga coacher in the world",
-//     pic: "https://res.cloudinary.com/niroavram/image/upload/v1617521371/family-members-with-their-pet-dog-on-white-background-free-vector_cuuymv.jpg"
-//   },
-//   {
-//   name: "Mega Yuga By master Yuli",
-//   trainerCreate: {
-//     username: "Asi",
-//     experience: "10 Years",
-//     age: "28"
-//   } ,
-//   capacity: 2,
-//   type: "sport",
-//   intensity: "2",
-//   limitations: 10,
-//   gender: "male",
-//   location:"zoom",
-//   time: "2021-04-04T14:32:34.466Z",
-//   free_text: " Yuli maste is the Yuga coacher in the world",
-//   pic: "https://res.cloudinary.com/niroavram/image/upload/v1617521371/family-members-with-their-pet-dog-on-white-background-free-vector_cuuymv.jpg"
-// },
-
-// ]
 export default function HomePage(props) {
-  const [trainings, setTrainings] = useState();
+  const [trainings, setTrainings] = useState([]);
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_SERVER}/all-trainings`, {
+    fetch(`${process.env.REACT_APP_SERVER}/allTrainings`, {
       headers: {
         "Content-Type": "application/json", //the content type is json
       },
@@ -186,7 +149,13 @@ export default function HomePage(props) {
                 </GridItem>
               </GridContainer>
 
-              <form>
+              <Grid className={classes.high} start="0" container reversed spacing={8}>
+        {trainings ? (
+          trainings.map((item) => {
+            return (
+              <Training key = {item._id} value={item} />
+            )})):""}
+            </Grid>
                 <GridContainer>
                   {/* <div >
                <LocationSearchInput/>
@@ -195,6 +164,7 @@ export default function HomePage(props) {
                   setSearchQuery={setSearchQuery}
                /> 
         </div>   */}
+
                   <Autocomplete
                     id="Category"
                     options={trainings}
@@ -217,18 +187,22 @@ export default function HomePage(props) {
                       <TextField {...params} label=" Date" variant="outlined" />
                     )}
                   />
-                </GridContainer>
-              </form>
 
-              {/* <div>
-      {trainings.map(item => {
-            <Training key = {item._id} value={item} />
-           })}
-    </div> */}
+
+
+                </GridContainer>
+ 
               {/* {trainings.map((item) => {
                 return <Training key = {item._id} value={item} />
               })} */}
             </div>
+          </Container>
+          <Container>
+         
+      {trainings?trainings.map(item => {
+            <Training key = {item._id} value={item} />
+           }):""}
+    
           </Container>
         </div>
         <Footer />
