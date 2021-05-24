@@ -1,4 +1,4 @@
-import React from 'react';
+import React , {useState, useEffect} from "react";
 import { useHistory } from "react-router-dom";
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
@@ -67,14 +67,36 @@ function refreshPage() {
 
 export default function RecipeReviewCard(training) {
   const classes = useStyles();
+  const [trainer, setTrainer] = useState();
   const [expanded, setExpanded] = React.useState(false);
   const [classicModal, setClassicModal] = React.useState(false);
   const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="down" ref={ref} {...props} />;
   });
   
+  const activeTraining = training.value;
+  
+  // useEffect(() => {
+  //   fetch(`${process.env.REACT_APP_SERVER}/TrainerDetails`, {
+  //     headers: {
+  //       "Content-Type": "application/json", //the content type is json
+  //     },
+  //     body: JSON.stringify({
+  //       _id : activeTraining.trainingCreator,
+  //     }),
+  //   })
+  //     .then((res) => res.json())
+  //     .then((result) => {
+  //       console.log(result);
+  //       setTrainer(result);
+  //     });
+  // }, []);
+
+
   Transition.displayName = "Transition";
 console.log(training)
+console.log(activeTraining)
+
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
@@ -89,11 +111,12 @@ console.log(training)
           <CardMedia
         className={classes.media}
         image={training.value.pic}
-        title="Paella dish"
+        title="name"
       />
         }
-        title= {training.value.name}
       />
+      <p> {training.value.name}</p>
+      <p> {activeTraining.trainerUsername}</p>
      <Typography>
 
       <p className={classes.pname}><b>{moment(training.value.time).format('MMMM Do YYYY, h:mm:ss a')}</b></p> 
@@ -144,15 +167,25 @@ console.log(training)
                     >
                       <Close className={classes.modalClose} />
                     </IconButton>
-                    <h4 className={classes.modalTitle}>הזמן מקום</h4>
+                    <h4 className={classes.modalTitle}>Book Place</h4>
                   </DialogTitle>
                   <DialogContent
                     id="classic-modal-slide-description"
                     className={classes.modalBody}
                   >
-                    <h3>שריין את מקומך בשיעור זה !</h3>
-                    <h3>מחיר: 50 ש"ח</h3>
-                    <h3>לתשלום באמצעות פייפאל</h3>
+                    <h3>Training Details:</h3>
+                    <h3>Name: {activeTraining.name}</h3>
+                    <h3>Trainer: {activeTraining.trainingCreator}</h3>
+                    <h3>Time: {activeTraining.time}</h3>
+                    <h3>Capacity: {activeTraining.capacity}</h3>
+                    <h3>Sport Type: {activeTraining.type}</h3>
+                    <h3>Intensity: {activeTraining.intensity}</h3>
+                    <h3>Age Group: {activeTraining.age_group}</h3>
+                    <h3>limitations: {activeTraining.limitations}</h3>
+                    <h3>Via Zoom? {activeTraining.zoom}</h3>
+                    <h3>Additional Info: {activeTraining.additional_info}</h3>
+                    <h3>Price</h3>
+                    <h3>Pay directly to the trainer</h3>
                   </DialogContent>
                   <DialogActions className={classes.modalFooter}>
                     <Button 
@@ -160,7 +193,7 @@ console.log(training)
                     simple
                     href="/HomePage"
                     >
-                      הזמן
+                      Book
                     </Button>
                     <Button
                       onClick={() => setClassicModal(false)}
@@ -189,9 +222,7 @@ console.log(training)
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-          <Typography paragraph>
-          💪🏼 Hi ! I'm your personal trainer.
-          </Typography>
+        {training.value.additional_info}
         </CardContent>
       </Collapse>
     </Card>

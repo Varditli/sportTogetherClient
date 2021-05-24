@@ -16,6 +16,7 @@ import {
       width:"80%",
       margin:"auto",
       textAlign:"center",
+      fontSize: "16px"
     },
     cardHeaderPlain: {
       marginLeft: "0px",

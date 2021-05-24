@@ -34,10 +34,10 @@ const LogoImg =
 
 export default function CreateTraing() {
   const [cardAnimaton, setCardAnimation] = React.useState("cardHidden");
-  const [name, setName] = useState("Relaxing Yoga");
+  const [name, setName] = useState("Relaxing Pilates");
   const [capacity, setCapacity] = useState(0);
   const [type, setType] = useState("Yoga");
-  const [time, setTime] = useState("1621427720768");
+  const [time, setTime] = useState(Date.now());
   const [location, setLocation] = useState("Herzel 50, Ramat Gan");
   const [zoom, setZoom] = useState("No");
   const [intensity, setIntensity] = useState("Low");
@@ -62,19 +62,19 @@ export default function CreateTraing() {
   //     }
 
   const CreatePost = () => {
-    //console.log(
-      // name,
-      // capacity,
-      // type,
-      // time,
-      // location,
-      // zoom,
-      // intensity,
-      // limitations,
-      // gender,
-      // age_group,
-      // additional_info
-      //)
+    console.log(
+      name,
+      capacity,
+      type,
+      time,
+      location,
+      zoom,
+      intensity,
+      limitations,
+      gender,
+      age_group,
+      additional_info
+      )
 
     fetch(`${process.env.REACT_APP_SERVER}/createNewTraining`, {
       method: "post",
@@ -99,6 +99,7 @@ export default function CreateTraing() {
       .then((res) => res.json())
       .then((data) => {
         if (data.error) {
+          console.log(data.error);
           console.log("Failed Adding New Training");
         } else {
           console.log("Successfully Added New Training");

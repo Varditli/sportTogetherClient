@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useHistory } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-import {Grid} from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 import Parallax from "../../compopnets/Parallax/Parallax";
 import Training from "../../Card/Training";
 import GridContainer from "../../Grid/GridContainer";
@@ -24,7 +24,7 @@ import LocationSearchInput from "./googleMaps/currentLocation";
 const useStyles = makeStyles(styles);
 
 export default function HomePage(props) {
-  const [trainings, setTrainings] = useState([]);
+  const [trainings, setTrainings] = useState();
 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_SERVER}/allTrainings`, {
@@ -149,15 +149,21 @@ export default function HomePage(props) {
                 </GridItem>
               </GridContainer>
 
-              <Grid className={classes.high} start="0" container reversed spacing={8}>
-        {trainings ? (
-          trainings.map((item) => {
-            return (
-              <Training key = {item._id} value={item} />
-            )})):""}
-            </Grid>
-                <GridContainer>
-                  {/* <div >
+              <Grid
+                className={classes.high}
+                start="0"
+                container
+                reversed
+                spacing={8}
+              >
+                {trainings
+                  ? trainings.map((item) => {
+                      return <Training key={item._id} value={item} />;
+                    })
+                  : ""}
+              </Grid>
+              <GridContainer>
+                {/* <div >
                <LocationSearchInput/>
                  <Search
                   searchQuery={searchQuery}
@@ -165,45 +171,42 @@ export default function HomePage(props) {
                /> 
         </div>   */}
 
-                  <Autocomplete
-                    id="Category"
-                    options={trainings}
-                    getOptionLabel={(trainings) => trainings.type}
-                    style={{ width: 300 }}
-                    renderInput={(params) => (
-                      <TextField
-                        {...params}
-                        label="Category"
-                        variant="outlined"
-                      />
-                    )}
-                  />
-                  <Autocomplete
-                    id="Date"
-                    options={trainings}
-                    getOptionLabel={(trainings) => trainings.time}
-                    style={{ width: 300 }}
-                    renderInput={(params) => (
-                      <TextField {...params} label=" Date" variant="outlined" />
-                    )}
-                  />
+                <Autocomplete
+                  id="Category"
+                  options={trainings}
+                  getOptionLabel={(trainings) => trainings.type}
+                  style={{ width: 300 }}
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      label="Category"
+                      variant="outlined"
+                    />
+                  )}
+                />
+                <Autocomplete
+                  id="Date"
+                  options={trainings}
+                  getOptionLabel={(trainings) => trainings.time}
+                  style={{ width: 300 }}
+                  renderInput={(params) => (
+                    <TextField {...params} label=" Date" variant="outlined" />
+                  )}
+                />
+              </GridContainer>
 
-
-
-                </GridContainer>
- 
               {/* {trainings.map((item) => {
                 return <Training key = {item._id} value={item} />
               })} */}
             </div>
           </Container>
-          <Container>
-         
-      {trainings?trainings.map(item => {
-            <Training key = {item._id} value={item} />
-           }):""}
-    
-          </Container>
+          {/* <Container>
+            {trainings
+              ? trainings.map((item) => {
+                  <Training key={item._id} value={item} />;
+                })
+              : ""}
+          </Container> */}
         </div>
         <Footer />
       </div>
