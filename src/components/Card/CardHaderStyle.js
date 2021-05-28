@@ -12,7 +12,6 @@ import {
       // borderRadius: "30px",
       padding: "1rem 15px",
       
-      backgroundColor:"#4fc3f7",
       width:"80%",
       margin:"auto",
       textAlign:"center",

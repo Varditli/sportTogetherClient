@@ -29,7 +29,7 @@ const history = useHistory();
 var name = localStorage.getItem("role");
 console.log(name)
 function refreshPage() {
-  window.location.reload(false);
+  location.reload(false);
 }
 
   return (

@@ -26,6 +26,7 @@ const useStyles = makeStyles(styles);
 export default function HomePage(props) {
   const [trainings, setTrainings] = useState();
 
+  
   useEffect(() => {
     fetch(`${process.env.REACT_APP_SERVER}/allTrainings`, {
       headers: {
@@ -34,10 +35,11 @@ export default function HomePage(props) {
     })
       .then((res) => res.json())
       .then((result) => {
-        console.log(result.trainings);
-        setTrainings(result.trainings);
+        //console.log(result.trainings);
+        return setTrainings(result.trainings);
       });
   }, []);
+  
 
   const filtertrainings = (trfiltertrainings, query) => {
     if (!query) {
@@ -194,19 +196,8 @@ export default function HomePage(props) {
                   )}
                 />
               </GridContainer>
-
-              {/* {trainings.map((item) => {
-                return <Training key = {item._id} value={item} />
-              })} */}
             </div>
           </Container>
-          {/* <Container>
-            {trainings
-              ? trainings.map((item) => {
-                  <Training key={item._id} value={item} />;
-                })
-              : ""}
-          </Container> */}
         </div>
         <Footer />
       </div>
