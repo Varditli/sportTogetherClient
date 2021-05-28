@@ -12,10 +12,11 @@ import {
 } from "react-router-dom";
 import HomePage from "./components/screens/HomePage/HomePage";
 import LoginTrainee from "./components/screens/LoginTrainee/LoginTrainee";
-import TrainerProfile from "./components/screens/ProfilePage/TrainerProfile";
-import LoginTrainer from "./components/screens/LoginTrainer/LoginTrainer";
-import CreateTraining from "./components/screens/CreateTraining/CreateTraining";
 import TraineeProfile from "./components/screens/ProfilePage/TraineeProfile";
+import LoginTrainer from "./components/screens/LoginTrainer/LoginTrainer";
+import TrainerProfile from "./components/screens/ProfilePage/TrainerProfile";
+import CreateTraining from "./components/screens/CreateTraining/CreateTraining";
+
 
 
 import { reducer, initialState } from "./reducers/userReducer";
@@ -27,6 +28,9 @@ const Routing = () => {
   const history = useHistory();
   const { state, dispatch } = useContext(UserContext);
 
+
+  //for reset password
+  
   useEffect(() => {
     // const member = JSON.parse(localStorage.getItem("member"));
     // if (member) {
