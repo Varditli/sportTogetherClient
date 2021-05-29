@@ -26,16 +26,20 @@ import Slide from "@material-ui/core/Slide";
 
 const useStyles = makeStyles((theme) => ({
   pname:{
-   textAlign:"center"
+   textAlign:"center",
+   fontSize:"16px"
+
   },
   root: {
     maxWidth: 345,
+    fontSize:"16px",
     display:"inline-block",
     borderRadius: "15px",
     border: "2px solid #4fc3f7",
     marginBottom:"15px",
     marginTop:"20px",
-    padding: "10px",
+    marginLeft:"35px",
+    padding: "30px",
     backgroundColor:"#e5eaea",
   },
   media: {

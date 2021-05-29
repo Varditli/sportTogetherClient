@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useHistory } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-import { Grid } from "@material-ui/core";
+import {Grid} from "@material-ui/core";
 import Parallax from "../../compopnets/Parallax/Parallax";
 import Training from "../../Card/Training";
 import GridContainer from "../../Grid/GridContainer";
@@ -23,8 +23,19 @@ import LocationSearchInput from "./googleMaps/currentLocation";
 
 const useStyles = makeStyles(styles);
 
+// var points = [
+//   { lat: 42.02, lng: -77.01 },
+//   { lat: 42.03, lng: -77.02 },
+//   { lat: 41.03, lng: -77.04 },
+//   { lat: 42.05, lng: -77.02 }
+// ]
+// var bounds = new this.props.google.maps.LatLngBounds();
+// for (var i = 0; i < points.length; i++) {
+// bounds.extend(points[i]);
+// }
+
 export default function HomePage(props) {
-  const [trainings, setTrainings] = useState();
+  const [trainings, setTrainings] = useState([]);
 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_SERVER}/allTrainings`, {
@@ -55,6 +66,7 @@ export default function HomePage(props) {
   const query = new URLSearchParams(search).get("s");
   const [searchQuery, setSearchQuery] = useState(query || "");
   const filteredtrainings = filtertrainings(trainings, query);
+
 
   return (
     <Router>
@@ -139,7 +151,9 @@ export default function HomePage(props) {
                   </GridItem>
 
                   <GridItem>
-                    <Maps />
+                    <Maps
+                        // bounds={bounds}
+                         />
                   </GridItem>
                 </GridContainer>
               </div>
@@ -149,64 +163,61 @@ export default function HomePage(props) {
                 </GridItem>
               </GridContainer>
 
-              <Grid
-                className={classes.high}
-                start="0"
-                container
-                reversed
-                spacing={8}
-              >
-                {trainings
-                  ? trainings.map((item) => {
-                      return <Training key={item._id} value={item} />;
-                    })
-                  : ""}
-              </Grid>
-              <GridContainer>
-                {/* <div >
+              <Grid className={classes.high} start="0" container reversed spacing={8}>
+        {trainings ? (
+          trainings.map((item) => {
+            return (
+              <Training key = {item._id} value={item} />
+            )})):""}
+            </Grid>
+                <GridContainer>
+                  <div >
                <LocationSearchInput/>
-                 <Search
+                 {/* <Search
                   searchQuery={searchQuery}
                   setSearchQuery={setSearchQuery}
-               /> 
-        </div>   */}
+               />  */}
+        </div>  
 
-                <Autocomplete
-                  id="Category"
-                  options={trainings}
-                  getOptionLabel={(trainings) => trainings.type}
-                  style={{ width: 300 }}
-                  renderInput={(params) => (
-                    <TextField
-                      {...params}
-                      label="Category"
-                      variant="outlined"
-                    />
-                  )}
-                />
-                <Autocomplete
-                  id="Date"
-                  options={trainings}
-                  getOptionLabel={(trainings) => trainings.time}
-                  style={{ width: 300 }}
-                  renderInput={(params) => (
-                    <TextField {...params} label=" Date" variant="outlined" />
-                  )}
-                />
-              </GridContainer>
+                  <Autocomplete
+                    id="Category"
+                    options={trainings}
+                    getOptionLabel={(trainings) => trainings.type}
+                    style={{ width: 300 }}
+                    renderInput={(params) => (
+                      <TextField
+                        {...params}
+                        label="Category"
+                        variant="outlined"
+                      />
+                    )}
+                  />
+                  <Autocomplete
+                    id="Date"
+                    options={trainings}
+                    getOptionLabel={(trainings) => trainings.time}
+                    style={{ width: 300 }}
+                    renderInput={(params) => (
+                      <TextField {...params} label=" Date" variant="outlined" />
+                    )}
+                  />
 
+
+
+                </GridContainer>
+ 
               {/* {trainings.map((item) => {
                 return <Training key = {item._id} value={item} />
               })} */}
             </div>
           </Container>
-          {/* <Container>
-            {trainings
-              ? trainings.map((item) => {
-                  <Training key={item._id} value={item} />;
-                })
-              : ""}
-          </Container> */}
+          <Container>
+         
+      {trainings?trainings.map(item => {
+            <Training key = {item._id} value={item} />
+           }):""}
+    
+          </Container>
         </div>
         <Footer />
       </div>
