@@ -139,7 +139,7 @@ export default function TraineeProfile(props) {
               Tel:{" "}
             </label>
           </strong>
-          <EditTextarea
+          <EditText
             name="tel"
             rows={0}
             //style={{ paddingTop: 1 }}

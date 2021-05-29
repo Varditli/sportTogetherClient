@@ -61,14 +61,14 @@ export default function TrainerProfile(props) {
     setOpen(false);
   };
 
-  const TypesList = trainer.sportType;
 
-  function ShowTypesList(trainer) {
-    const listItems = TypesList.map((type) => (
-      <li key={type.toString()}>{type}</li>
-    ));
-    return <ul>{listItems}</ul>;
-  }
+  // const ShowTypesList = ()  => {
+    
+  //   for (var i=0; i<trainer.sportType.length; i++) {
+  //   <li>{trainer.sportType[i]}</li>
+  //   };
+  //   return(<ul></ul>);
+  // };
 
   const Edit = () => {
     return (
@@ -94,6 +94,7 @@ export default function TrainerProfile(props) {
             </label>
           </strong>
           <EditText
+            type = {String}
             id="username"
             name="username"
             defaultValue={trainer.username}
@@ -107,7 +108,8 @@ export default function TrainerProfile(props) {
               Tel:{" "}
             </label>
           </strong>
-          <EditTextarea
+          <EditText
+            type = {String}
             name="tel"
             rows={0}
             //style={{ paddingTop: 1 }}
@@ -123,7 +125,7 @@ export default function TrainerProfile(props) {
           </strong>
           <EditText
             name="age"
-            type="number"
+            type= {Number}
             style={{ width: "100px" }}
             defaultValue={trainer.age}
             inline
@@ -135,9 +137,10 @@ export default function TrainerProfile(props) {
           <strong>
             <label className="mr-2">Experience: </label>
           </strong>
-          <EditTextarea
+          <EditText
             name="experience"
             rows={4}
+            type = {String}
             //style={{ paddingTop: 1 }}
             placeholder="Share your trainees about your experience"
             //defaultValue={trainer.experience}
@@ -151,12 +154,13 @@ export default function TrainerProfile(props) {
           <strong>
             <label className="mr-2">Sport Types: </label>
           </strong>
-          <EditTextarea
+          <EditText
           name='sportType'
           rows={3}
+          type = {String}
           //style={{ paddingTop: 1 }}
           //placeholder={trainer.experience}
-          defaultValue = {ShowTypesList}
+          defaultValue = {trainer.sportType}
           inline
         />
         </div>
@@ -215,7 +219,10 @@ export default function TrainerProfile(props) {
                         </DialogTitle>
                         <DialogContent>{Edit()}</DialogContent>
                         <DialogActions>
-                          <Button onClick={handleClose} color="primary">
+                          <Button 
+                          onClick={handleClose} 
+                          color="primary"
+                          >
                             Cancel
                           </Button>
                           <Button onClick={handleClose} color="primary">
@@ -245,7 +252,6 @@ export default function TrainerProfile(props) {
                       <tr>
                         <td classNames={classes.tit}>Sport Types:</td>
                         <td>{trainer.sportType}</td>
-                        console.log({trainer.sportType})
                       </tr>
                     </table>
                   </div>

@@ -31,7 +31,7 @@ export default function HeaderLinksTrainee(props) {
   console.log(name);
 
   function refreshPage() {
-    window.location.reload(false);
+    location.reload(false);
   }
 
   return (
