@@ -44,13 +44,13 @@ export default function ProfilePage(props) {
   const [open, setOpen] = React.useState(false);
   const { state, dispatch } = useContext(UserContext);
   const history = useHistory();
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [email, setEmail] = useState("");
-  const [age, setAge] = useState("");
-  const [tel, setTel] = useState("");
-  const [sportType, setSportType] = useState("");
-  const [experience, setExperience] = useState("");
+  const [username, setUsername] = useState(trainer.username);
+  const [password, setPassword] = useState(trainer.password);
+  const [email, setEmail] = useState(trainer.email);
+  const [age, setAge] = useState(trainer.age);
+  const [tel, setTel] = useState(trainer.tel);
+  const [sportType, setSportType] = useState(trainer.sportType);
+  const [experience, setExperience] = useState(trainer.experience);
   const { token } = localStorage.getItem("jwt");
 
   const handleClickOpen = () => {
@@ -61,9 +61,36 @@ export default function ProfilePage(props) {
     setOpen(false);
   };
 
+  const PostNewData = () => {
+    fetch(`${process.env.REACT_APP_SERVER}/editTrainerProfile`, {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json", //the content type is json
+      },
+      body: JSON.stringify({
+        username,
+        email,
+        age,
+        tel,
+        experience,
+        sportType,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.error) {
+          console.log("Failed editing trainer profile");
+        } else {
+          console.log("successfully edited Trainer profile");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   // const ShowTypesList = ()  => {
-    
+
   //   for (var i=0; i<trainer.sportType.length; i++) {
   //   <li>{trainer.sportType[i]}</li>
   //   };
@@ -75,7 +102,9 @@ export default function ProfilePage(props) {
       <React.Fragment>
         <div style={{ whiteSpace: "nowrap" }}>
           <strong>
-            <label className="mr-2">Email: <small>(read-only) </small></label>
+            <label className="mr-2">
+              Email: <small>(read-only) </small>
+            </label>
           </strong>
           <EditText
             name="email"
@@ -84,22 +113,20 @@ export default function ProfilePage(props) {
             defaultValue={trainer.email}
             inline
             readonly
-            onChange = {(e) => setEmail(e.target.value)}
+            onChange={(e) => setEmail(e.target.value)}
           />
         </div>
         <div style={{ whiteSpace: "nowrap" }}>
           <strong>
-            <label className="mr-2">
-              User Name:{" "}
-            </label>
+            <label className="mr-2">User Name: </label>
           </strong>
           <EditText
-            type = {String}
+            type={String}
             id="username"
             name="username"
-            defaultValue={trainer.username}
+            value={trainer.username}
             inline
-            onChange = {(e) => setUsername(e.target.value)}
+            onChange={e => setUsername(e.target.value)}
           />
         </div>
         <div style={{ whiteSpace: "nowrap" }}>
@@ -109,13 +136,13 @@ export default function ProfilePage(props) {
             </label>
           </strong>
           <EditText
-            type = {String}
+            type={String}
             name="tel"
             rows={0}
             //style={{ paddingTop: 1 }}
-            defaultValue={trainer.tel}
+            value={trainer.tel}
             inline
-            onChange = {(e) => setTel(e.target.value)}
+            onChange={e => setTel(e.target.value)}
             //onSave={this.onSave}
           />
         </div>
@@ -125,11 +152,11 @@ export default function ProfilePage(props) {
           </strong>
           <EditText
             name="age"
-            type= {Number}
+            type={Number}
             style={{ width: "100px" }}
-            defaultValue={trainer.age}
+            value={trainer.age}
             inline
-            onChange = {(e) => setAge(e.target.value)}
+            onChange={e => setAge(e.target.value)}
             //onSave={this.onSave}
           />
         </div>
@@ -140,13 +167,12 @@ export default function ProfilePage(props) {
           <EditText
             name="experience"
             rows={4}
-            type = {String}
+            type={String}
             //style={{ paddingTop: 1 }}
             placeholder="Share your trainees about your experience"
-            //defaultValue={trainer.experience}
             value={trainer.experience}
             inline
-            onChange = {(e) => setExperience(e.target.value)}
+            onChange={e => setExperience(e.target.value)}
             //onSave={this.onSave}
           />
         </div>
@@ -155,22 +181,20 @@ export default function ProfilePage(props) {
             <label className="mr-2">Sport Types: </label>
           </strong>
           <EditText
-          name='sportType'
-          rows={3}
-          type = {String}
-          //style={{ paddingTop: 1 }}
-          //placeholder={trainer.experience}
-          defaultValue = {trainer.sportType}
-          inline
-        />
+            name="sportType"
+            rows={3}
+            type={String}
+            //style={{ paddingTop: 1 }}
+            value={trainer.sportType}
+            onChange={e => setSportType(e.target.value)}
+            inline
+          />
         </div>
       </React.Fragment>
     );
   };
 
-
   const navImageClasses = classNames(classes.imgRounded, classes.imgGallery);
-
 
   return (
     <div>
@@ -219,13 +243,16 @@ export default function ProfilePage(props) {
                         </DialogTitle>
                         <DialogContent>{Edit()}</DialogContent>
                         <DialogActions>
-                          <Button 
-                          onClick={handleClose} 
-                          color="primary"
-                          >
+                          <Button onClick={handleClose} color="primary">
                             Cancel
                           </Button>
-                          <Button onClick={handleClose} color="primary">
+                          <Button
+                            onClick={async () => {
+                              handleClose();
+                              PostNewData();
+                            }}
+                            color="primary"
+                          >
                             Save
                           </Button>
                         </DialogActions>

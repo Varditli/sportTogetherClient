@@ -32,20 +32,6 @@ function valuetext(value) {
   return `${value}°C`;
 }
 
-// const training1 = {
-//   name: "Running",
-//   location:"Herzel 30, Ramat Gan",
-//   zoom:"No", 
-//   capacity: 15, 
-//   type:"Running",
-//   time:"1621427720768", 
-//   intensity:"Low",
-//   limitations:"None", 
-//   gender:"Male", 
-//   age_group: [5, 100],
-//   price:44, 
-//   additional_info: "bla"}
-
 
 export default function CreateTraing() {
   const [cardAnimaton, setCardAnimation] = React.useState("");
