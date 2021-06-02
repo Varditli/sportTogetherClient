@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from "react";
+import React, { useState, Fragment, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import {
   Container,
@@ -24,6 +24,7 @@ import DateFnsUtils from "@date-io/date-fns";
 import { DateTimePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
 import useStyles from "./styles";
 import GridItem from "../../Grid/GridItem";
+import FindLocation from "../HomePage/googleMaps/FindLocation";
 
 const LogoImg =
   "https://res.cloudinary.com/niroavram/image/upload/v1617714585/Add_a_subheading_kpvjyo.svg";
@@ -39,7 +40,7 @@ export default function CreateTraing() {
   const [capacity, setCapacity] = useState();
   const [type, setType] = useState();
   const [time, setTime] = useState(new Date());
-  const [location, setLocation] = useState("Herzel 50, Ramat Gan");
+  const [location, setLocation] = useState("");
   const [zoom, setZoom] = useState();
   const [intensity, setIntensity] = useState();
   const [limitations, setLimitations] = useState();
@@ -49,7 +50,7 @@ export default function CreateTraing() {
   const [additional_info, setAdditional_info] = useState();
   const [price, setPrice] = useState();
   //const [selectedDate, handleDateChange] = useState(new Date());
-
+  
   setTimeout(function () {
     setCardAnimation("");
   }, 700);
@@ -186,6 +187,7 @@ export default function CreateTraing() {
                   onChange={(e) => setType(e.target.value)}
                   helperText="You can insert more than one, using ',' to separate"
                 />
+              
                 <br />
                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
                   <Fragment>
@@ -228,14 +230,15 @@ export default function CreateTraing() {
                   </Select>
                 </FormControl>
                 <br />
-                <LocationSearchInput
+                <FindLocation/>
+                {/* <LocationSearchInput
                   variant="outlined"
                   margin="normal"
                   id="Location"
                   label="Location"
                   type="Location"
                   onChange={(e) => setLocation(e.target.value)}
-                />
+                /> */}
                 <br />
                 <FormControl variant="outlined" className={classes.formControl}>
                   <InputLabel htmlFor="outlined-age-native-simple">

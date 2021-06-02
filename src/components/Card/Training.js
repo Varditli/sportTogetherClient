@@ -356,6 +356,7 @@ export default function RecipeReviewCard(training) {
         </p>
         <p className={classes.pname}>
           {"location: " + training.value.location}
+          
         </p>
 
         <CardActions disableSpacing>
@@ -449,6 +450,7 @@ export default function RecipeReviewCard(training) {
                   className={classes.modalBody}
                 >
                   <h3>Training Details:</h3>
+                  
                   <h3>Name: {activeTraining.name}</h3>
                   <h3>Trainer: {activeTraining.trainerUsername}</h3>
                   <h3>Time: {activeTraining.time}</h3>

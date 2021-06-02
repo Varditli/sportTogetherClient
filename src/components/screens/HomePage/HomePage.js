@@ -19,24 +19,14 @@ import Schedule from "@material-ui/icons/Schedule";
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 import HowToRegIcon from "@material-ui/icons/HowToReg";
 import NavPills from "../../NavPills/NavPills";
-import LocationSearchInput from "./googleMaps/currentLocation";
+import LocationSearchInput from "./googleMaps/LocationSearchInput";
+import FindLocation from "./googleMaps/FindLocation";
+// import { ZoomMtg } from '@zoomus/websdk';
 
 const useStyles = makeStyles(styles);
 
-// var points = [
-//   { lat: 42.02, lng: -77.01 },
-//   { lat: 42.03, lng: -77.02 },
-//   { lat: 41.03, lng: -77.04 },
-//   { lat: 42.05, lng: -77.02 }
-// ]
-// var bounds = new this.props.google.maps.LatLngBounds();
-// for (var i = 0; i < points.length; i++) {
-// bounds.extend(points[i]);
-// }
-
 export default function HomePage(props) {
   const [trainings, setTrainings] = useState([]);
-
   
   useEffect(() => {
     fetch(`${process.env.REACT_APP_SERVER}/allTrainings`, {
@@ -46,7 +36,7 @@ export default function HomePage(props) {
     })
       .then((res) => res.json())
       .then((result) => {
-        //console.log(result.trainings);
+        console.log(result.trainings);
         return setTrainings(result.trainings);
       });
   }, []);
@@ -68,8 +58,7 @@ export default function HomePage(props) {
   const query = new URLSearchParams(search).get("s");
   const [searchQuery, setSearchQuery] = useState(query || "");
   const filteredtrainings = filtertrainings(trainings, query);
-
-
+ 
   return (
     <Router>
       <div>
@@ -151,11 +140,8 @@ export default function HomePage(props) {
                   <GridItem xs={12} sm={12} md={8}>
                     <h1>Trainings Map</h1>
                   </GridItem>
-
                   <GridItem>
-                    <Maps
-                        // bounds={bounds}
-                         />
+                    <Maps />
                   </GridItem>
                 </GridContainer>
               </div>
@@ -169,16 +155,19 @@ export default function HomePage(props) {
         {trainings ? (
           trainings.map((item) => {
             return (
+              
               <Training key = {item._id} value={item} />
             )})):""}
             </Grid>
+            {/* <LocationSearchInput/> */}
                 <GridContainer>
+              
                   <div >
-               <LocationSearchInput/>
-                 {/* <Search
+              
+                 <Search
                   searchQuery={searchQuery}
                   setSearchQuery={setSearchQuery}
-               />  */}
+               /> 
         </div>  
 
                   <Autocomplete
@@ -194,6 +183,7 @@ export default function HomePage(props) {
                       />
                     )}
                   />
+                  
                   <Autocomplete
                     id="Date"
                     options={trainings}
@@ -203,17 +193,14 @@ export default function HomePage(props) {
                       <TextField {...params} label=" Date" variant="outlined" />
                     )}
                   />
-
-
-
+               
                 </GridContainer>
- 
-              {/* {trainings.map((item) => {
-                return <Training key = {item._id} value={item} />
-              })} */}
+         
             </div>
+            {/* <FindLocation/> */}
           </Container>
           <Container>
+            
          
       {trainings?trainings.map(item => {
             <Training key = {item._id} value={item} />
