@@ -202,7 +202,7 @@ export default function ProfilePage(props) {
         small
         filter
         image={
-          "https://res.cloudinary.com/dywnmmeue/image/upload/v1617887588/trainingPic_gmmk9c.jpg"
+          "https://res.cloudinary.com/dywnmmeue/image/upload/v1618049358/image1587385360_ortrsf.jpg"
         }
       />
       <div className={classNames(classes.main, classes.mainRaised)}>
@@ -214,7 +214,7 @@ export default function ProfilePage(props) {
                   <div>
                     <img
                       src={
-                        "https://res.cloudinary.com/dywnmmeue/image/upload/v1617887588/trainingPic_gmmk9c.jpg"
+                        "https://res.cloudinary.com/varditcloud/image/upload/v1622701191/user_x0bhfk.png"
                       }
                       alt="..."
                       className={imageClasses}
@@ -351,7 +351,7 @@ export default function ProfilePage(props) {
                       ),
                     },
                     {
-                      tabButton: "My Favorites",
+                      tabButton: "Statistics",
                       tabIcon: Favorite,
                       tabContent: (
                         <GridContainer justify="center">

@@ -24,22 +24,24 @@ import LocationSearchInput from "./googleMaps/currentLocation";
 const useStyles = makeStyles(styles);
 
 export default function HomePage(props) {
-  const [trainings, setTrainings] = useState();
-
-  
-  useEffect(() => {
-    fetch(`${process.env.REACT_APP_SERVER}/allTrainings`, {
-      headers: {
-        "Content-Type": "application/json", //the content type is json
-      },
-    })
-      .then((res) => res.json())
-      .then((result) => {
-        //console.log(result.trainings);
-        return setTrainings(result.trainings);
+  const fetchData = async () => {
+    try {
+      const res = await fetch(`${process.env.REACT_APP_SERVER}/allTrainings`, {
+        headers: {
+          "Content-Type": "application/json", //the content type is json
+        },
       });
-  }, []);
-  
+      const body = await res.json();
+      console.log(body);
+      return body.trainings;
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const [trainings, setTrainings] = useState(fetchData()); //contains json of trainings
+
+  console.log(trainings);
 
   const filtertrainings = (trfiltertrainings, query) => {
     if (!query) {
@@ -58,6 +60,7 @@ export default function HomePage(props) {
   const [searchQuery, setSearchQuery] = useState(query || "");
   const filteredtrainings = filtertrainings(trainings, query);
 
+  console.log("trainings : ", trainings);
   return (
     <Router>
       <div>
@@ -65,7 +68,7 @@ export default function HomePage(props) {
           small
           filter
           image={
-            "https://res.cloudinary.com/dywnmmeue/image/upload/v1618049358/image1587385360_ortrsf.jpg"
+            "https://res.cloudinary.com/varditcloud/image/upload/v1622705744/bg_brk5no.png"
           }
         >
           <div className={classes.container}>
@@ -94,7 +97,7 @@ export default function HomePage(props) {
                     tabButton: "Sign up",
                     tabIcon: HowToRegIcon,
                     tabContent: (
-                      <span>
+                      <span className={classes.centered}>
                         <h3>
                           <ul>In order to participate in the trainings,</ul>
                           <ul> first, you need to sign up to our website</ul>
@@ -107,13 +110,14 @@ export default function HomePage(props) {
                     tabButton: "Register to the training",
                     tabIcon: Schedule,
                     tabContent: (
-                      <span>
+                      <span className={classes.centered}>
                         <h3>
-                          After you are signed-in, choose the training you would
-                          like to participate in and book your place, no payment
-                          needed.
-                          <br />
-                          You will pay directly to the trainer.
+                        <ul>After you are signed-in,</ul>
+                          <ul>
+                            choose the training you
+                            would like to participate in and book your place.
+                          </ul>
+                          <ul>No payment needed, you will pay directly to the trainer.</ul>
                         </h3>
                         <br />
                       </span>
@@ -123,7 +127,7 @@ export default function HomePage(props) {
                     tabButton: " Enjoy ",
                     tabIcon: CheckCircleIcon,
                     tabContent: (
-                      <span>
+                      <span className={classes.centered}>
                         <h3>
                           <ul>It's all set !</ul>
                           <ul>You can now enjoy your training</ul>
@@ -134,46 +138,16 @@ export default function HomePage(props) {
                   },
                 ]}
               />
-              <div className={classes.section}>
-                <GridContainer justify="center">
-                  <GridItem xs={12} sm={12} md={8}>
-                    <h1>Trainings Map</h1>
-                  </GridItem>
 
-                  <GridItem>
-                    <Maps />
-                  </GridItem>
-                </GridContainer>
-              </div>
               <GridContainer justify="center">
                 <GridItem xs={12} sm={12} md={8}>
                   <h1>Our Trainings</h1>
                 </GridItem>
               </GridContainer>
-
-              <Grid
-                className={classes.high}
-                start="0"
-                container
-                reversed
-                spacing={8}
-              >
-                {trainings
-                  ? trainings.map((item) => {
-                      return <Training key={item._id} value={item} />;
-                    })
-                  : ""}
-              </Grid>
               <GridContainer>
-                {/* <div >
-               <LocationSearchInput/>
-                 <Search
-                  searchQuery={searchQuery}
-                  setSearchQuery={setSearchQuery}
-               /> 
-        </div>   */}
+                {/* //here will be the filters for the trainings */}
 
-                <Autocomplete
+                {/* <Autocomplete
                   id="Category"
                   options={trainings}
                   getOptionLabel={(trainings) => trainings.type}
@@ -194,8 +168,16 @@ export default function HomePage(props) {
                   renderInput={(params) => (
                     <TextField {...params} label=" Date" variant="outlined" />
                   )}
-                />
+                /> */}
               </GridContainer>
+
+              <Grid className={classes.high} container spacing={8}>
+                {/* {trainings
+                  ? trainings.map((item) => {
+                      return <Training key={item._id} value={item} />;
+                    })
+                  : ""} */}
+              </Grid>
             </div>
           </Container>
         </div>

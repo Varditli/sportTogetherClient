@@ -69,15 +69,6 @@ export default function RecipeReviewCard(training) {
   const { state, dispatch } = useContext(UserContext);
   const classes = useStyles();
   const [trainer, setTrainer] = useState();
-  const [isReg, setIsReg] = useState();
-  const [expanded, setExpanded] = React.useState(false);
-  const [data, setData] = React.useState();
-  const [likes, setLikes] = React.useState(false);
-  const [islike, setIsLike] = React.useState();
-  const [classicModal, setClassicModal] = React.useState(false);
-  const Transition = React.forwardRef(function Transition(props, ref) {
-    return <Slide direction="down" ref={ref} {...props} />;
-  });
 
   const activeTraining = training.value;
 
@@ -86,6 +77,19 @@ export default function RecipeReviewCard(training) {
 
   const trainee = JSON.parse(localStorage.getItem("trainee"));
   console.log(participants);
+
+  const [isReg, setIsReg] = useState(
+    activeTraining.participants.includes(trainee._id) ? true : false
+  );
+  const [expanded, setExpanded] = React.useState(false);
+  const [data, setData] = React.useState();
+  const [likes, setLikes] = React.useState(false);
+  const [islike, setIsLike] = React.useState();
+  const [isDialodOpen, setIsDialodOpen] = React.useState(false);
+  const [footerButtons, setFooterButtons] = React.useState();
+  const Transition = React.forwardRef(function Transition(props, ref) {
+    return <Slide direction="down" ref={ref} {...props} />;
+  });
 
   // const checkIsReg = () => {
   //   participants.map((par) => {
@@ -100,7 +104,6 @@ export default function RecipeReviewCard(training) {
 
   console.log(isReg);
 
-  
   const regTraining = (trainingId) => {
     fetch(`${process.env.REACT_APP_SERVER}/regTrainingAddTrainee`, {
       method: "put",
@@ -247,82 +250,90 @@ export default function RecipeReviewCard(training) {
     setExpanded(!expanded);
   };
 
+  const closeDialog = () => {
+    setIsDialodOpen(false);
+    window.location.reload(false);
+  };
+
+  const openDialog = () => {
+    setIsDialodOpen(true);
+  };
+
   var freePlaces = training.value.capacity - participants.length;
   const history = useHistory();
   console.log("Free Places: " + freePlaces);
   console.log(isReg);
 
-  var footerButtons = () => {
-    if (isReg == true && freePlaces >= 0) {
-      return (
-        <div>
-          <h3>Yay! You are registered to the training!</h3>
-          <Button
-            //color="transparent"
-            simple
-            onClick={async () => {
-              unRegTraining(activeTraining._id);
-              setIsReg(true);
-            }}
-          >
-            Unbook
-          </Button>
-          <Button
-            onClick={async () => {
-              setClassicModal(false);
-              //refreshPage();
-            }}
-            //color="danger"
-            simple
-          >
-            Back To HomePage
-          </Button>
-        </div>
-      );
-    } else if (isReg == false) {
-      if (freePlaces > 0) {
-        return (
-          <div>
-            <Button
-              //color="transparent"
-              simple
-              onClick={async () => {
-                regTraining(activeTraining._id);
-                setIsReg(false);
-                //refreshPage();
-              }}
-            >
-              Book
-            </Button>
-            <Button
-              onClick={() => setClassicModal(false)}
-              //color="danger"
-              simple
-            >
-              Cancel
-            </Button>
-          </div>
-        );
-      } else if (freePlaces == 0) {
-        return (
-          <div>
-            <Button
-              onClick={async () => {
-                setClassicModal(false);
-                window.location(false);
-              }}
-              //color="danger"
-              simple
-            >
-              Cancel
-            </Button>
-          </div>
-        );
-      } else {
-        return "ff";
-      }
-    }
-  };
+  // const checkFooterButtons = () => {
+  //   {
+  //     isReg == true && freePlaces >= 0
+  //       ? setFooterButtons(
+  //           <div>
+  //             <h3>Yay! You are registered to the training!</h3>
+  //             <Button
+  //               color="primary"
+  //               simple
+  //               onClick={async () => {
+  //                 unRegTraining(activeTraining._id);
+  //                 //setIsDialodOpen(false);
+  //                 setIsReg(false);
+  //               }}
+  //             >
+  //               Unbook
+  //             </Button>
+  //             <Button
+  //               onClick={async () => {
+  //                 closeDialog();
+  //                 //refreshPage();
+  //               }}
+  //               color="primary"
+  //               simple
+  //             >
+  //               Back To HomePage
+  //             </Button>
+  //           </div>
+  //         )
+  //       : isReg == false && freePlaces > 0
+  //       ? setFooterButtons(
+  //           <div>
+  //             <Button
+  //               color="primary"
+  //               simple
+  //               onClick={async () => {
+  //                 regTraining(activeTraining._id);
+  //                 setIsReg(false);
+  //                 //closeDialog();
+  //                 //refreshPage();
+  //               }}
+  //             >
+  //               Book
+  //             </Button>
+  //             <Button
+  //               onClick={() => closeDialog()}
+  //               //color="danger"
+  //               simple
+  //             >
+  //               Cancel
+  //             </Button>
+  //           </div>
+  //         )
+  //       : isReg == false && freePlaces == 0
+  //       ? setFooterButtons(
+  //           <div>
+  //             <Button
+  //               onClick={async () => {
+  //                 closeDialog();
+  //               }}
+  //               //color="danger"
+  //               simple
+  //             >
+  //               Cancel
+  //             </Button>
+  //           </div>
+  //         )
+  //       : setFooterButtons(<div></div>);
+  //   }
+  // };
 
   return (
     <div>
@@ -383,41 +394,39 @@ export default function RecipeReviewCard(training) {
 
           <GridContainer>
             <GridItem xs>
-              {isReg & freePlaces>=0 ? (
+              {isReg == true && freePlaces >= 0 ? (
                 <Button
                   round
                   color="primary"
                   block
-                  onClick={() => setClassicModal(true)}
+                  onClick={async () => openDialog()}
                 >
                   Unbook
                 </Button>
-              ) : !isReg & freePlaces>0 ?
-              (
+              ) : isReg == false && freePlaces > 0 ? (
                 <Button
                   round
                   color="primary"
                   block
-                  onClick={() => setClassicModal(true)}
+                  onClick={async () => openDialog()}
                 >
                   Book Place
                 </Button>
-              ):
-                !isReg & freePlaces ==0 ? (
-                  ""
-              )
-              : ("")
-              }
+              ) : isReg == false && freePlaces == 0 ? (
+                ""
+              ) : (
+                ""
+              )}
 
               <Dialog
                 classes={{
                   root: classes.center,
                   paper: classes.modal,
                 }}
-                open={classicModal}
+                open={isDialodOpen}
                 TransitionComponent={Transition}
                 keepMounted
-                onClose={() => setClassicModal(false)}
+                onClose={() => setIsDialodOpen(false)}
                 aria-labelledby="classic-modal-slide-title"
                 aria-describedby="classic-modal-slide-description"
               >
@@ -432,8 +441,7 @@ export default function RecipeReviewCard(training) {
                     aria-label="Close"
                     color="inherit"
                     onClick={async () => {
-                      setClassicModal(false);
-                      //refreshPage();
+                      closeDialog();
                     }}
                   >
                     <Close className={classes.modalClose} />
@@ -467,75 +475,81 @@ export default function RecipeReviewCard(training) {
                   </h3>
                 </DialogContent>
                 <DialogActions className={classes.modalFooter}>
-                  <div>
-                    {() => footerButtons()}
-                    {isReg == true && freePlaces >= 0 ? (
-                    <div>
-                      <h3>Yay! You are registered to the training!</h3>
-                      <Button
-                        color="transparent"
-                        simple
-                        onClick={async () => {
-                          unRegTraining(activeTraining._id);
-                          setIsReg(true);
-                        }}
-                      >
-                        Unbook
-                      </Button>
-                      <Button
-                        onClick={async () => {
-                          setClassicModal(false);
-                          //refreshPage();
-                        }}
-                        color="danger"
-                        simple
-                      >
-                        Back To HomePage
-                      </Button>
-                    </div>
-                  ) 
-                  :
-                  isReg == false && freePlaces > 0 ? (
-                      <div>
-                        <Button
-                          color="transparent"
-                          simple
-                          onClick={async () => {
-                            regTraining(activeTraining._id);
-                            setIsReg(false);
-                            //refreshPage();
-                          }}
-                        >
-                          Book
-                        </Button>
-                        <Button
-                          onClick={() => setClassicModal(false)}
-                          color="danger"
-                          simple
-                        >
-                          Cancel
-                        </Button>
-                      </div>
-                    ) : isReg == false && freePlaces == 0 ? (
-                      <div>
-                        <Button
-                          onClick={async () => {
-                            setClassicModal(false);
-                            window.location(false);
-                          }}
-                          color="danger"
-                          simple
-                        >
-                          Cancel
-                        </Button>
-                      </div>
-                    ) : (
-                      "שש"
-                    )
-}
-                  </div>
+                   
+                    {console.log(footerButtons)}
+                    {
+      isReg == true && freePlaces >= 0
+        ? setFooterButtons(
+            <div>
+              <h3>Yay! You are registered to the training!</h3>
+              <Button
+                color="primary"
+                simple
+                onClick={async () => {
+                  unRegTraining(activeTraining._id);
+                  //setIsDialodOpen(false);
+                  setIsReg(false);
+                }}
+              >
+                Unbook
+              </Button>
+              <Button
+                onClick={async () => {
+                  closeDialog();
+                  //refreshPage();
+                }}
+                color="primary"
+                simple
+              >
+                Back To HomePage
+              </Button>
+            </div>
+          )
+        : isReg == false && freePlaces > 0
+        ? setFooterButtons(
+            <div>
+              <Button
+                color="primary"
+                simple
+                onClick={async () => {
+                  regTraining(activeTraining._id);
+                  setIsReg(false);
+                  //closeDialog();
+                  //refreshPage();
+                }}
+              >
+                Book
+              </Button>
+              <Button
+                onClick={() => closeDialog()}
+                //color="danger"
+                simple
+              >
+                Cancel
+              </Button>
+            </div>
+          )
+        : isReg == false && freePlaces == 0
+        ? setFooterButtons(
+            <div>
+              <Button
+                onClick={async () => {
+                  closeDialog();
+                }}
+                //color="danger"
+                simple
+              >
+                Cancel
+              </Button>
+            </div>
+          )
+        : setFooterButtons(<div></div>)
+    }
+    {footerButtons}
                 </DialogActions>
               </Dialog>
+
+
             </GridItem>
           </GridContainer>
 

@@ -89,7 +89,13 @@ input: {
   },
   textCenter: {
     textAlign: "center"
+  },
+
+  centered: {
+    textAlign: "center",
+    lineHeight: "normal"
   }
 };
+
 
 export default styles;

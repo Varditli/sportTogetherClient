@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { UserContext } from "../../../App";
 import { EditText, EditTextarea } from "react-edit-text";
@@ -23,6 +23,12 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 //import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
+import Training from "../../../components/Card/Training"
+import Card from "@material-ui/core/Card";
+import CardHeader from "@material-ui/core/CardHeader";
+import CardMedia from "@material-ui/core/CardMedia";
+import CardContent from "@material-ui/core/CardContent";
+import CardActions from "@material-ui/core/CardActions";
 
 import styles from "./ProfileStyle";
 import { ContactSupportOutlined } from "@material-ui/icons";
@@ -36,6 +42,7 @@ export default function TraineeProfilePage(props) {
   const classes = useStyles();
   //const { ...rest } = props;
 
+  const [myTrainings, setMyTrainings] = useState([])
   const [open, setOpen] = React.useState(false);
   const { state, dispatch } = useContext(UserContext);
   const history = useHistory();
@@ -104,6 +111,24 @@ export default function TraineeProfilePage(props) {
   };
 
 
+
+  useEffect(()=>{
+    fetch(`${process.env.REACT_APP_SERVER}/myTrainingsTrainee`,{
+      method: "get",
+       headers:{
+          "Authorization":"Bearer "+localStorage.getItem("jwt")
+      }
+  }).then(res=>res.json())
+  .then(result=>{
+      console.log(myTrainings);
+      return setMyTrainings(result.myTrainings);
+  }) 
+},[])
+
+console.log(myTrainings);
+const upcoming  = myTrainings.time > Date.now();
+const past  = myTrainings.time <= Date.now();
+
   const Edit = () => {
     return (
       <React.Fragment>
@@ -171,7 +196,7 @@ export default function TraineeProfilePage(props) {
         small
         filter
         image={
-          "https://res.cloudinary.com/dywnmmeue/image/upload/v1617887588/trainingPic_gmmk9c.jpg"
+          "https://res.cloudinary.com/dywnmmeue/image/upload/v1618049358/image1587385360_ortrsf.jpg"
         }
       />
       <div className={classNames(classes.main, classes.mainRaised)}>
@@ -183,7 +208,7 @@ export default function TraineeProfilePage(props) {
                   <div>
                     <img
                       src={
-                        "https://res.cloudinary.com/dywnmmeue/image/upload/v1617887588/trainingPic_gmmk9c.jpg"
+                        "https://res.cloudinary.com/varditcloud/image/upload/v1622701191/user_x0bhfk.png"
                       }
                       alt="..."
                     />
@@ -254,21 +279,13 @@ export default function TraineeProfilePage(props) {
                       tabIcon: Camera,
                       tabContent: (
                         <GridContainer justify="center">
-                          <GridItem xs={12} sm={12} md={4}>
-                            <img
-                              alt="..."
-                              src={
-                                "https://res.cloudinary.com/dywnmmeue/image/upload/v1617887588/trainingPic_gmmk9c.jpg"
-                              }
-                            />
-                          </GridItem>
-                          <GridItem xs={12} sm={12} md={4}>
-                            <img
-                              alt="..."
-                              src={
-                                "https://res.cloudinary.com/dywnmmeue/image/upload/v1617887588/trainingPic_gmmk9c.jpg"
-                              }
-                            />
+
+                          <GridItem xs={12} sm={12} md={12}>
+                          {myTrainings.length
+                  ? myTrainings.map((item) => {
+                      return <Training key={item._id} value={item} />;
+                    })
+                  : ""}
                           </GridItem>
                         </GridContainer>
                       ),
