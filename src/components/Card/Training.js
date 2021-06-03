@@ -27,18 +27,22 @@ import Close from "@material-ui/icons/Close";
 import Slide from "@material-ui/core/Slide";
 
 const useStyles = makeStyles((theme) => ({
-  pname: {
-    textAlign: "center",
+  pname:{
+   textAlign:"center",
+   fontSize:"16px"
+
   },
   root: {
     maxWidth: 345,
-    display: "inline-block",
+    fontSize:"16px",
+    display:"inline-block",
     borderRadius: "15px",
     border: "2px solid #4fc3f7",
-    marginBottom: "15px",
-    marginTop: "20px",
-    padding: "10px",
-    backgroundColor: "#e5eaea",
+    marginBottom:"15px",
+    marginTop:"20px",
+    marginLeft:"35px",
+    padding: "30px",
+    backgroundColor:"#e5eaea",
   },
   media: {
     height: "60px",
@@ -363,6 +367,7 @@ export default function RecipeReviewCard(training) {
         </p>
         <p className={classes.pname}>
           {"location: " + training.value.location}
+          
         </p>
 
         <CardActions disableSpacing>
@@ -453,6 +458,7 @@ export default function RecipeReviewCard(training) {
                   className={classes.modalBody}
                 >
                   <h3>Training Details:</h3>
+                  
                   <h3>Name: {activeTraining.name}</h3>
                   <h3>Trainer: {activeTraining.trainerUsername}</h3>
                   <h3>Time: {activeTraining.time}</h3>

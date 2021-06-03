@@ -1,9 +1,8 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from "react";
 import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng,
 } from 'react-places-autocomplete';
-
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAd7JflAOBezbp22Ur_svbRKdZ_8C0bmQ8&libraries=places"></script>
 
 export default class LocationSearchInput extends React.Component {
@@ -25,11 +24,12 @@ export default class LocationSearchInput extends React.Component {
  
   render() {
     return (
-      <PlacesAutocomplete
+          <PlacesAutocomplete
         value={this.state.address}
         onChange={this.handleChange}
         onSelect={this.handleSelect}
       >
+     
         {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
           <div>
             <input
@@ -38,6 +38,7 @@ export default class LocationSearchInput extends React.Component {
                 className: 'location-search-input',
               })}
             />
+            
             <div className="autocomplete-dropdown-container">
               {loading && <div>Loading...</div>}
               {suggestions.map(suggestion => {
@@ -48,7 +49,7 @@ export default class LocationSearchInput extends React.Component {
                 const style = suggestion.active
                   ? { backgroundColor: '#fafafa', cursor: 'pointer' }
                   : { backgroundColor: '#ffffff', cursor: 'pointer' };
-                return (
+                return (  
                   <div
                     {...getSuggestionItemProps(suggestion, {
                       className,
@@ -61,6 +62,7 @@ export default class LocationSearchInput extends React.Component {
               })}
             </div>
           </div>
+
         )}
       </PlacesAutocomplete>
     );

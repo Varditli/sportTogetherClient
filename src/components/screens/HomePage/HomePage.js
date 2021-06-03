@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useHistory } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-import { Grid } from "@material-ui/core";
+import {Grid} from "@material-ui/core";
 import Parallax from "../../compopnets/Parallax/Parallax";
 import Training from "../../Card/Training";
 import GridContainer from "../../Grid/GridContainer";
@@ -19,7 +19,9 @@ import Schedule from "@material-ui/icons/Schedule";
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 import HowToRegIcon from "@material-ui/icons/HowToReg";
 import NavPills from "../../NavPills/NavPills";
-import LocationSearchInput from "./googleMaps/currentLocation";
+import LocationSearchInput from "./googleMaps/LocationSearchInput";
+import FindLocation from "./googleMaps/FindLocation";
+// import { ZoomMtg } from '@zoomus/websdk';
 
 const useStyles = makeStyles(styles);
 
@@ -30,6 +32,9 @@ export default function HomePage(props) {
         headers: {
           "Content-Type": "application/json", //the content type is json
         },
+
+
+
       });
       const body = await res.json();
       console.log(body);
@@ -39,6 +44,20 @@ export default function HomePage(props) {
     }
   };
 
+  
+  //   const [trainings, setTrainings] = useState([]);
+  
+//   useEffect(() => {
+//     fetch(`${process.env.REACT_APP_SERVER}/allTrainings`, {
+//       headers: {
+//         "Content-Type": "application/json", //the content type is json
+//       },
+//     })
+//       .then((res) => res.json())
+//       .then((result) => {
+//         console.log(result.trainings);
+//         return setTrainings(result.trainings);
+  
   const [trainings, setTrainings] = useState(fetchData()); //contains json of trainings
 
   console.log(trainings);
@@ -60,7 +79,9 @@ export default function HomePage(props) {
   const [searchQuery, setSearchQuery] = useState(query || "");
   const filteredtrainings = filtertrainings(trainings, query);
 
+
   console.log("trainings : ", trainings);
+
   return (
     <Router>
       <div>
