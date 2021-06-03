@@ -35,7 +35,7 @@ import { ContactSupportOutlined } from "@material-ui/icons";
 
 const useStyles = makeStyles(styles);
 
-export default function TraineeProfilePage(props) {
+export default function TraineeProfile(props) {
   const trainee = JSON.parse(localStorage.getItem("trainee"));
   console.log(trainee);
 

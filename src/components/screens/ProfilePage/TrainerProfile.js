@@ -29,7 +29,7 @@ import styles from "./ProfileStyle.js";
 
 const useStyles = makeStyles(styles);
 
-export default function ProfilePage(props) {
+export default function TrainerProfile(props) {
   const trainer = JSON.parse(localStorage.getItem("trainer"));
   console.log(trainer);
 
