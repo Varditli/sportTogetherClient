@@ -27,42 +27,41 @@ import Close from "@material-ui/icons/Close";
 import Slide from "@material-ui/core/Slide";
 
 const useStyles = makeStyles((theme) => ({
-  pname:{
-   textAlign:"center",
-   fontSize:"16px"
-
-  },
-  root: {
-    maxWidth: 345,
-    fontSize:"16px",
-    display:"inline-block",
-    borderRadius: "15px",
-    border: "2px solid #4fc3f7",
-    marginBottom:"15px",
-    marginTop:"20px",
-    marginLeft:"35px",
-    padding: "30px",
-    backgroundColor:"#e5eaea",
-  },
-  media: {
-    height: "60px",
-    width: "60px",
-    borderRadius: "30px",
-    paddingTop: "5%", // 16:9
-  },
-  expand: {
-    transform: "rotate(0deg)",
-    marginLeft: "auto",
-    transition: theme.transitions.create("transform", {
-      duration: theme.transitions.duration.shortest,
-    }),
-  },
-  expandOpen: {
-    transform: "rotate(180deg)",
-  },
-  avatar: {
-    backgroundColor: red[500],
-  },
+	pname: {
+		textAlign: "center",
+		fontSize: "16px",
+	},
+	root: {
+		maxWidth: 345,
+		minHeight: 400,
+		fontSize: "16px",
+		display: "inline-block",
+		borderRadius: "15px",
+		border: "2px solid #4fc3f7",
+		marginBottom: "15px",
+		marginTop: "20px",
+		padding: "16px",
+		backgroundColor: "#e5eaea",
+	},
+	media: {
+		height: "60px",
+		width: "60px",
+		borderRadius: "30px",
+		paddingTop: "5%", // 16:9
+	},
+	expand: {
+		transform: "rotate(0deg)",
+		marginLeft: "auto",
+		transition: theme.transitions.create("transform", {
+			duration: theme.transitions.duration.shortest,
+		}),
+	},
+	expandOpen: {
+		transform: "rotate(180deg)",
+	},
+	avatar: {
+		backgroundColor: red[500],
+	},
 }));
 // function refreshPage() {
 //   window.location.reload(false);
@@ -70,510 +69,498 @@ const useStyles = makeStyles((theme) => ({
 // }
 
 export default function RecipeReviewCard(training) {
-  const { state, dispatch } = useContext(UserContext);
-  const classes = useStyles();
-  const [trainer, setTrainer] = useState();
+	const { state, dispatch } = useContext(UserContext);
+	console.log("state", state);
+	const classes = useStyles();
+	const [trainer, setTrainer] = useState();
 
-  const activeTraining = training.value;
+	const activeTraining = training.value;
 
-  const participants = training.value.participants;
-  //console.log(localStorage.getItem("trainee"));
+	const participants = training.value.participants;
 
-  const trainee = JSON.parse(localStorage.getItem("trainee"));
-  console.log(participants);
+	const trainee = JSON.parse(localStorage.getItem("trainee")) || {};
 
-  const [isReg, setIsReg] = useState(
-    activeTraining.participants.includes(trainee._id) ? true : false
-  );
-  const [expanded, setExpanded] = React.useState(false);
-  const [data, setData] = React.useState();
-  const [likes, setLikes] = React.useState(false);
-  const [islike, setIsLike] = React.useState();
-  const [isDialodOpen, setIsDialodOpen] = React.useState(false);
-  const [footerButtons, setFooterButtons] = React.useState();
-  const Transition = React.forwardRef(function Transition(props, ref) {
-    return <Slide direction="down" ref={ref} {...props} />;
-  });
+	const [isReg, setIsReg] = useState(
+		activeTraining.participants.includes(trainee._id) ? true : false
+	);
+	const [expanded, setExpanded] = React.useState(false);
+	const [data, setData] = React.useState();
+	const [likes, setLikes] = React.useState(false);
+	const [islike, setIsLike] = React.useState();
+	const [isDialodOpen, setIsDialodOpen] = React.useState(false);
+	const [footerButtons, setFooterButtons] = React.useState();
+	const Transition = React.forwardRef(function Transition(props, ref) {
+		return <Slide direction="down" ref={ref} {...props} />;
+	});
 
-  // const checkIsReg = () => {
-  //   participants.map((par) => {
-  //     if (par == trainee._id) {
-  //       setIsReg(true);
-  //     } else {
-  //       setIsReg(false);
-  //     }
-  //   });
-  // };
-  // checkIsReg();
+	// const checkIsReg = () => {
+	//   participants.map((par) => {
+	//     if (par == trainee._id) {
+	//       setIsReg(true);
+	//     } else {
+	//       setIsReg(false);
+	//     }
+	//   });
+	// };
+	// checkIsReg();
 
-  console.log(isReg);
+	const regTraining = (trainingId) => {
+		fetch(`${process.env.REACT_APP_SERVER}/regTrainingAddTrainee`, {
+			method: "put",
+			headers: {
+				"Content-Type": "application/json",
+				Authorization: "Bearer " + localStorage.getItem("jwt"),
+			},
+			body: JSON.stringify({
+				trainingId: trainingId,
+			}),
+		})
+			.then((res) => res.json())
+			.then((result) => {
+				// const newData = data.map((item) => {
+				//   if (item._id == result._id) {
+				//     return result;
+				//   } else {
+				//     return item;
+				//   }
+				// });
+				// setData(newData);
+				setIsReg(true);
+				console.log(result);
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+	};
 
-  const regTraining = (trainingId) => {
-    fetch(`${process.env.REACT_APP_SERVER}/regTrainingAddTrainee`, {
-      method: "put",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + localStorage.getItem("jwt"),
-      },
-      body: JSON.stringify({
-        trainingId: trainingId,
-      }),
-    })
-      .then((res) => res.json())
-      .then((result) => {
-        // const newData = data.map((item) => {
-        //   if (item._id == result._id) {
-        //     return result;
-        //   } else {
-        //     return item;
-        //   }
-        // });
-        // setData(newData);
-        setIsReg(true);
-        console.log(result);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+	//unregister to a training
+	const unRegTraining = (trainingId) => {
+		fetch(`${process.env.REACT_APP_SERVER}/unRegTrainingRemoveTrainee`, {
+			method: "put",
+			headers: {
+				"Content-Type": "application/json",
+				Authorization: "Bearer " + localStorage.getItem("jwt"),
+			},
+			body: JSON.stringify({
+				trainingId: trainingId,
+			}),
+		})
+			.then((res) => res.json())
+			.then((result) => {
+				// const newData = data.map((item) => {
+				//   if (item._id == result._id) {
+				//     return result;
+				//   } else {
+				//     return item;
+				//   }
+				// });
+				// setData(newData);
+				setIsReg(false);
+				console.log(result);
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+	};
 
-  //unregister to a training
-  const unRegTraining = (trainingId) => {
-    fetch(`${process.env.REACT_APP_SERVER}/unRegTrainingRemoveTrainee`, {
-      method: "put",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + localStorage.getItem("jwt"),
-      },
-      body: JSON.stringify({
-        trainingId: trainingId,
-      }),
-    })
-      .then((res) => res.json())
-      .then((result) => {
-        // const newData = data.map((item) => {
-        //   if (item._id == result._id) {
-        //     return result;
-        //   } else {
-        //     return item;
-        //   }
-        // });
-        // setData(newData);
-        setIsReg(false);
-        console.log(result);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+	const likeTraining = (id) => {
+		fetch(`${process.env.REACT_APP_SERVER}/like`, {
+			method: "put",
+			headers: {
+				"Content-Type": "application/json",
+				Authorization: "Bearer " + localStorage.getItem("jwt"),
+			},
+			body: JSON.stringify({
+				trainingId: id,
+			}),
+		})
+			.then((res) => res.json())
+			.then((result) => {
+				training.likeTraining(id, result);
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+	};
 
-  const likeTraining = (id) => {
-    fetch(`${process.env.REACT_APP_SERVER}/like`, {
-      method: "put",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + localStorage.getItem("jwt"),
-      },
-      body: JSON.stringify({
-        trainingId: id,
-      }),
-    })
-      .then((res) => res.json())
-      .then((result) => {
-        // const newData = data.map((item) => {
-        //   if (item._id == result._id) {
-        //     return result;
-        //   } else {
-        //     return item;
-        //   }
-        // });
-        // setData(newData);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+	const unlikeTraining = (id) => {
+		fetch(`${process.env.REACT_APP_SERVER}/unlike`, {
+			method: "put",
+			headers: {
+				"Content-Type": "application/json",
+				Authorization: "Bearer " + localStorage.getItem("jwt"),
+			},
+			body: JSON.stringify({
+				trainingId: id,
+			}),
+		})
+			.then((res) => res.json())
+			.then((result) => {
+				training.unlikeTraining(id, result);
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+	};
 
-  const unlikeTraining = (id) => {
-    fetch("/unlike", {
-      method: "put",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + localStorage.getItem("jwt"),
-      },
-      body: JSON.stringify({
-        trainingId: id,
-      }),
-    })
-      .then((res) => res.json())
-      .then((result) => {
-        // console.log(result._id);
-        // const newData = data.map((item) => {
-        //   if (item._id == result._id) {
-        //     return result;
-        //   } else {
-        //     return item;
-        //   }
-        // });
-        // setData(newData);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+	useEffect(() => {
+		fetch(`${process.env.REACT_APP_SERVER}/myTrainingsTrainee`, {
+			headers: {
+				Authorization: "Bearer " + localStorage.getItem("jwt"),
+			},
+		})
+			.then((res) => res.json())
+			.then((result) => {
+				//return setPics(result.myTraining)
+			})
+			.catch((err) => {});
+	}, []);
 
-  useEffect(() => {
-    fetch(`${process.env.REACT_APP_SERVER}/myTrainingsTrainee`, {
-      headers: {
-        Authorization: "Bearer " + localStorage.getItem("jwt"),
-      },
-    })
-      .then((res) => res.json())
-      .then((result) => {
-        //return setPics(result.myTraining)
-      });
-  }, []);
+	useEffect(() => {
+		fetch("/myLikes", {
+			headers: {
+				Authorization: "Bearer " + localStorage.getItem("jwt"),
+			},
+		})
+			.then((res) => res.json())
+			.then((result) => {
+				console.log(result);
+				return setLikes(result.myTraining);
+			})
+			.catch((err) => {});
+	}, []);
 
-  useEffect(() => {
-    fetch("/myLikes", {
-      headers: {
-        Authorization: "Bearer " + localStorage.getItem("jwt"),
-      },
-    })
-      .then((res) => res.json())
-      .then((result) => {
-        console.log(result);
-        return setLikes(result.myTraining);
-      });
-  }, []);
+	Transition.displayName = "Transition";
+	//console.log(training)
 
-  Transition.displayName = "Transition";
-  //console.log(training)
+	const handleExpandClick = () => {
+		setExpanded(!expanded);
+	};
 
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
+	const closeDialog = () => {
+		setIsDialodOpen(false);
+		window.location.reload(false);
+	};
 
-  const closeDialog = () => {
-    setIsDialodOpen(false);
-    window.location.reload(false);
-  };
+	const openDialog = () => {
+		setIsDialodOpen(true);
+	};
 
-  const openDialog = () => {
-    setIsDialodOpen(true);
-  };
+	var freePlaces = training.value.capacity - participants.length;
+	const history = useHistory();
+	console.log("Free Places: " + freePlaces);
+	console.log("isReg", isReg);
 
-  var freePlaces = training.value.capacity - participants.length;
-  const history = useHistory();
-  console.log("Free Places: " + freePlaces);
-  console.log(isReg);
+	//todo:  button book/unbook
+	// remove button if not avaible space
+	// dont display past traingings (by time)
 
-  // const checkFooterButtons = () => {
-  //   {
-  //     isReg == true && freePlaces >= 0
-  //       ? setFooterButtons(
-  //           <div>
-  //             <h3>Yay! You are registered to the training!</h3>
-  //             <Button
-  //               color="primary"
-  //               simple
-  //               onClick={async () => {
-  //                 unRegTraining(activeTraining._id);
-  //                 //setIsDialodOpen(false);
-  //                 setIsReg(false);
-  //               }}
-  //             >
-  //               Unbook
-  //             </Button>
-  //             <Button
-  //               onClick={async () => {
-  //                 closeDialog();
-  //                 //refreshPage();
-  //               }}
-  //               color="primary"
-  //               simple
-  //             >
-  //               Back To HomePage
-  //             </Button>
-  //           </div>
-  //         )
-  //       : isReg == false && freePlaces > 0
-  //       ? setFooterButtons(
-  //           <div>
-  //             <Button
-  //               color="primary"
-  //               simple
-  //               onClick={async () => {
-  //                 regTraining(activeTraining._id);
-  //                 setIsReg(false);
-  //                 //closeDialog();
-  //                 //refreshPage();
-  //               }}
-  //             >
-  //               Book
-  //             </Button>
-  //             <Button
-  //               onClick={() => closeDialog()}
-  //               //color="danger"
-  //               simple
-  //             >
-  //               Cancel
-  //             </Button>
-  //           </div>
-  //         )
-  //       : isReg == false && freePlaces == 0
-  //       ? setFooterButtons(
-  //           <div>
-  //             <Button
-  //               onClick={async () => {
-  //                 closeDialog();
-  //               }}
-  //               //color="danger"
-  //               simple
-  //             >
-  //               Cancel
-  //             </Button>
-  //           </div>
-  //         )
-  //       : setFooterButtons(<div></div>);
-  //   }
-  // };
+	// const checkFooterButtons = () => {
+	//   {
+	//     isReg == true && freePlaces >= 0
+	//       ? setFooterButtons(
+	//           <div>
+	//             <h3>Yay! You are registered to the training!</h3>
+	//             <Button
+	//               color="primary"
+	//               simple
+	//               onClick={async () => {
+	//                 unRegTraining(activeTraining._id);
+	//                 //setIsDialodOpen(false);
+	//                 setIsReg(false);
+	//               }}
+	//             >
+	//               Unbook
+	//             </Button>
+	//             <Button
+	//               onClick={async () => {
+	//                 closeDialog();
+	//                 //refreshPage();
+	//               }}
+	//               color="primary"
+	//               simple
+	//             >
+	//               Back To HomePage
+	//             </Button>
+	//           </div>
+	//         )
+	//       : isReg == false && freePlaces > 0
+	//       ? setFooterButtons(
+	//           <div>
+	//             <Button
+	//               color="primary"
+	//               simple
+	//               onClick={async () => {
+	//                 regTraining(activeTraining._id);
+	//                 setIsReg(false);
+	//                 //closeDialog();
+	//                 //refreshPage();
+	//               }}
+	//             >
+	//               Book
+	//             </Button>
+	//             <Button
+	//               onClick={() => closeDialog()}
+	//               //color="danger"
+	//               simple
+	//             >
+	//               Cancel
+	//             </Button>
+	//           </div>
+	//         )
+	//       : isReg == false && freePlaces == 0
+	//       ? setFooterButtons(
+	//           <div>
+	//             <Button
+	//               onClick={async () => {
+	//                 closeDialog();
+	//               }}
+	//               //color="danger"
+	//               simple
+	//             >
+	//               Cancel
+	//             </Button>
+	//           </div>
+	//         )
+	//       : setFooterButtons(<div></div>);
+	//   }
+	// };
 
-  return (
-    <div>
-      <Card className={classes.root}>
-        <CardHeader />
-        <p> {training.value.name}</p>
-        <p> {activeTraining.trainerUsername}</p>
-        <Typography>
-          <p className={classes.pname}>
-            <b>
-              {moment(training.value.time).format("MMMM Do YYYY, h:mm:ss a")}
-            </b>
-          </p>
-        </Typography>
-        <p className={classes.pname}>
-          <Typography color="error">
-            {freePlaces >= 10
-              ? +freePlaces + "  Places left!"
-              : freePlaces < 10 && freePlaces > 5
-              ? "Only " + freePlaces + "  Places left!"
-              : freePlaces > 0 && freePlaces <= 5
-              ? "Hurry Up! Only " + freePlaces + "  Places left!"
-              : freePlaces == 0
-              ? "Fully Booked! "
-              : ""}
-          </Typography>
-        </p>
-        <p className={classes.pname}>
-          {"location: " + training.value.location}
-          
-        </p>
+	return (
+		<div>
+			<Card className={classes.root}>
+				<CardHeader />
+				<p>
+					{" "}
+					{training.value.name} {training.value.price}
+				</p>
+				<p> {activeTraining.trainerUsername}</p>
+				<Typography>
+					<p className={classes.pname}>
+						<b>
+							{moment(training.value.time).format(
+								"MMMM Do YYYY, h:mm:ss a"
+							)}
+						</b>
+					</p>
+				</Typography>
+				<p className={classes.pname}>
+					<Typography color="error">
+						{freePlaces >= 10
+							? +freePlaces + "  Places left!"
+							: freePlaces < 10 && freePlaces > 5
+							? "Only " + freePlaces + "  Places left!"
+							: freePlaces > 0 && freePlaces <= 5
+							? "Hurry Up! Only " + freePlaces + "  Places left!"
+							: freePlaces == 0
+							? "Fully Booked! "
+							: ""}
+					</Typography>
+				</p>
+				<p className={classes.pname}>
+					{"location: " + training.value.location}
+				</p>
 
-        <CardActions disableSpacing>
-          {/* {state ? (
-            training.likes.includes(state._id) ? (
-              <IconButton
-                aria-label="add to favorites"
-                onClick={() => {
-                  unlikeTraining(training._id);
-                  //setIsLike(false);
-                }}
-              >
-                <FavoriteIcon />
-              </IconButton>
-            ) : (
-              <IconButton
-                aria-label="add to favorites"
-                onClick={() => {
-                  likeTraining(training._id);
-                  //setIsLike(true);
-                }}
-              >
-                <FavoriteBorderIcon />
-              </IconButton>
-            )
-          ) : (
-            ""
-          )} */}
+				<CardActions disableSpacing>
+					{state ? (
+						training.value.likes.includes(state._id) ? (
+							<IconButton
+								aria-label="add to favorites"
+								onClick={() => {
+									unlikeTraining(training.value._id);
+									//setIsLike(false);
+								}}
+							>
+								<FavoriteIcon />
+							</IconButton>
+						) : (
+							<IconButton
+								aria-label="add to favorites"
+								onClick={() => {
+									likeTraining(training.value._id);
+									//setIsLike(true);
+								}}
+							>
+								<FavoriteBorderIcon />
+							</IconButton>
+						)
+					) : (
+						""
+					)}
 
-          <GridContainer>
-            <GridItem xs>
-              {isReg == true && freePlaces >= 0 ? (
-                <Button
-                  round
-                  color="primary"
-                  block
-                  onClick={async () => openDialog()}
-                >
-                  Unbook
-                </Button>
-              ) : isReg == false && freePlaces > 0 ? (
-                <Button
-                  round
-                  color="primary"
-                  block
-                  onClick={async () => openDialog()}
-                >
-                  Book Place
-                </Button>
-              ) : isReg == false && freePlaces == 0 ? (
-                ""
-              ) : (
-                ""
-              )}
+					<GridContainer>
+						<GridItem xs>
+							{isReg == true && freePlaces >= 0 ? (
+								<Button
+									round
+									color="primary"
+									block
+									onClick={async () => openDialog()}
+								>
+									Unbook
+								</Button>
+							) : isReg == false && freePlaces > 0 ? (
+								<Button
+									round
+									color="primary"
+									block
+									onClick={async () => openDialog()}
+								>
+									Book Place
+								</Button>
+							) : isReg == false && freePlaces == 0 ? (
+								""
+							) : (
+								""
+							)}
 
-              <Dialog
-                classes={{
-                  root: classes.center,
-                  paper: classes.modal,
-                }}
-                open={isDialodOpen}
-                TransitionComponent={Transition}
-                keepMounted
-                onClose={() => setIsDialodOpen(false)}
-                aria-labelledby="classic-modal-slide-title"
-                aria-describedby="classic-modal-slide-description"
-              >
-                <DialogTitle
-                  id="classic-modal-slide-title"
-                  disableTypography
-                  className={classes.modalHeader}
-                >
-                  <IconButton
-                    className={classes.modalCloseButton}
-                    key="close"
-                    aria-label="Close"
-                    color="inherit"
-                    onClick={async () => {
-                      closeDialog();
-                    }}
-                  >
-                    <Close className={classes.modalClose} />
-                  </IconButton>
-                  <h4 className={classes.modalTitle}>Book Place</h4>
-                </DialogTitle>
-                <DialogContent
-                  id="classic-modal-slide-description"
-                  className={classes.modalBody}
-                >
-                  <h3>Training Details:</h3>
-                  
-                  <h3>Name: {activeTraining.name}</h3>
-                  <h3>Trainer: {activeTraining.trainerUsername}</h3>
-                  <h3>Time: {activeTraining.time}</h3>
-                  <h3>Capacity: {activeTraining.capacity}</h3>
-                  <h3>Sport Type: {activeTraining.type}</h3>
-                  <h3>Intensity: {activeTraining.intensity}</h3>
-                  <h3>
-                    Age Group: {activeTraining.age_group[0]} -{" "}
-                    {activeTraining.age_group[1]}
-                  </h3>
-                  <h3>limitations: {activeTraining.limitations}</h3>
-                  <h3>Via Zoom? {activeTraining.zoom}</h3>
-                  <h3>Additional Info: {activeTraining.additional_info}</h3>
-                  <h3>
-                    Price:{" "}
-                    {activeTraining.price == 0 ? "Free" : activeTraining.price}{" "}
-                    <span>
-                      <h5 color="#838D92">(Pay directly to the trainer)</h5>
-                    </span>
-                  </h3>
-                </DialogContent>
-                <DialogActions className={classes.modalFooter}>
-                   
-                    {console.log(footerButtons)}
-                    {
-      isReg == true && freePlaces >= 0
-        ? setFooterButtons(
-            <div>
-              <h3>Yay! You are registered to the training!</h3>
-              <Button
-                color="primary"
-                simple
-                onClick={async () => {
-                  unRegTraining(activeTraining._id);
-                  //setIsDialodOpen(false);
-                  setIsReg(false);
-                }}
-              >
-                Unbook
-              </Button>
-              <Button
-                onClick={async () => {
-                  closeDialog();
-                  //refreshPage();
-                }}
-                color="primary"
-                simple
-              >
-                Back To HomePage
-              </Button>
-            </div>
-          )
-        : isReg == false && freePlaces > 0
-        ? setFooterButtons(
-            <div>
-              <Button
-                color="primary"
-                simple
-                onClick={async () => {
-                  regTraining(activeTraining._id);
-                  setIsReg(false);
-                  //closeDialog();
-                  //refreshPage();
-                }}
-              >
-                Book
-              </Button>
-              <Button
-                onClick={() => closeDialog()}
-                //color="danger"
-                simple
-              >
-                Cancel
-              </Button>
-            </div>
-          )
-        : isReg == false && freePlaces == 0
-        ? setFooterButtons(
-            <div>
-              <Button
-                onClick={async () => {
-                  closeDialog();
-                }}
-                //color="danger"
-                simple
-              >
-                Cancel
-              </Button>
-            </div>
-          )
-        : setFooterButtons(<div></div>)
-    }
-    {footerButtons}
-                </DialogActions>
-              </Dialog>
+							<Dialog
+								classes={{
+									root: classes.center,
+									paper: classes.modal,
+								}}
+								open={isDialodOpen}
+								TransitionComponent={Transition}
+								keepMounted
+								onClose={() => setIsDialodOpen(false)}
+								aria-labelledby="classic-modal-slide-title"
+								aria-describedby="classic-modal-slide-description"
+							>
+								<DialogTitle
+									id="classic-modal-slide-title"
+									disableTypography
+									className={classes.modalHeader}
+								>
+									<IconButton
+										className={classes.modalCloseButton}
+										key="close"
+										aria-label="Close"
+										color="inherit"
+										onClick={async () => {
+											closeDialog();
+										}}
+									>
+										<Close className={classes.modalClose} />
+									</IconButton>
+									<h4 className={classes.modalTitle}>Book Place</h4>
+								</DialogTitle>
+								<DialogContent
+									id="classic-modal-slide-description"
+									className={classes.modalBody}
+								>
+									<h3>Training Details:</h3>
 
+									<h3>Name: {activeTraining.name}</h3>
+									<h3>Trainer: {activeTraining.trainerUsername}</h3>
+									<h3>Time: {activeTraining.time}</h3>
+									<h3>Capacity: {activeTraining.capacity}</h3>
+									<h3>Sport Type: {activeTraining.type}</h3>
+									<h3>Intensity: {activeTraining.intensity}</h3>
+									<h3>
+										Age Group: {activeTraining.age_group[0]} -{" "}
+										{activeTraining.age_group[1]}
+									</h3>
+									<h3>limitations: {activeTraining.limitations}</h3>
+									<h3>Via Zoom? {activeTraining.zoom}</h3>
+									<h3>
+										Additional Info: {activeTraining.additional_info}
+									</h3>
+									<h3>
+										Price:{" "}
+										{activeTraining.price == 0
+											? "Free"
+											: activeTraining.price}{" "}
+										<span>
+											<h5 color="#838D92">
+												(Pay directly to the trainer)
+											</h5>
+										</span>
+									</h3>
+								</DialogContent>
+								<DialogActions className={classes.modalFooter}>
+									{isReg == true && freePlaces >= 0 ? (
+										<div>
+											<h3>
+												Yay! You are registered to the training!
+											</h3>
+											<Button
+												color="primary"
+												simple
+												onClick={async () => {
+													unRegTraining(activeTraining._id);
+													//setIsDialodOpen(false);
+													setIsReg(false);
+												}}
+											>
+												Unbook
+											</Button>
+											<Button
+												onClick={async () => {
+													closeDialog();
+													//refreshPage();
+												}}
+												color="primary"
+												simple
+											>
+												Back To HomePage
+											</Button>
+										</div>
+									) : isReg == false && freePlaces > 0 ? (
+										<div>
+											<Button
+												color="primary"
+												simple
+												onClick={async () => {
+													regTraining(activeTraining._id);
+													setIsReg(false);
+													//closeDialog();
+													//refreshPage();
+												}}
+											>
+												Book
+											</Button>
+											<Button
+												onClick={() => closeDialog()}
+												//color="danger"
+												simple
+											>
+												Cancel
+											</Button>
+										</div>
+									) : (
+										<div>
+											<Button
+												onClick={async () => {
+													closeDialog();
+												}}
+												//color="danger"
+												simple
+											>
+												Cancel
+											</Button>
+										</div>
+									)}
+									{footerButtons}
+								</DialogActions>
+							</Dialog>
+						</GridItem>
+					</GridContainer>
 
-            </GridItem>
-          </GridContainer>
-
-          <IconButton
-            className={clsx(classes.expand, {
-              [classes.expandOpen]: expanded,
-            })}
-            onClick={handleExpandClick}
-            aria-expanded={expanded}
-            aria-label="show more"
-          >
-            <ExpandMoreIcon />
-          </IconButton>
-        </CardActions>
-        <Collapse in={expanded} timeout="auto" unmountOnExit>
-          <CardContent>{training.value.additional_info}</CardContent>
-        </Collapse>
-      </Card>
-    </div>
-  );
+					<IconButton
+						className={clsx(classes.expand, {
+							[classes.expandOpen]: expanded,
+						})}
+						onClick={handleExpandClick}
+						aria-expanded={expanded}
+						aria-label="show more"
+					>
+						<ExpandMoreIcon />
+					</IconButton>
+				</CardActions>
+				<Collapse in={expanded} timeout="auto" unmountOnExit>
+					<CardContent>{training.value.additional_info}</CardContent>
+				</Collapse>
+			</Card>
+		</div>
+	);
 }
