@@ -14,13 +14,13 @@ import TextField from "@material-ui/core/TextField";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import { BrowserRouter as Router } from "react-router-dom";
 import Search from "./Search";
-import Maps from "./googleMaps/Maps";
+//import Maps from "./googleMaps/Maps";
 import Schedule from "@material-ui/icons/Schedule";
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 import HowToRegIcon from "@material-ui/icons/HowToReg";
 import NavPills from "../../NavPills/NavPills";
-import LocationSearchInput from "./googleMaps/LocationSearchInput";
-import FindLocation from "./googleMaps/FindLocation";
+//import LocationSearchInput from "./googleMaps/LocationSearchInput";
+//import FindLocation from "./googleMaps/FindLocation";
 // import { ZoomMtg } from '@zoomus/websdk';
 
 import Filter from "../../Filter/Filter";
