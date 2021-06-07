@@ -16,6 +16,7 @@ import TraineeProfile from "./components/screens/ProfilePage/TraineeProfile";
 import LoginTrainer from "./components/screens/LoginTrainer/LoginTrainer";
 import TrainerProfile from "./components/screens/ProfilePage/TrainerProfile";
 import CreateTraining from "./components/screens/CreateTraining/CreateTraining";
+import Contact from "./components/screens/Contact/Contact";
 
 
 
@@ -74,6 +75,9 @@ const Routing = () => {
       </Route>
       <Route exact path="/CreateTraining">
         <CreateTraining />
+      </Route>
+      <Route exact path="/Contact">
+        <Contact />
       </Route>
     </Switch>
   );

@@ -24,7 +24,7 @@ import DateFnsUtils from "@date-io/date-fns";
 import { DateTimePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
 import useStyles from "./styles";
 import GridItem from "../../Grid/GridItem";
-import FindLocation from "../HomePage/googleMaps/FindLocation";
+//import FindLocation from "../HomePage/googleMaps/FindLocation";
 
 const LogoImg =
   "https://res.cloudinary.com/niroavram/image/upload/v1617714585/Add_a_subheading_kpvjyo.svg";
@@ -230,7 +230,7 @@ export default function CreateTraing() {
                   </Select>
                 </FormControl>
                 <br />
-                <FindLocation/>
+                {/* <FindLocation/> */}
                 {/* <LocationSearchInput
                   variant="outlined"
                   margin="normal"
