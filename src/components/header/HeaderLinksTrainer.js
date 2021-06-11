@@ -25,35 +25,43 @@ const useStyles = makeStyles(styles);
 export default function HeaderLinksTrainer(props) {
   const classes = useStyles();
   const { state, dispatch } = useContext(UserContext);
-const history = useHistory();
-var name = localStorage.getItem("role");
-console.log(name)
-function refreshPage() {
-  location.reload(false);
-}
+  const history = useHistory();
+  var name = localStorage.getItem("role");
+  console.log(name);
+
+  function refreshPage() {
+    window.location.reload(false);
+  }
 
   return (
     <List className={classes.list}>
-     <ListItem className={classes.listItem}>
-     <Button 
-     color="transparent"
-     className={classes.navLink}
-      onClick={() => {
-      localStorage.clear();
-      dispatch({ type: "CLEAR" });
-      refreshPage();
-      history.push("/HomePage");
-        }}
-        // onClick={refreshPage}
-     >
+      <ListItem className={classes.listItem}>
+        <Button
+          aria-label="menu"
+          aria-label="settings"
+          color="transparent"
+          className={classes.navLink}
+          onClick={() => {
+            // localStorage.clear();
+            // dispatch({ type: "CLEAR" });
+            // refreshPage();
+            // history.push("/HomePage");
+            localStorage.clear();
+						history.push("/HomePage");
+						refreshPage();
+          }}
+        >
           Logout
-      </Button>
-     </ListItem>
+        </Button>
+      </ListItem>
       <ListItem className={classes.listItem}>
         <Button
           href="/TrainerProfile"
           color="transparent"
           className={classes.navLink}
+          // onClick={() => {
+					// 	history.push("/TrainerProfile");
+					// }}
         >
           Profile
         </Button>

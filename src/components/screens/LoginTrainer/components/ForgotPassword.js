@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import { UserContext } from "../../../../App";
 import Button from "../../../CustomButtons/Button";
 import TextField from "@material-ui/core/TextField";
-import useStyles from "../styles";
+import {useStyles} from "../styles";
 import CardFooter from "../../../Card/CardFooter";
 import CardBody from "../../../Card/CardBody";
 import GridItem from "../../../Grid/GridItem";
@@ -14,11 +14,12 @@ import GridItem from "../../../Grid/GridItem";
 
 // const classes = loginstyle();
 
-export default function SignIn(isTrainer) {
+export default function ForgotPassword({ onSuccess }) {
 	const { state, dispatch } = useContext(UserContext);
 	const history = useHistory();
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
+	const [tel, setTel] = useState("");
 	const classes = useStyles();
 	const [cardAnimaton, setCardAnimation] = React.useState("cardHidden");
 	setTimeout(function () {
@@ -29,24 +30,18 @@ export default function SignIn(isTrainer) {
 		window.location.reload(false);
 	}
 	const signinTrainee = () => {
-		fetch(`${process.env.REACT_APP_SERVER}/signinTrainee`, {
+		fetch(`${process.env.REACT_APP_SERVER}/forgotPasswordTrainer`, {
 			method: "post",
 			headers: { "Content-Type": "application/json" },
 			body: JSON.stringify({
 				email,
 				password,
+				tel,
 			}),
 		})
 			.then((res) => res.json())
 			.then((data) => {
-				if (data.error) {
-				}
-				localStorage.setItem("jwt", data.token);
-				localStorage.setItem("trainee", JSON.stringify(data.trainee));
-				localStorage.setItem("role", "trainee");
-				dispatch({ type: "TRAINEE", payload: data.trainee });
-				history.push("/HomePage");
-				refreshPage();
+				onSuccess();
 			})
 			.catch((err) => {
 				console.log(err);
@@ -74,8 +69,21 @@ export default function SignIn(isTrainer) {
 					margin="normal"
 					required
 					fullWidth
+					name="tel"
+					label="tel"
+					type="tel"
+					id="tel"
+					autoComplete="tel"
+					value={tel}
+					onChange={(e) => setTel(e.target.value)}
+				/>
+				<TextField
+					variant="outlined"
+					margin="normal"
+					required
+					fullWidth
 					name="password"
-					label="Password"
+					label="new Password"
 					type="password"
 					id="password"
 					autoComplete="current-password"
@@ -85,7 +93,7 @@ export default function SignIn(isTrainer) {
 			</CardBody>
 			<GridItem>
 				<Button onClick={() => signinTrainee()} round color="primary">
-					Sign In
+					Reset
 				</Button>
 			</GridItem>
 		</form>

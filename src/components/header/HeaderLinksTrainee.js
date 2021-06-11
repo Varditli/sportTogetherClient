@@ -24,52 +24,47 @@ import { render } from "@testing-library/react";
 const useStyles = makeStyles(styles);
 
 export default function HeaderLinksTrainee(props) {
-  const classes = useStyles();
-  const { state, dispatch } = useContext(UserContext);
-  const history = useHistory();
-  var name = localStorage.getItem("role");
-  console.log(name);
+	const classes = useStyles();
+	const { state, dispatch } = useContext(UserContext);
+	const history = useHistory();
+	var name = localStorage.getItem("role");
+	console.log(name);
 
-  function refreshPage() {
-    location.reload(false);
-  }
+	function refreshPage() {
+		window.location.reload(false);
+	}
 
-  return (
-    <List className={classes.list}>
-      <ListItem className={classes.listItem}>
-        <Button aria-label="menu"
-              aria-label="settings"
-          color="transparent"
-          className={classes.navLink}
-          onClick={() => {
-            localStorage.clear();
-            dispatch({ type: "CLEAR" }); 
-            refreshPage();
-            history.push("/HomePage"); 
-          }}
-        >
-          Logout
-        </Button>
-        <Button
-          color="transparent"
-          className={classes.navLink}
-          onClick={() => {
-          history.push("/TraineeProfile");
-          }}
-        >
-          Profile
-        </Button>
-      </ListItem>
-      <ListItem className={classes.listItem}>
-        <Button
-          href="/HomePage"
-          color="transparent"
-          className={classes.navLink}
-        >
-          Home
-        </Button>
-      </ListItem>
-    </List>
-  );
+	return (
+		<List className={classes.list}>
+			<ListItem className={classes.listItem}>
+				<Button
+					aria-label="menu"
+					aria-label="settings"
+					color="transparent"
+					className={classes.navLink}
+					onClick={() => {
+						localStorage.clear();
+						history.push("/HomePage");
+						refreshPage();
+					}}
+				>
+					Logout
+				</Button>
+				<Button
+					color="transparent"
+					className={classes.navLink}
+					onClick={() => {
+						history.push("/TraineeProfile");
+					}}
+				>
+					Profile
+				</Button>
+			</ListItem>
+			<ListItem className={classes.listItem}>
+				<Button href="/HomePage" color="transparent" className={classes.navLink}>
+					Home
+				</Button>
+			</ListItem>
+		</List>
+	);
 }
-

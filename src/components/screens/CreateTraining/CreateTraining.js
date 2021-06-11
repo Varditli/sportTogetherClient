@@ -19,12 +19,10 @@ import Card from "../../Card/Card";
 import CardHeader from "../../Card/CardHeader";
 import CardBody from "../../Card/CardBody";
 import Parallax from "../../compopnets/Parallax/Parallax";
-//import LocationSearchInput from "../HomePage/googleMaps/LocationSearchInput";
 import DateFnsUtils from "@date-io/date-fns";
 import { DateTimePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
 import useStyles from "./styles";
 import GridItem from "../../Grid/GridItem";
-//import FindLocation from "../HomePage/googleMaps/FindLocation";
 
 const LogoImg =
   "https://res.cloudinary.com/niroavram/image/upload/v1617714585/Add_a_subheading_kpvjyo.svg";
@@ -230,15 +228,17 @@ export default function CreateTraing() {
                   </Select>
                 </FormControl>
                 <br />
-                {/* <FindLocation/> */}
-                {/* <LocationSearchInput
+                <TextField
                   variant="outlined"
                   margin="normal"
-                  id="Location"
-                  label="Location"
-                  type="Location"
+                  fullWidth
+                  type={String}
+                  name="location"
+                  label="location"
+                  id="location"
+                  value={location}
                   onChange={(e) => setLocation(e.target.value)}
-                /> */}
+                />
                 <br />
                 <FormControl variant="outlined" className={classes.formControl}>
                   <InputLabel htmlFor="outlined-age-native-simple">

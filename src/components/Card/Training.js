@@ -203,18 +203,18 @@ export default function RecipeReviewCard(training) {
 			});
 	};
 
-	useEffect(() => {
-		fetch(`${process.env.REACT_APP_SERVER}/myTrainingsTrainee`, {
-			headers: {
-				Authorization: "Bearer " + localStorage.getItem("jwt"),
-			},
-		})
-			.then((res) => res.json())
-			.then((result) => {
-				//return setPics(result.myTraining)
-			})
-			.catch((err) => {});
-	}, []);
+	// useEffect(() => {
+	// 	fetch(`${process.env.REACT_APP_SERVER}/myTrainingsTrainee`, {
+	// 		headers: {
+	// 			Authorization: "Bearer " + localStorage.getItem("jwt"),
+	// 		},
+	// 	})
+	// 		.then((res) => res.json())
+	// 		.then((result) => {
+	// 			//return setPics(result.myTraining)
+	// 		})
+	// 		.catch((err) => {});
+	// }, []);
 
 	useEffect(() => {
 		fetch("/myLikes", {
@@ -332,14 +332,14 @@ export default function RecipeReviewCard(training) {
 				<CardHeader />
 				<p>
 					{" "}
-					{training.value.name} {training.value.price}
+					{training.value.name}
 				</p>
 				<p> {activeTraining.trainerUsername}</p>
 				<Typography>
 					<p className={classes.pname}>
 						<b>
 							{moment(training.value.time).format(
-								"MMMM Do YYYY, h:mm:ss a"
+								"MMMM Do YYYY, h:mm a"
 							)}
 						</b>
 					</p>

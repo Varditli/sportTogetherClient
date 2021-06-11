@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { UserContext } from "../../../App";
 import { EditText, EditTextarea } from "react-edit-text";
@@ -24,6 +24,7 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
+import moment from "moment";
 
 import styles from "./ProfileStyle.js";
 
@@ -50,6 +51,7 @@ export default function TrainerProfile(props) {
   const [age, setAge] = useState(trainer.age);
   const [tel, setTel] = useState(trainer.tel);
   const [sportType, setSportType] = useState(trainer.sportType);
+  const [myTraining, setMyTraining] = useState([]);
   const [experience, setExperience] = useState(trainer.experience);
   const { token } = localStorage.getItem("jwt");
 
@@ -62,26 +64,32 @@ export default function TrainerProfile(props) {
   };
 
   const PostNewData = () => {
+    const newData = {
+      username,
+      email,
+      age,
+      tel,
+      experience,
+      sportType,
+    };
     fetch(`${process.env.REACT_APP_SERVER}/editTrainerProfile`, {
       method: "post",
       headers: {
         "Content-Type": "application/json", //the content type is json
       },
-      body: JSON.stringify({
-        username,
-        email,
-        age,
-        tel,
-        experience,
-        sportType,
-      }),
+      body: JSON.stringify(newData),
     })
       .then((res) => res.json())
       .then((data) => {
         if (data.error) {
           console.log("Failed editing trainer profile");
         } else {
+          localStorage.setItem(
+            "trainer",
+            JSON.stringify({ ...trainer, ...newData })
+          );
           console.log("successfully edited Trainer profile");
+          history.replace();
         }
       })
       .catch((err) => {
@@ -110,10 +118,10 @@ export default function TrainerProfile(props) {
             name="email"
             type="email"
             style={{ width: "200px" }}
-            defaultValue={trainer.email}
+            defaultValue={email}
             inline
             readonly
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => setEmail(e)}
           />
         </div>
         <div style={{ whiteSpace: "nowrap" }}>
@@ -124,9 +132,9 @@ export default function TrainerProfile(props) {
             type={String}
             id="username"
             name="username"
-            value={trainer.username}
+            value={username}
             inline
-            onChange={e => setUsername(e.target.value)}
+            onChange={(e) => setUsername(e)}
           />
         </div>
         <div style={{ whiteSpace: "nowrap" }}>
@@ -140,9 +148,12 @@ export default function TrainerProfile(props) {
             name="tel"
             rows={0}
             //style={{ paddingTop: 1 }}
-            value={trainer.tel}
+            value={tel}
             inline
-            onChange={e => setTel(e.target.value)}
+            onChange={(e) => {
+              console.log("e", e);
+              setTel(e);
+            }}
             //onSave={this.onSave}
           />
         </div>
@@ -154,9 +165,9 @@ export default function TrainerProfile(props) {
             name="age"
             type={Number}
             style={{ width: "100px" }}
-            value={trainer.age}
+            value={age}
             inline
-            onChange={e => setAge(e.target.value)}
+            onChange={(e) => setAge(e)}
             //onSave={this.onSave}
           />
         </div>
@@ -170,31 +181,60 @@ export default function TrainerProfile(props) {
             type={String}
             //style={{ paddingTop: 1 }}
             placeholder="Share your trainees about your experience"
-            value={trainer.experience}
+            value={experience}
             inline
-            onChange={e => setExperience(e.target.value)}
+            onChange={(e) => setExperience(e)}
             //onSave={this.onSave}
           />
         </div>
-        <div style={{ whiteSpace: "nowrap" }}>
-          <strong>
-            <label className="mr-2">Sport Types: </label>
-          </strong>
-          <EditText
-            name="sportType"
-            rows={3}
-            type={String}
-            //style={{ paddingTop: 1 }}
-            value={trainer.sportType}
-            onChange={e => setSportType(e.target.value)}
-            inline
-          />
-        </div>
+        {/* <div style={{ whiteSpace: "nowrap" }}>
+					<strong>
+						<label className="mr-2">Sport Types: </label>
+					</strong>
+					<EditText
+						name="sportType"
+						rows={3}
+						type={String}
+						//style={{ paddingTop: 1 }}
+						value={sportType.map((s) => s.name).join(", ")}
+						onChange={(e) => setSportType(e)}
+						inline
+					/>
+				</div> */}
       </React.Fragment>
     );
   };
 
   const navImageClasses = classNames(classes.imgRounded, classes.imgGallery);
+
+  useEffect(() => {
+    fetchTrainings();
+
+    function fetchTrainings() {
+      fetch(`${process.env.REACT_APP_SERVER}/myTrainingsTrainer`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + localStorage.getItem("jwt"),
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          setMyTraining(data.myTraining);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }, []);
+
+  console.log("myTraining", myTraining);
+
+  const past = myTraining.filter(
+    (training) => new Date(training.time).getTime() <= Date.now()
+  );
+  const next = myTraining.filter(
+    (training) => new Date(training.time).getTime() > Date.now()
+  );
 
   return (
     <div>
@@ -276,10 +316,12 @@ export default function TrainerProfile(props) {
                         <td classNames={classes.tit}>Experience:</td>
                         <td>{trainer.experience}</td>
                       </tr>
-                      <tr>
+                      {/* <tr>
                         <td classNames={classes.tit}>Sport Types:</td>
-                        <td>{trainer.sportType}</td>
-                      </tr>
+                        <td>
+                          {trainer.sportType.map((s) => s.name).join(", ")}
+                        </td>
+                      </tr> */}
                     </table>
                   </div>
                 </div>
@@ -296,24 +338,19 @@ export default function TrainerProfile(props) {
                       tabIcon: Camera,
                       tabContent: (
                         <GridContainer justify="center">
-                          <GridItem xs={12} sm={12} md={4}>
-                            <img
-                              alt="..."
-                              src={
-                                "https://res.cloudinary.com/dywnmmeue/image/upload/v1617887588/trainingPic_gmmk9c.jpg"
-                              }
-                              className={navImageClasses}
-                            />
-                          </GridItem>
-                          <GridItem xs={12} sm={12} md={4}>
-                            <img
-                              alt="..."
-                              src={
-                                "https://res.cloudinary.com/dywnmmeue/image/upload/v1617887588/trainingPic_gmmk9c.jpg"
-                              }
-                              className={navImageClasses}
-                            />
-                          </GridItem>
+                          {next.map((t) => (
+                            <GridItem xs={12} sm={12} md={4}>
+                              <p>
+                                <b>Training name:</b>
+                                <br /> {t.name}
+                              </p>
+                              <p>
+                                <b>Training time:</b>
+                                <br />{" "}
+                                {moment(t.time).format("MMMM Do YYYY, h:mm a")}
+                              </p>
+                            </GridItem>
+                          ))}
                         </GridContainer>
                       ),
                     },
@@ -322,60 +359,48 @@ export default function TrainerProfile(props) {
                       tabIcon: Palette,
                       tabContent: (
                         <GridContainer justify="center">
-                          <GridItem xs={12} sm={12} md={4}>
-                            <img
-                              alt="..."
-                              src={
-                                "https://res.cloudinary.com/dywnmmeue/image/upload/v1617887588/trainingPic_gmmk9c.jpg"
-                              }
-                              className={navImageClasses}
-                            />
-                          </GridItem>
-                          <GridItem xs={12} sm={12} md={4}>
-                            <img
-                              alt="..."
-                              src={
-                                "https://res.cloudinary.com/dywnmmeue/image/upload/v1617887588/trainingPic_gmmk9c.jpg"
-                              }
-                              className={navImageClasses}
-                            />
-                            <img
-                              alt="..."
-                              src={
-                                "https://res.cloudinary.com/dywnmmeue/image/upload/v1617887588/trainingPic_gmmk9c.jpg"
-                              }
-                              className={navImageClasses}
-                            />
-                          </GridItem>
+                          {past.map((t) => (
+                            <GridItem xs={12} sm={12} md={4}>
+                              <p>
+                                <b>Training name:</b>
+                                <br /> {t.name}
+                              </p>
+                              <p>
+                                <b>Training time:</b>
+                                <br />{" "}
+                                {moment(t.time).format("MMMM Do YYYY, h:mm a")}
+                              </p>
+                            </GridItem>
+                          ))}
                         </GridContainer>
                       ),
                     },
-                    {
-                      tabButton: "Statistics",
-                      tabIcon: Favorite,
-                      tabContent: (
-                        <GridContainer justify="center">
-                          <GridItem xs={12} sm={12} md={4}>
-                            <img
-                              alt="..."
-                              src={
-                                "https://res.cloudinary.com/dywnmmeue/image/upload/v1617887588/trainingPic_gmmk9c.jpg"
-                              }
-                              className={navImageClasses}
-                            />
-                          </GridItem>
-                          <GridItem xs={12} sm={12} md={4}>
-                            <img
-                              alt="..."
-                              src={
-                                "https://res.cloudinary.com/dywnmmeue/image/upload/v1617887588/trainingPic_gmmk9c.jpg"
-                              }
-                              className={navImageClasses}
-                            />
-                          </GridItem>
-                        </GridContainer>
-                      ),
-                    },
+                    // {
+                    // 	tabButton: "Statistics",
+                    // 	tabIcon: Favorite,
+                    // 	tabContent: (
+                    // 		<GridContainer justify="center">
+                    // 			<GridItem xs={12} sm={12} md={4}>
+                    // 				<img
+                    // 					alt="..."
+                    // 					src={
+                    // 						"https://res.cloudinary.com/dywnmmeue/image/upload/v1617887588/trainingPic_gmmk9c.jpg"
+                    // 					}
+                    // 					className={navImageClasses}
+                    // 				/>
+                    // 			</GridItem>
+                    // 			<GridItem xs={12} sm={12} md={4}>
+                    // 				<img
+                    // 					alt="..."
+                    // 					src={
+                    // 						"https://res.cloudinary.com/dywnmmeue/image/upload/v1617887588/trainingPic_gmmk9c.jpg"
+                    // 					}
+                    // 					className={navImageClasses}
+                    // 				/>
+                    // 			</GridItem>
+                    // 		</GridContainer>
+                    // 	),
+                    // },
                   ]}
                 />
               </GridItem>

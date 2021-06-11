@@ -23,7 +23,7 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 //import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
-import Training from "../../../components/Card/Training"
+import Training from "../../../components/Card/Training";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import CardMedia from "@material-ui/core/CardMedia";
@@ -32,6 +32,7 @@ import CardActions from "@material-ui/core/CardActions";
 
 import styles from "./ProfileStyle";
 import { ContactSupportOutlined } from "@material-ui/icons";
+import { Redirect } from "react-router-dom";
 
 const useStyles = makeStyles(styles);
 
@@ -40,17 +41,18 @@ export default function TraineeProfile(props) {
   console.log(trainee);
 
   const classes = useStyles();
+
   //const { ...rest } = props;
 
-  const [myTrainings, setMyTrainings] = useState([])
+  const [myTraining, setMyTraining] = useState([]);
   const [open, setOpen] = React.useState(false);
   const { state, dispatch } = useContext(UserContext);
   const history = useHistory();
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [email, setEmail] = useState("");
-  const [age, setAge] = useState("");
-  const [tel, setTel] = useState("");
+  const [username, setUsername] = useState(trainee?.username);
+  const [password, setPassword] = useState(trainee?.password);
+  const [email, setEmail] = useState(trainee?.email);
+  const [age, setAge] = useState(trainee?.age);
+  const [tel, setTel] = useState(trainee?.tel);
   const { token } = localStorage.getItem("jwt");
 
   const handleClickOpen = () => {
@@ -75,34 +77,31 @@ export default function TraineeProfile(props) {
   //     });
   // }
 
-
-  const PostData = () => {
-    if (
-      !/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
-        email
-      )
-    ) {
-      //   M.toast({ html: "Invalid email", classes: "#ff4081 pink accent-2" });
-      return;
-    }
+  const PostNewData = () => {
+    const newData = {
+      username,
+      email,
+      age,
+      tel,
+    };
     fetch(`${process.env.REACT_APP_SERVER}/editTraineeProfile`, {
       method: "post",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        username,
-        email,
-        password,
-        age,
-        tel,
-      }),
+      headers: {
+        "Content-Type": "application/json", //the content type is json
+      },
+      body: JSON.stringify(newData),
     })
       .then((res) => res.json())
       .then((data) => {
         if (data.error) {
-          console.log("Failed Updating the Trainee Profile");
+          console.log("Failed editing trainee profile");
         } else {
-          console.log("successfully Updated the Trainee Profile");
-          window.location.reload("false");
+          localStorage.setItem(
+            "trainee",
+            JSON.stringify({ ...trainee, ...newData })
+          );
+          console.log("successfully edited Trainee profile");
+          history.replace();
         }
       })
       .catch((err) => {
@@ -110,24 +109,38 @@ export default function TraineeProfile(props) {
       });
   };
 
+  useEffect(() => {
+    fetchTrainings();
 
+    function fetchTrainings() {
+      fetch(`${process.env.REACT_APP_SERVER}/myTrainingsTrainee`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + localStorage.getItem("jwt"),
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          setMyTraining(data.myTraining);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }, []);
 
-  useEffect(()=>{
-    fetch(`${process.env.REACT_APP_SERVER}/myTrainingsTrainee`,{
-      method: "get",
-       headers:{
-          "Authorization":"Bearer "+localStorage.getItem("jwt")
-      }
-  }).then(res=>res.json())
-  .then(result=>{
-      console.log(myTrainings);
-      return setMyTrainings(result.myTrainings);
-  }) 
-},[])
-
-console.log(myTrainings);
-const upcoming  = myTrainings.time > Date.now();
-const past  = myTrainings.time <= Date.now();
+  //   useEffect(()=>{
+  //     fetch(`${process.env.REACT_APP_SERVER}/myTrainingsTrainee`,{
+  //       method: "get",
+  //        headers:{
+  //           "Authorization":"Bearer "+localStorage.getItem("jwt")
+  //       }
+  //   }).then(res=>res.json())
+  //   .then(result=>{
+  //       console.log("myTrainings: ",myTrainings);
+  //       return setMyTrainings(result.myTrainings);
+  //   })
+  // },[])
 
   const Edit = () => {
     return (
@@ -142,9 +155,10 @@ const past  = myTrainings.time <= Date.now();
             name="email"
             type="email"
             style={{ width: "200px" }}
-            defaultValue={trainee.email}
+            defaultValue={email}
             inline
             readonly
+            onChange={(e) => setEmail(e)}
           />
         </div>
         <div style={{ whiteSpace: "nowrap" }}>
@@ -152,10 +166,12 @@ const past  = myTrainings.time <= Date.now();
             <label className="mr-2">User Name: </label>
           </strong>
           <EditText
+            type={String}
             id="username"
             name="username"
-            defaultValue={trainee.username}
+            value={username}
             inline
+            onChange={(e) => setUsername(e)}
           />
         </div>
         <div style={{ whiteSpace: "nowrap" }}>
@@ -165,12 +181,15 @@ const past  = myTrainings.time <= Date.now();
             </label>
           </strong>
           <EditText
+            type={String}
             name="tel"
             rows={0}
-            //style={{ paddingTop: 1 }}
-            defaultValue={trainee.tel}
+            value={tel}
             inline
-            //onSave={UpdateValue()}
+            onChange={(e) => {
+              console.log("e", e);
+              setTel(e);
+            }}
           />
         </div>
         <div style={{ whiteSpace: "nowrap" }}>
@@ -179,16 +198,26 @@ const past  = myTrainings.time <= Date.now();
           </strong>
           <EditText
             name="age"
-            type="number"
+            type={Number}
             style={{ width: "100px" }}
-            defaultValue={trainee.age}
+            value={age}
             inline
-            //onSave={UpdateValue()}
+            onChange={(e) => setAge(e)}
           />
         </div>
       </React.Fragment>
     );
   };
+
+  if (!trainee) return <Redirect to="LoginTrainee" />;
+
+  console.log('myTraining',myTraining);
+  const past = myTraining.filter(
+    (training) => new Date(training.time).getTime() <= Date.now()
+  );
+  const next = myTraining.filter(
+    (training) => new Date(training.time).getTime() > Date.now()
+  );
 
   return (
     <div>
@@ -214,24 +243,41 @@ const past  = myTrainings.time <= Date.now();
                     />
                   </div>
                   <div className={classes.name}>
-                    <Button
-                      variant="outlined"
-                      color="primary"
-                      onClick={handleClickOpen}
-                    >
-                      Edit
-                    </Button>
-                    <Dialog
-                      open={open}
-                      onClose={handleClose}
-                      aria-labelledby="form-dialog-title"
-                    >
-                      <DialogTitle id="form-dialog-title">
-                        Edit Trainee Profile
-                      </DialogTitle>
-                      <DialogContent>{Edit()}</DialogContent>
-                      <DialogActions>
-                        <Button 
+                    <h3 className={classes.title}>
+                      {localStorage.getItem("username")}
+                    </h3>
+                    <div>
+                      <Button
+                        variant="outlined"
+                        color="primary"
+                        onClick={handleClickOpen}
+                      >
+                        Edit
+                      </Button>
+                      <Dialog
+                        open={open}
+                        onClose={handleClose}
+                        aria-labelledby="form-dialog-title"
+                        width="80%"
+                      >
+                        <DialogTitle id="form-dialog-title">
+                          Edit Trainee Profile
+                        </DialogTitle>
+                        <DialogContent>{Edit()}</DialogContent>
+                        <DialogActions>
+                          <Button onClick={handleClose} color="primary">
+                            Cancel
+                          </Button>
+                          <Button
+                            onClick={async () => {
+                              handleClose();
+                              PostNewData();
+                            }}
+                            color="primary"
+                          >
+                            Save
+                          </Button>
+                          {/* <Button 
                         onClick={handleClose} 
                         color="primary"
                         round
@@ -244,9 +290,10 @@ const past  = myTrainings.time <= Date.now();
                           color="primary"
                         >
                           Save
-                        </Button>
-                      </DialogActions>
-                    </Dialog>
+                        </Button> */}
+                        </DialogActions>
+                      </Dialog>
+                    </div>
                   </div>
                 </div>
               </GridItem>
@@ -279,14 +326,25 @@ const past  = myTrainings.time <= Date.now();
                       tabIcon: Camera,
                       tabContent: (
                         <GridContainer justify="center">
-
-                          <GridItem xs={12} sm={12} md={12}>
-                          {myTrainings.length
-                  ? myTrainings.map((item) => {
+                          {next.map((t) => (
+                            <GridItem xs={12} sm={12} md={4}>
+                              <p>
+                                <b>Training name:</b>
+                                <br /> {t.name}
+                              </p>
+                              <p>
+                                <b>Training time:</b>
+                                <br /> {t.time}
+                              </p>
+                            </GridItem>
+                          ))}
+                          {/* <GridItem xs={12} sm={12} md={12}>
+                          {myTraining.length
+                  ? myTraining.map((item) => {
                       return <Training key={item._id} value={item} />;
                     })
                   : ""}
-                          </GridItem>
+                          </GridItem> */}
                         </GridContainer>
                       ),
                     },
@@ -295,28 +353,18 @@ const past  = myTrainings.time <= Date.now();
                       tabIcon: Palette,
                       tabContent: (
                         <GridContainer justify="center">
-                          <GridItem xs={12} sm={12} md={4}>
-                            <img
-                              alt="..."
-                              src={
-                                "https://res.cloudinary.com/dywnmmeue/image/upload/v1617887588/trainingPic_gmmk9c.jpg"
-                              }
-                            />
-                          </GridItem>
-                          <GridItem xs={12} sm={12} md={4}>
-                            <img
-                              alt="..."
-                              src={
-                                "https://res.cloudinary.com/dywnmmeue/image/upload/v1617887588/trainingPic_gmmk9c.jpg"
-                              }
-                            />
-                            <img
-                              alt="..."
-                              src={
-                                "https://res.cloudinary.com/dywnmmeue/image/upload/v1617887588/trainingPic_gmmk9c.jpg"
-                              }
-                            />
-                          </GridItem>
+                          {past.map((t) => (
+                            <GridItem xs={12} sm={12} md={4}>
+                              <p>
+                                <b>Training name:</b>
+                                <br /> {t.name}
+                              </p>
+                              <p>
+                                <b>Training time:</b>
+                                <br /> {t.time}
+                              </p>
+                            </GridItem>
+                          ))}
                         </GridContainer>
                       ),
                     },
@@ -325,22 +373,7 @@ const past  = myTrainings.time <= Date.now();
                       tabIcon: Favorite,
                       tabContent: (
                         <GridContainer justify="center">
-                          <GridItem xs={12} sm={12} md={4}>
-                            <img
-                              alt="..."
-                              src={
-                                "https://res.cloudinary.com/dywnmmeue/image/upload/v1617887588/trainingPic_gmmk9c.jpg"
-                              }
-                            />
-                          </GridItem>
-                          <GridItem xs={12} sm={12} md={4}>
-                            <img
-                              alt="..."
-                              src={
-                                "https://res.cloudinary.com/dywnmmeue/image/upload/v1617887588/trainingPic_gmmk9c.jpg"
-                              }
-                            />
-                          </GridItem>
+                          <GridItem xs={12} sm={12} md={4}></GridItem>
                         </GridContainer>
                       ),
                     },

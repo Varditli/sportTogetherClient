@@ -76,8 +76,8 @@ export default function Login() {
 								<CardHeader>
 									<Typography component="h1" variant="h5">
 										{displayForgotPassword
-											? "Reset password"
-											: "Sign in"}
+											? "Reset Password Trainee"
+											: "Sign In Trainee"}
 									</Typography>
 								</CardHeader>
 								<form className={classes.form}>
@@ -111,7 +111,7 @@ export default function Login() {
 							<div>
 								<CardHeader>
 									<Typography component="h1" variant="h5">
-										Sign Up
+										Sign Up Trainee
 									</Typography>
 								</CardHeader>
 								<SignUp />

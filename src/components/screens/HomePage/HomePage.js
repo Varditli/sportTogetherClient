@@ -14,13 +14,10 @@ import TextField from "@material-ui/core/TextField";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import { BrowserRouter as Router } from "react-router-dom";
 import Search from "./Search";
-//import Maps from "./googleMaps/Maps";
 import Schedule from "@material-ui/icons/Schedule";
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 import HowToRegIcon from "@material-ui/icons/HowToReg";
 import NavPills from "../../NavPills/NavPills";
-//import LocationSearchInput from "./googleMaps/LocationSearchInput";
-//import FindLocation from "./googleMaps/FindLocation";
 // import { ZoomMtg } from '@zoomus/websdk';
 
 import Filter from "../../Filter/Filter";
@@ -223,30 +220,7 @@ export default function HomePage(props) {
 								</GridItem>
 							</GridContainer>
 							<GridContainer>
-								{/* //here will be the filters for the trainings */}
 
-								{/* <Autocomplete
-                  id="Category"
-                  options={trainings}
-                  getOptionLabel={(trainings) => trainings.type}
-                  style={{ width: 300 }}
-                  renderInput={(params) => (
-                    <TextField
-                      {...params}
-                      label="Category"
-                      variant="outlined"
-                    />
-                  )}
-                />
-                <Autocomplete
-                  id="Date"
-                  options={trainings}
-                  getOptionLabel={(trainings) => trainings.time}
-                  style={{ width: 300 }}
-                  renderInput={(params) => (
-                    <TextField {...params} label=" Date" variant="outlined" />
-                  )}
-                /> */}
 							</GridContainer>
 							<Grid className={classes.filter} container spacing={16}>
 								<Filter
