@@ -170,7 +170,18 @@ export default function Signup(types) {
 					value={experience}
 					onChange={(e) => setExperience(e.target.value)}
 				/>
-				<NoSsr>
+				<TextField
+					variant="outlined"
+					margin="normal"
+					required
+					fullWidth
+					name="sportType"
+					label="sportType"
+					id="sportType"
+					value={sportType}
+					onChange={(e) => setSportType(e.target.value)}
+				/>
+				{/* <NoSsr>
 					<div>
 						<div {...getRootProps()}>
 							<Label {...getInputLabelProps()}>Sport Types</Label>
@@ -197,7 +208,7 @@ export default function Signup(types) {
 							</Listbox>
 						) : null}
 					</div>
-				</NoSsr>
+				</NoSsr> */}
 			</CardBody>
 			<GridItem>
 				<Button onClick={() => PostDataTrainer()} round color="primary">

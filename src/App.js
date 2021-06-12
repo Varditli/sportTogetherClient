@@ -29,23 +29,9 @@ const Routing = () => {
   const { state, dispatch } = useContext(UserContext);
 
 
-  //for reset password
   
   useEffect(() => {
-    // const member = JSON.parse(localStorage.getItem("member"));
-    // if (member) {
-    //   if (!history.location.pathname.startsWith("/reset/:token")) {
-    //     dispatch({ type: "MEMBER", payload: member });
-    //     history.push("/");
-    //   } else {
-    //     dispatch({ type: "MEMBER", payload: member });
-    //     history.push("/reset/:token");
-    //   }
-    // } else {
-    //   if (!history.location.pathname.startsWith("/reset")) {
-    //     history.push("/signin");
-    //   }
-    // }
+
   }, []);
 
   const location = useLocation();

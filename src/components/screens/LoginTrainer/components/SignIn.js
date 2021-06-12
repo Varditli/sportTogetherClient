@@ -50,7 +50,8 @@ function refreshPage() {
         localStorage.setItem("role","trainer");
         dispatch({ type: "TRAINER", payload: data.trainer });
         history.push("/HomePage");
-        refreshPage();
+        //refreshPage();
+        
       })
       .catch((err) => {
         console.log(err);

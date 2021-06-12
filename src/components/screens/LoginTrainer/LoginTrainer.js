@@ -107,9 +107,9 @@ export default function LoginTrainer() {
                   <Button onClick={() => isSigned()} variant="body2">
                     {"Don't have an account? Sign Up"}
                   </Button>
-                  <Button onClick={() => onForgotPassword()} variant="body2">
+                  {/* <Button onClick={() => onForgotPassword()} variant="body2">
                     forgot password?
-                  </Button>
+                  </Button> */}
                 </GridItem>
               </div>
             ) : (

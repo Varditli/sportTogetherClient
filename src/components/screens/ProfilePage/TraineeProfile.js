@@ -63,20 +63,6 @@ export default function TraineeProfile(props) {
     setOpen(false);
   };
 
-  // const editTraineeProfile = () => {
-  //   handleClickOpen();
-  //   return;
-
-  // };
-
-  //   const UpdateValue = (e) => {
-  //     const { note } = this.state;
-
-  //     this.setState({
-  //         note: { ...note, [e.target.name]: e.target.value }
-  //     });
-  // }
-
   const PostNewData = () => {
     const newData = {
       username,
@@ -129,18 +115,6 @@ export default function TraineeProfile(props) {
     }
   }, []);
 
-  //   useEffect(()=>{
-  //     fetch(`${process.env.REACT_APP_SERVER}/myTrainingsTrainee`,{
-  //       method: "get",
-  //        headers:{
-  //           "Authorization":"Bearer "+localStorage.getItem("jwt")
-  //       }
-  //   }).then(res=>res.json())
-  //   .then(result=>{
-  //       console.log("myTrainings: ",myTrainings);
-  //       return setMyTrainings(result.myTrainings);
-  //   })
-  // },[])
 
   const Edit = () => {
     return (
@@ -368,15 +342,15 @@ export default function TraineeProfile(props) {
                         </GridContainer>
                       ),
                     },
-                    {
-                      tabButton: "My Favorites",
-                      tabIcon: Favorite,
-                      tabContent: (
-                        <GridContainer justify="center">
-                          <GridItem xs={12} sm={12} md={4}></GridItem>
-                        </GridContainer>
-                      ),
-                    },
+                    // {
+                    //   tabButton: "My Favorites",
+                    //   tabIcon: Favorite,
+                    //   tabContent: (
+                    //     <GridContainer justify="center">
+                    //       <GridItem xs={12} sm={12} md={4}></GridItem>
+                    //     </GridContainer>
+                    //   ),
+                    // },
                   ]}
                 />
               </GridItem>

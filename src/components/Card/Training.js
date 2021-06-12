@@ -93,17 +93,7 @@ export default function RecipeReviewCard(training) {
 		return <Slide direction="down" ref={ref} {...props} />;
 	});
 
-	// const checkIsReg = () => {
-	//   participants.map((par) => {
-	//     if (par == trainee._id) {
-	//       setIsReg(true);
-	//     } else {
-	//       setIsReg(false);
-	//     }
-	//   });
-	// };
-	// checkIsReg();
-
+	//register to a training
 	const regTraining = (trainingId) => {
 		fetch(`${process.env.REACT_APP_SERVER}/regTrainingAddTrainee`, {
 			method: "put",
@@ -117,14 +107,6 @@ export default function RecipeReviewCard(training) {
 		})
 			.then((res) => res.json())
 			.then((result) => {
-				// const newData = data.map((item) => {
-				//   if (item._id == result._id) {
-				//     return result;
-				//   } else {
-				//     return item;
-				//   }
-				// });
-				// setData(newData);
 				setIsReg(true);
 				console.log(result);
 			})
@@ -147,14 +129,6 @@ export default function RecipeReviewCard(training) {
 		})
 			.then((res) => res.json())
 			.then((result) => {
-				// const newData = data.map((item) => {
-				//   if (item._id == result._id) {
-				//     return result;
-				//   } else {
-				//     return item;
-				//   }
-				// });
-				// setData(newData);
 				setIsReg(false);
 				console.log(result);
 			})
@@ -203,19 +177,6 @@ export default function RecipeReviewCard(training) {
 			});
 	};
 
-	// useEffect(() => {
-	// 	fetch(`${process.env.REACT_APP_SERVER}/myTrainingsTrainee`, {
-	// 		headers: {
-	// 			Authorization: "Bearer " + localStorage.getItem("jwt"),
-	// 		},
-	// 	})
-	// 		.then((res) => res.json())
-	// 		.then((result) => {
-	// 			//return setPics(result.myTraining)
-	// 		})
-	// 		.catch((err) => {});
-	// }, []);
-
 	useEffect(() => {
 		fetch("/myLikes", {
 			headers: {
@@ -231,7 +192,6 @@ export default function RecipeReviewCard(training) {
 	}, []);
 
 	Transition.displayName = "Transition";
-	//console.log(training)
 
 	const handleExpandClick = () => {
 		setExpanded(!expanded);
@@ -250,81 +210,6 @@ export default function RecipeReviewCard(training) {
 	const history = useHistory();
 	console.log("Free Places: " + freePlaces);
 	console.log("isReg", isReg);
-
-	//todo:  button book/unbook
-	// remove button if not avaible space
-	// dont display past traingings (by time)
-
-	// const checkFooterButtons = () => {
-	//   {
-	//     isReg == true && freePlaces >= 0
-	//       ? setFooterButtons(
-	//           <div>
-	//             <h3>Yay! You are registered to the training!</h3>
-	//             <Button
-	//               color="primary"
-	//               simple
-	//               onClick={async () => {
-	//                 unRegTraining(activeTraining._id);
-	//                 //setIsDialodOpen(false);
-	//                 setIsReg(false);
-	//               }}
-	//             >
-	//               Unbook
-	//             </Button>
-	//             <Button
-	//               onClick={async () => {
-	//                 closeDialog();
-	//                 //refreshPage();
-	//               }}
-	//               color="primary"
-	//               simple
-	//             >
-	//               Back To HomePage
-	//             </Button>
-	//           </div>
-	//         )
-	//       : isReg == false && freePlaces > 0
-	//       ? setFooterButtons(
-	//           <div>
-	//             <Button
-	//               color="primary"
-	//               simple
-	//               onClick={async () => {
-	//                 regTraining(activeTraining._id);
-	//                 setIsReg(false);
-	//                 //closeDialog();
-	//                 //refreshPage();
-	//               }}
-	//             >
-	//               Book
-	//             </Button>
-	//             <Button
-	//               onClick={() => closeDialog()}
-	//               //color="danger"
-	//               simple
-	//             >
-	//               Cancel
-	//             </Button>
-	//           </div>
-	//         )
-	//       : isReg == false && freePlaces == 0
-	//       ? setFooterButtons(
-	//           <div>
-	//             <Button
-	//               onClick={async () => {
-	//                 closeDialog();
-	//               }}
-	//               //color="danger"
-	//               simple
-	//             >
-	//               Cancel
-	//             </Button>
-	//           </div>
-	//         )
-	//       : setFooterButtons(<div></div>);
-	//   }
-	// };
 
 	return (
 		<div>
@@ -368,7 +253,6 @@ export default function RecipeReviewCard(training) {
 								aria-label="add to favorites"
 								onClick={() => {
 									unlikeTraining(training.value._id);
-									//setIsLike(false);
 								}}
 							>
 								<FavoriteIcon />
@@ -378,7 +262,6 @@ export default function RecipeReviewCard(training) {
 								aria-label="add to favorites"
 								onClick={() => {
 									likeTraining(training.value._id);
-									//setIsLike(true);
 								}}
 							>
 								<FavoriteBorderIcon />
@@ -488,7 +371,6 @@ export default function RecipeReviewCard(training) {
 												simple
 												onClick={async () => {
 													unRegTraining(activeTraining._id);
-													//setIsDialodOpen(false);
 													setIsReg(false);
 												}}
 											>
@@ -513,15 +395,12 @@ export default function RecipeReviewCard(training) {
 												onClick={async () => {
 													regTraining(activeTraining._id);
 													setIsReg(false);
-													//closeDialog();
-													//refreshPage();
 												}}
 											>
 												Book
 											</Button>
 											<Button
 												onClick={() => closeDialog()}
-												//color="danger"
 												simple
 											>
 												Cancel
@@ -533,7 +412,6 @@ export default function RecipeReviewCard(training) {
 												onClick={async () => {
 													closeDialog();
 												}}
-												//color="danger"
 												simple
 											>
 												Cancel
